@@ -1,5 +1,7 @@
 package com.sentinel.login.loginsoa.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,4 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class LoginController {
+
+    /*@RequestMapping(value = "/save", method = RequestMethod.POST)
+    public Resu stopSupplierCouponBatchDtoById(String param) throws Exception {
+        SupplierCouponBatchDto supplierCouponBatchDto = JSONObject.parseObject(param, SupplierCouponBatchDto.class);
+
+
+    }*/
+
 }
