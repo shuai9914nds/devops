@@ -6,13 +6,17 @@ $(function () {
         //
         $.ajax({
             //请求方式
-            type : "GET",
+            type : "POST",
             //请求的媒体类型
             contentType: "application/json;charset=UTF-8",
             //请求地址
-            url : "http://192.168.43.12/admin/list/",
+            url : "http://localhost:8082/login/save",
             //数据，json字符串
-            data : JSON.stringify(list),
+            data : {
+               param:"ssdfsdfsdfds"
+            },
+
+                //JSON.stringify(list),
             //请求成功
             success : function(result) {
                 console.log(result);

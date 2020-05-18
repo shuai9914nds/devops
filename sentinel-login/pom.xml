@@ -64,6 +64,14 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.62</version>
         </dependency>
+        <!--数据库驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.18</version>
+        </dependency>
+
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
