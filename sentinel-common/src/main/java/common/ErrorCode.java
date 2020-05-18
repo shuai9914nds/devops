@@ -1,3 +1,5 @@
+package common;
+
 /**
  * 错误信息枚举类
  *

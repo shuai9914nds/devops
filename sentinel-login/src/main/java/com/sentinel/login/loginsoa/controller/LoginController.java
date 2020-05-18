@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import utils.MD5Utils;
 
 
 /**
@@ -20,9 +21,9 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 //    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public Result stopSupplierCouponBatchDtoById(String param) throws Exception {
+//    public common.Result stopSupplierCouponBatchDtoById(String param) throws Exception {
 //        SupplierCouponBatchDto supplierCouponBatchDto = JSONObject.parseObject(param, SupplierCouponBatchDto.class);
-//        BaseQueryDto
 //
 //    }
+
 }
