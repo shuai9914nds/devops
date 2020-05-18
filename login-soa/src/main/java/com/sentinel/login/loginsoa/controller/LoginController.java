@@ -1,8 +1,12 @@
 package com.sentinel.login.loginsoa.controller;
 
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  * @author: liushuai
@@ -10,13 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @description：登录controller
  */
 @RestController
+@RequestMapping("login")
 public class LoginController {
 
-    /*@RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Resu stopSupplierCouponBatchDtoById(String param) throws Exception {
-        SupplierCouponBatchDto supplierCouponBatchDto = JSONObject.parseObject(param, SupplierCouponBatchDto.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-
-    }*/
-
+//    @RequestMapping(value = "/save", method = RequestMethod.POST)
+//    public Result stopSupplierCouponBatchDtoById(String param) throws Exception {
+//        SupplierCouponBatchDto supplierCouponBatchDto = JSONObject.parseObject(param, SupplierCouponBatchDto.class);
+//        BaseQueryDto
+//
+//    }
 }

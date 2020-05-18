@@ -1,97 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>let us blog now! make high quality content</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../resources/bulma.css" />
-    <link rel="stylesheet" href="../resources/fontawesome/css/font-awesome.css"/>
-    <!-- <link rel="stylesheet" href="debug.css"/> -->
-    <script src="main.js"></script>
-    <style>
-      .login-main{
-        width: 1000px;
-        margin: auto;
-      }
-      .login-main .columns {
-        height: 96vh;
-      }
-      .login-left {
-        display: flex;
-      }
-      .login-right {
-        display: flex;
-      }
-      .login-left img {
-        align-self: center;
-        border-radius: 5px;
-      }
-      .login-right .login-wrapper{
-        align-self: center;
-      }
-      .login-wrapper h1 {
-        font-size: 28px;
-        font-weight: bold;
-        margin: 16px 0 32px 0;
-      }
-      .login-btn {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-      .breadcrumb {
-        margin-bottom: -32px;
-      }
-    </style>
+    <link rel="stylesheet" href="../resources/bulma.css"/>
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../resources/jquery-3.4.1.min.js"></script>
+    <script src="../js/login.js"></script>
 </head>
 <body>
-    <section class="login-main">
-      <div class="container">
-          <div class="columns">
-              <div class="column is-three-fifths login-left">
+<section class="login-main">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-three-fifths login-left">
                 <img src="../static/image/login/bloger.jpg">
-              </div>
-              <div class="column login-right">
+            </div>
+            <div class="column login-right">
                 <div class="login-wrapper">
                     <h1>Let`s blog together!</h1>
                     <div class="field">
-                      <p class="control has-icons-left has-icons-right">
-                        <input class="input" type="uname" placeholder="用户名">
-                        <span class="icon is-small is-left">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" id="uname" type="uname" placeholder="用户名">
+                            <span class="icon is-small is-left">
                           <i class="fa fa-home"></i>
                         </span>
-                        <span class="icon is-small is-right">
+                            <span class="icon is-small is-right">
                           <i class="fa fa-check"></i>
                         </span>
-                      </p>
+                        </p>
                     </div>
                     <div class="field">
-                      <p class="control has-icons-left">
-                        <input class="input" type="password" placeholder="密码">
-                        <span class="icon is-small is-left">
+                        <p class="control has-icons-left">
+                            <input class="input" id="password" type="password" placeholder="密码">
+                            <span class="icon is-small is-left">
                           <i class="fa fa-lock"></i>
                         </span>
-                      </p>
+                        </p>
                     </div>
                     <div class="field">
-                      <p class="control">
-                        <button type="submit" class="button is-success login-btn">
-                          登录
-                        </button>
-                      </p>
+                        <p class="control">
+                            <button id="submit" type="submit" class="button is-success login-btn">
+                                登录
+                            </button>
+                        </p>
                     </div>
                 </div>
-              </div>
             </div>
-      </div>
-    </section>
-    <section>
-      <nav class="breadcrumb is-centered">
+        </div>
+    </div>
+</section>
+<section>
+    <nav class="breadcrumb is-centered">
         <ul>
-          <li><a href="#">主页</a></li>
-          <li><a href="#">关于</a></li>
+            <li><a href="#">主页</a></li>
+            <li><a href="#">关于</a></li>
         </ul>
-      </nav>
-    </section>
+    </nav>
+</section>
 </body>
 </html>

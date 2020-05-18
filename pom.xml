@@ -16,6 +16,7 @@
     <modules>
         <module>login-soa</module>
         <module>sentinel-common</module>
+        <module>shuaitest</module>
     </modules>
 
     <properties>

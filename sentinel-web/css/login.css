@@ -1,0 +1,40 @@
+.login-main {
+    width: 1000px;
+    margin: auto;
+}
+
+.login-main .columns {
+    height: 96vh;
+}
+
+.login-left {
+    display: flex;
+}
+
+.login-right {
+    display: flex;
+}
+
+.login-left img {
+    align-self: center;
+    border-radius: 5px;
+}
+
+.login-right .login-wrapper {
+    align-self: center;
+}
+
+.login-wrapper h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 16px 0 32px 0;
+}
+
+.login-btn {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.breadcrumb {
+    margin-bottom: -32px;
+}
