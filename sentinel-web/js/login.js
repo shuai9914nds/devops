@@ -1,32 +1,35 @@
 $(function () {
     $("#submit").click(function () {
-
+        var param = {
+            uname: $('#uname').val(),
+            password: $('#password').val()
+        }
         //请求参数
-        var list = {};
+        var paramJson = JSON.stringify(param);
         //
         $.ajax({
             //请求方式
-            type : "POST",
+            type: "POST",
             //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
             //请求地址
-            url : "http://localhost:8082/login/save",
+            url: "http://localhost:8082/login/save",
             //数据，json字符串
-            data : {
-               param:"ssdfsdfsdfds"
-            },
+            data: {"param": paramJson},
 
-                //JSON.stringify(list),
+            //JSON.stringify(list),
             //请求成功
-            success : function(result) {
+            success: function (result) {
                 console.log(result);
-            },
+            }
+            ,
             //请求失败，包含具体的错误信息
-            error : function(e){
+            error: function (e) {
                 console.log(e.status);
                 console.log(e.responseText);
             }
-        });
+        })
+        ;
 
     })
 })
