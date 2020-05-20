@@ -1,7 +1,7 @@
 package com.sentinel.login.loginsoa.service;
 
 
-import com.sentinel.login.loginsoa.dao.mapper.UserInfoMapper;
+import com.sentinel.login.loginsoa.mapper.UserInfoMapper;
 import com.sentinel.login.loginsoa.model.UserInfo;
 import com.sentinel.login.loginsoa.model.UserInfoExample;
 import common.ErrorCode;
@@ -10,10 +10,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import utils.MD5Utils;
 
-import java.util.Collections;
 import java.util.List;
+
 
 /**
  * <p>
@@ -51,7 +50,7 @@ public class UserInfoService {
             return new Result(ErrorCode.SYSTEM_ERROR);
         }
         UserInfo userInfoDB = userInfos.get(0);
-        if (!userInfoDB.getUname().equals(userInfo.getUname()) || !userInfoDB.getPassword().equals(MD5Utils.md5(userInfo.getPassword()))) {
+        if (!userInfoDB.getUname().equals(userInfo.getUname()) || !userInfoDB.getPassword().equals(userInfo.getPassword())) {
             return new Result(ErrorCode.UNAME_OR_PASSWORD_ERROR);
         }
         return new Result(true);

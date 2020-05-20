@@ -1,10 +1,13 @@
-package com.sentinel.login.loginsoa.dao.mapper;
+package com.sentinel.login.loginsoa.mapper;
 
 import com.sentinel.login.loginsoa.model.UserInfo;
 import com.sentinel.login.loginsoa.model.UserInfoExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserInfoMapper {
     int countByExample(UserInfoExample example);
 
