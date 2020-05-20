@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -41,7 +42,12 @@ public class UserInfoService {
         if (StringUtils.isNotEmpty(userInfo.getUname())) {
             criteria.andUnameEqualTo(userInfo.getUname());
         }
-        List<UserInfo> userInfos = userInfoMapper.selectByExample(userInfoExample);
+        List<UserInfo> userInfos ;
+        try {
+            userInfos = userInfoMapper.selectByExample(userInfoExample);
+        } catch (Exception e) {
+            return new Result(ErrorCode.SYSTEM_ERROR);
+        }
         //如果userInfos为空，说明用户名或者密码错误
         if (CollectionUtils.isEmpty(userInfos)) {
             return new Result(ErrorCode.UNAME_OR_PASSWORD_ERROR);

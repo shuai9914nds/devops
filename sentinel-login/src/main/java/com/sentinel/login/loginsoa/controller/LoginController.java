@@ -1,6 +1,7 @@
 package com.sentinel.login.loginsoa.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.sentinel.login.loginsoa.model.UserInfo;
 import com.sentinel.login.loginsoa.service.UserInfoService;
 import common.ErrorCode;
@@ -10,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import utils.BeanConverter;
 
 
 /**
@@ -18,6 +18,7 @@ import utils.BeanConverter;
  * @date: 2020/5/16
  * @description：登录controller
  */
+@CrossOrigin(maxAge=3600)
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -28,6 +29,7 @@ public class LoginController {
 
     /**
      * 登录时核对用户信息
+     *
      * @param param
      * @return
      * @throws Exception
@@ -37,15 +39,19 @@ public class LoginController {
         if (StringUtils.isEmpty(param)) {
             return new Result(ErrorCode.PARAM_ERROR);
         }
-        UserInfo userInfo = BeanConverter.convert(param, UserInfo.class);
-
+        UserInfo userInfo = null;
+        try {
+            userInfo = JSONObject.parseObject(param, UserInfo.class);
+        } catch (Exception e) {
+            return new Result(ErrorCode.PARAM_ERROR);
+        }
         if (userInfo == null || StringUtils.isEmpty(userInfo.getUname()) || StringUtils.isEmpty(userInfo.getPassword())) {
-            return new Result(ErrorCode.PARAM_ERROR );
+            return new Result(ErrorCode.PARAM_ERROR);
         }
         Result result = null;
         try {
             result = userInfoService.checkUserInfo(userInfo);
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
         return result;

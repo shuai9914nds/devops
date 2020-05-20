@@ -20,7 +20,9 @@ $(function () {
             //JSON.stringify(list),
             //请求成功
             success: function (result) {
-                console.log(result);
+                if (result.success) {
+                    alert("登陆成功")
+                }
             }
             ,
             //请求失败，包含具体的错误信息
