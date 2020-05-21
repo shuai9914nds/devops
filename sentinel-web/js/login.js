@@ -13,7 +13,7 @@ $(function () {
             //请求的媒体类型
             dataType: "json",
             //请求地址
-            url: "http://localhost:8082/login/save",
+            url: "http://localhost:8082/login/login",
             //数据，json字符串
             data: {"param": paramJson},
 

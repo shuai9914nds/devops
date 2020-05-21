@@ -7,6 +7,10 @@ import com.sentinel.login.loginsoa.service.UserInfoService;
 import common.ErrorCode;
 import common.Result;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +32,45 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /**
-     * 登录时核对用户信息
+     * 保存用户信息
      *
      * @param param
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result checkUserInfo(String param) throws Exception {
+//    @RequestMapping(value = "/save", method = RequestMethod.POST)
+//    public Result checkUserInfo(String param) throws Exception {
+//        if (StringUtils.isEmpty(param)) {
+//            return new Result(ErrorCode.PARAM_ERROR);
+//        }
+//        UserInfo userInfo = null;
+//        try {
+//            userInfo = JSONObject.parseObject(param, UserInfo.class);
+//        } catch (Exception e) {
+//            return new Result(ErrorCode.PARAM_ERROR);
+//        }
+//        if (userInfo == null || StringUtils.isEmpty(userInfo.getUname()) || StringUtils.isEmpty(userInfo.getPassword())) {
+//            return new Result(ErrorCode.PARAM_ERROR);
+//        }
+//        Result result = null;
+//        try {
+//            result = userInfoService.saveUserInfo(userInfo);
+//        } catch (Exception e) {
+//
+//        }
+//        return result;
+//    }
+
+
+    /**
+     * 登录验证
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result login(String param) throws Exception {
         if (StringUtils.isEmpty(param)) {
             return new Result(ErrorCode.PARAM_ERROR);
         }
@@ -48,13 +83,23 @@ public class LoginController {
         if (userInfo == null || StringUtils.isEmpty(userInfo.getUname()) || StringUtils.isEmpty(userInfo.getPassword())) {
             return new Result(ErrorCode.PARAM_ERROR);
         }
-        Result result = null;
+        Subject subject= SecurityUtils.getSubject();
+        UsernamePasswordToken token=new UsernamePasswordToken(userInfo.getUname(), userInfo.getPassword());
         try {
-            result = userInfoService.checkUserInfo(userInfo);
-        } catch (Exception e) {
-
+            subject.login(token);
+            if (subject.isAuthenticated()) {
+                System.out.println("成功");
+            }
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            System.out.println(e);
         }
-        return result;
+//        if (subject.hasRole("admin")) {
+//            return new Result(ErrorCode.PARAM_ERROR);
+//        }
+
+        return new Result();
+
     }
 
 }
