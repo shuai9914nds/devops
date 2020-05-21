@@ -4,7 +4,6 @@ package com.sentinel.login.loginsoa.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.sentinel.login.loginsoa.service.impl.CustomRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;

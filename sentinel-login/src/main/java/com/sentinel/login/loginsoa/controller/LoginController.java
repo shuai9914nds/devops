@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sentinel.login.loginsoa.model.UserInfo;
 import com.sentinel.login.loginsoa.service.UserInfoService;
 import common.ErrorCode;
-import common.Result;
+import common.JsonResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * @date: 2020/5/16
  * @description：登录controller
  */
-@CrossOrigin(maxAge=3600)
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -70,35 +70,31 @@ public class LoginController {
      * @throws Exception
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(String param) throws Exception {
+    public JsonResult login(String param) throws Exception {
         if (StringUtils.isEmpty(param)) {
-            return new Result(ErrorCode.PARAM_ERROR);
+            return new JsonResult(ErrorCode.PARAM_ERROR);
         }
-        UserInfo userInfo = null;
+        UserInfo userInfo;
         try {
             userInfo = JSONObject.parseObject(param, UserInfo.class);
         } catch (Exception e) {
-            return new Result(ErrorCode.PARAM_ERROR);
+            return new JsonResult(ErrorCode.PARAM_ERROR);
         }
-        if (userInfo == null || StringUtils.isEmpty(userInfo.getUname()) || StringUtils.isEmpty(userInfo.getPassword())) {
-            return new Result(ErrorCode.PARAM_ERROR);
+        if (null == userInfo || StringUtils.isEmpty(userInfo.getUname()) || StringUtils.isEmpty(userInfo.getPassword())) {
+            return new JsonResult(ErrorCode.PARAM_ERROR);
         }
-        Subject subject= SecurityUtils.getSubject();
-        UsernamePasswordToken token=new UsernamePasswordToken(userInfo.getUname(), userInfo.getPassword());
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(userInfo.getUname(), userInfo.getPassword());
         try {
             subject.login(token);
-            if (subject.isAuthenticated()) {
-                System.out.println("成功");
-            }
         } catch (AuthenticationException e) {
-            e.printStackTrace();
-            System.out.println(e);
+           logger.error("登录失败");
+            return new JsonResult(ErrorCode.PARAM_ERROR);
         }
-//        if (subject.hasRole("admin")) {
-//            return new Result(ErrorCode.PARAM_ERROR);
-//        }
-
-        return new Result();
+        if (!subject.isAuthenticated()) {
+            return new JsonResult(ErrorCode.PARAM_ERROR);
+        }
+        return new JsonResult();
 
     }
 

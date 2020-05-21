@@ -21,7 +21,9 @@ $(function () {
             //请求成功
             success: function (result) {
                 if (result.success) {
-                    alert("登陆成功")
+                    alert("登陆成功");
+                } else {
+                    alert("登录失败");
                 }
             }
             ,

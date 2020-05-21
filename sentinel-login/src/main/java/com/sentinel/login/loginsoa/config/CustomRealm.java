@@ -1,4 +1,4 @@
-package com.sentinel.login.loginsoa.service.impl;
+package com.sentinel.login.loginsoa.config;
 
 
 import com.sentinel.login.loginsoa.mapper.UserInfoMapper;
@@ -16,7 +16,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.MD5Utils;
 
 import java.util.List;
 
