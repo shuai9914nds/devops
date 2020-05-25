@@ -2,6 +2,7 @@ package com.sentinel.login.loginsoa.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.sentinel.login.loginsoa.constants.Constants;
 import com.sentinel.login.loginsoa.model.UserInfo;
 import com.sentinel.login.loginsoa.service.UserInfoService;
 import common.ErrorCode;
@@ -88,12 +89,20 @@ public class LoginController {
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-           logger.error("登录失败");
+            logger.error("登录失败");
             return new JsonResult(ErrorCode.PARAM_ERROR);
         }
         if (!subject.isAuthenticated()) {
             return new JsonResult(ErrorCode.PARAM_ERROR);
         }
+        UserInfo userInfoPrincipal;
+        try {
+            userInfoPrincipal = (UserInfo) subject.getPrincipal();
+        } catch (Exception e) {
+            logger.error("获取用户信息失败");
+            return new JsonResult(ErrorCode.PARAM_ERROR);
+        }
+        subject.getSession().setAttribute(Constants.SESSION_USER_INFO, userInfoPrincipal);
         return new JsonResult();
 
     }
