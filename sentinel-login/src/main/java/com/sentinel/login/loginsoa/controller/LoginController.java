@@ -99,7 +99,7 @@ public class LoginController {
         try {
             userInfoPrincipal = (UserInfo) subject.getPrincipal();
         } catch (Exception e) {
-            logger.error("获取用户信息失败");
+            logger.error("获取用户信息失败", e);
             return new JsonResult(ErrorCode.PARAM_ERROR);
         }
         subject.getSession().setAttribute(Constants.SESSION_USER_INFO, userInfoPrincipal);

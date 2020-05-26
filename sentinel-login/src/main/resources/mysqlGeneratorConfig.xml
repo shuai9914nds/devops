@@ -18,24 +18,24 @@
 			<property name="forceBigDecimals" value="false"/>
 		</javaTypeResolver>
 		<!-- 生成Model类存放位置 -->
-		<javaModelGenerator targetPackage="com.sentinel.login.loginsoa.shuai.model" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.sentinel.login.loginsoa.model" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true"/>
 			<property name="trimStrings" value="false"/>
 		</javaModelGenerator>
 		<!-- 生成映射文件存放位置 -->
-		<sqlMapGenerator targetPackage="com.sentinel.login.loginsoa.shuai.dao.xml" targetProject="src/main/java">
+		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true"/>
 		</sqlMapGenerator>
 		<!-- 生成Dao类存放位置 -->
 		<javaClientGenerator type="XMLMAPPER" targetPackage="
-        com.sentinel.login.loginsoa.shuai.dao.mapper" targetProject="src/main/java">
+        com.sentinel.login.loginsoa.mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 		<!-- 生成对应表及类名 -->
-		<table tableName="user_info"></table>
+<!--		<table tableName="user_info"></table>-->
 		<table tableName="user_role"></table>
-		<table tableName="sys_permission"></table>
-		<table tableName="role_permission"></table>
+<!--		<table tableName="sys_permission"></table>-->
+<!--		<table tableName="role_permission"></table>-->
 
 
 <!--		<table tableName="user_info"-->
