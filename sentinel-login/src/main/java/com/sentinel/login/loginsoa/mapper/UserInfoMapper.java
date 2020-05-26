@@ -2,10 +2,10 @@ package com.sentinel.login.loginsoa.mapper;
 
 import com.sentinel.login.loginsoa.model.UserInfo;
 import com.sentinel.login.loginsoa.model.UserInfoExample;
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserInfoMapper {

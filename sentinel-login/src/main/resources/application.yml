@@ -18,3 +18,10 @@ mybatis:
   #开启驼峰命名
   configuration:
     map-underscore-to-camel-case: true
+
+## 日志配置
+logging:
+  config: classpath:slf4j.xml
+  level:
+    com.sentinel.login.loginsoa: trace
+

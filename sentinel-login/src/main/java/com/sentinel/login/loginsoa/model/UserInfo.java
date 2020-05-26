@@ -32,6 +32,11 @@ public class UserInfo {
     private String nickName;
 
     /**
+     * 角色ID  101普通用户 201管理员 301超级管理员
+     */
+    private Integer roleId;
+
+    /**
      * 创建时间
      */
     private Date createTime;
@@ -50,4 +55,9 @@ public class UserInfo {
      * 更新人
      */
     private String updateBy;
+
+    /**
+     * 是否有效 1有效 0无效
+     */
+    private Boolean status;
 }

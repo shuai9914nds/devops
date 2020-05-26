@@ -27,6 +27,7 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 根据条件查询用户信息列表
+     *
      * @param userInfo
      * @return
      */
@@ -38,6 +39,7 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 查询全部用户信息
+     *
      * @return
      */
     @Override
@@ -47,6 +49,7 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 根据userInfo获取userInfoExample
+     *
      * @param userInfo
      * @return
      */
@@ -67,6 +70,11 @@ public class LoginServiceImpl implements LoginService {
         }
         if (null != userInfo.getPhone()) {
             criteria.andPhoneEqualTo(userInfo.getPhone());
+        }
+        if (null != userInfo.getStatus()) {
+            criteria.andStatusEqualTo(userInfo.getStatus());
+        } else {
+            criteria.andStatusEqualTo(true);
         }
         return userInfoExample;
     }

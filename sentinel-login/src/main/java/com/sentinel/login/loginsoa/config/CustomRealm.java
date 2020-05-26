@@ -53,11 +53,11 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) token.getPrincipal();
         UserInfo userInfo = new UserInfo();
         userInfo.setUname(username);
-        List<UserInfo> userInfos = null;
+        List<UserInfo> userInfos;
         try {
             userInfos = loginService.getUserInfoByCondition(userInfo);
         } catch (Exception e) {
-            logger.error("查询数据库异常！");
+            logger.error("查询数据库异常！", e);
             return null;
         }
 

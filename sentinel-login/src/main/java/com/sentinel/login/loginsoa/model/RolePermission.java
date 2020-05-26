@@ -1,85 +1,49 @@
 package com.sentinel.login.loginsoa.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class RolePermission {
+
+    /**
+     * 主键Id
+     */
     private Integer id;
 
+    /**
+     * 角色id
+     */
     private Integer roleId;
 
+    /**
+     * 权限id
+     */
     private Integer permissionId;
 
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
+    /**
+     * 创建人
+     */
     private String createBy;
 
+    /**
+     * 更新时间
+     */
     private Date updateTime;
 
+    /**
+     * 更新人
+     */
     private String updateBy;
 
+    /**
+     * 是否有效 1有效 0无效
+     */
     private Boolean status;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
-    public Integer getPermissionId() {
-        return permissionId;
-    }
-
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
 }

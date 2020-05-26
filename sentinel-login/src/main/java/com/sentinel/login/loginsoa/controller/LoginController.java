@@ -89,7 +89,7 @@ public class LoginController {
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-            logger.error("登录失败");
+            logger.error("登录失败", e);
             return new JsonResult(ErrorCode.PARAM_ERROR);
         }
         if (!subject.isAuthenticated()) {
@@ -104,7 +104,6 @@ public class LoginController {
         }
         subject.getSession().setAttribute(Constants.SESSION_USER_INFO, userInfoPrincipal);
         return new JsonResult();
-
     }
 
 }

@@ -6,11 +6,13 @@
     <result column="uname" property="uname" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" /> 
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, uname, password, phone, nick_name, create_time, create_by, update_time, update_by
+    id, uname, password, phone, nick_name, role_id, create_time, create_by, update_time, 
+    update_by, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sentinel.login.loginsoa.model.UserInfoExample" >
     select
@@ -105,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.sentinel.login.loginsoa.model.UserInfo" >
     insert into user_info (id, uname, password, 
-      phone, nick_name, create_time, 
-      create_by, update_time, update_by
-      )
+      phone, nick_name, role_id, 
+      create_time, create_by, update_time, 
+      update_by, status)
     values (#{id,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
-      )
+      #{phone,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.sentinel.login.loginsoa.model.UserInfo" >
     insert into user_info
@@ -131,6 +134,9 @@
       <if test="nickName != null" >
         nick_name,
       </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
       <if test="createTime != null" >
         create_time,
       </if>
@@ -142,6 +148,9 @@
       </if>
       <if test="updateBy != null" >
         update_by,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -160,6 +169,9 @@
       <if test="nickName != null" >
         #{nickName,jdbcType=VARCHAR},
       </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -171,6 +183,9 @@
       </if>
       <if test="updateBy != null" >
         #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -198,6 +213,9 @@
       <if test="record.nickName != null" >
         nick_name = #{record.nickName,jdbcType=VARCHAR},
       </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -209,6 +227,9 @@
       </if>
       <if test="record.updateBy != null" >
         update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -222,10 +243,12 @@
       password = #{record.password,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      update_by = #{record.updateBy,jdbcType=VARCHAR}
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -245,6 +268,9 @@
       <if test="nickName != null" >
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -257,6 +283,9 @@
       <if test="updateBy != null" >
         update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -266,10 +295,12 @@
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR}
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
