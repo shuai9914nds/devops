@@ -2,10 +2,12 @@ package com.sentinel.login.loginsoa.mapper;
 
 import com.sentinel.login.loginsoa.model.UserRole;
 import com.sentinel.login.loginsoa.model.UserRoleExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface UserRoleMapper {
     int countByExample(UserRoleExample example);
 

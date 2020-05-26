@@ -3,10 +3,12 @@ package com.sentinel.login.loginsoa.mapper;
 
 import com.sentinel.login.loginsoa.model.RolePermission;
 import com.sentinel.login.loginsoa.model.RolePermissionExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface RolePermissionMapper {
     int countByExample(RolePermissionExample example);
 

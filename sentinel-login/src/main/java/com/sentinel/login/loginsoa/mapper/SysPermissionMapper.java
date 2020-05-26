@@ -2,10 +2,12 @@ package com.sentinel.login.loginsoa.mapper;
 
 import com.sentinel.login.loginsoa.model.SysPermission;
 import com.sentinel.login.loginsoa.model.SysPermissionExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface SysPermissionMapper {
     int countByExample(SysPermissionExample example);
 
