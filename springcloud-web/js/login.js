@@ -1,22 +1,20 @@
 $(function () {
     $("#submit").click(function () {
-        var param = {
-            uname: $('#uname').val(),
-            password: $('#password').val()
-        }
-        //请求参数
-        var paramJson = JSON.stringify(param);
-        //
         $.ajax({
             //请求方式
             type: "POST",
             //请求的媒体类型
             dataType: "json",
+            contentType : 'application/json',
             //请求地址
             url: "http://localhost:8082/login/login",
             //数据，json字符串
-            data: {"param": paramJson},
-
+            data: JSON.stringify(
+                {
+                    uname: $('#uname').val(),
+                    password: $('#password').val()
+                }
+            ),
             //JSON.stringify(list),
             //请求成功
             success: function (result) {

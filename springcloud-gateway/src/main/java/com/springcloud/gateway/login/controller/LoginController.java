@@ -1,7 +1,6 @@
 package com.springcloud.gateway.login.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.springcloud.gateway.login.model.UserInfo;
 import com.springcloud.gateway.login.service.UserInfoService;
 import com.springcloud.gateway.login.constants.Constants;
@@ -66,21 +65,12 @@ public class LoginController {
     /**
      * 登录验证
      *
-     * @param param
+     * @param userInfo
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JsonResult login(String param) throws Exception {
-        if (StringUtils.isEmpty(param)) {
-            return new JsonResult(ErrorCode.PARAM_ERROR);
-        }
-        UserInfo userInfo;
-        try {
-            userInfo = JSONObject.parseObject(param, UserInfo.class);
-        } catch (Exception e) {
-            return new JsonResult(ErrorCode.PARAM_ERROR);
-        }
+    public JsonResult login(@RequestBody UserInfo userInfo) throws Exception {
         if (null == userInfo || StringUtils.isEmpty(userInfo.getUname()) || StringUtils.isEmpty(userInfo.getPassword())) {
             return new JsonResult(ErrorCode.PARAM_ERROR);
         }
