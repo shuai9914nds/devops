@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: userinfo-server
+    #数据库连接配置
+    datasource:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/user
+      username: root
+      password: root
+server:
+  port: 9090
+
+eureka:
+  client:
+    service-url:
+      #设置服务注册中心地址
+      defaultZone: http://localhost:8761/eureka
+
