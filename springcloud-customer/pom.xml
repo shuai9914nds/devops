@@ -9,40 +9,31 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springcloud</groupId>
-    <artifactId>springcloud-userinfo-api</artifactId>
+    <artifactId>springcloud-consumer</artifactId>
     <version>1.8.0-SNAPSHOT</version>
-    <name>springcloud-provider-api</name>
-    <description>Demo project for Spring Boot</description>
+    <name>springcloud-consumer</name>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>provider-userinfo-api</module>
-    </modules>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
     <dependencies>
+        <!-- 项目中用到了Feign注解，引入此包 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
-            <version>1.4.4.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
             <artifactId>springcloud-common</artifactId>
             <version>${project.version}</version>
             <groupId>com.springcloud.parent</groupId>
         </dependency>
-        <!-- 项目中用到了Feign注解，引入此包 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>com.springcloud</groupId>
+            <artifactId>userinfo-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
+
+    <modules>
+        <module>customer-userinfo</module>
+    </modules>
 
 </project>
