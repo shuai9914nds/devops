@@ -1,5 +1,8 @@
 package com.springcloud.provider.userinfo.model;
 
+import lombok.Data;
+
+@Data
 public class MenuRoleRel {
     private Integer id;
 
@@ -7,27 +10,4 @@ public class MenuRoleRel {
 
     private Integer menuRoleId;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
-    }
-
-    public Integer getMenuRoleId() {
-        return menuRoleId;
-    }
-
-    public void setMenuRoleId(Integer menuRoleId) {
-        this.menuRoleId = menuRoleId;
-    }
 }
