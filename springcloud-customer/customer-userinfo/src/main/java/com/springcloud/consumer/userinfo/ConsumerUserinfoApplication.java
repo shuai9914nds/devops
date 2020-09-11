@@ -16,4 +16,5 @@ public class ConsumerUserinfoApplication {
         SpringApplication.run(ConsumerUserinfoApplication.class, args);
     }
 
+
 }

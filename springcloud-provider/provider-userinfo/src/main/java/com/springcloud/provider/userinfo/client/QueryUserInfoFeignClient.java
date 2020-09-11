@@ -20,6 +20,7 @@ import java.util.List;
  * @description：
  */
 @RestController
+@RequestMapping("/userinfo")
 @Api(value = "API - QueryUserInfoFeignClient", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class QueryUserInfoFeignClient implements QueryUserInfoFeignApi {
 
@@ -32,7 +33,7 @@ public class QueryUserInfoFeignClient implements QueryUserInfoFeignApi {
      * @return
      */
     @Override
-    @RequestMapping(value = "/userinfo/getUserInfos", method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserInfos", method = RequestMethod.POST)
     public Result<List<UserInfoDto>> getUserInfos() {
         return userInfoService.getUserInfos();
     }

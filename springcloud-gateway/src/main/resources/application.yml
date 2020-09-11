@@ -1,27 +1,25 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      instance:
+        prefer-ip-address: true
 server:
-  port: 8082
-  servlet:
-    context-path: /
+  port: 8769
 spring:
-  #数据库连接配置
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/user
-    username: root
-    password: root
-
-#mybatis的相关配置
-mybatis:
-  #mapper配置文件
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.sentinel.login.loginsoa.model
-  #开启驼峰命名
-  configuration:
-    map-underscore-to-camel-case: true
-
-## 日志配置
-logging:
-  config: classpath:slf4j.xml
-  level:
-    com.sentinel.login.loginsoa: trace
+  application:
+    name: service-zuul
+  cloud:
+    gateway:
+      routes:
+#        - id: userinfo-server
+#          uri: http://localhost:8761/
+#          predicates:
+#            - Path=/userinfo/**
+#          filters:
+#            - StripPrefix= 1 #过滤几个前缀/为间隔
+        - id: xujin_route
+          uri: http://baidu.com:80/
+          predicates:
+          - Path=/xujin
 
