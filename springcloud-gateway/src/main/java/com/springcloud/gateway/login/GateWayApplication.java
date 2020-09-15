@@ -13,12 +13,22 @@ public class GateWayApplication {
         SpringApplication.run(GateWayApplication.class, args);
     }
 
-    @Bean
-    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-        return builder.routes()
-                //basic proxy
-                .route(r -> r.path("/userinfo/**")
-                        .uri("http://localhost:8761/")
-                ).build();
-    }
+//    @Bean
+//    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+//        return builder.routes()
+//                //basic proxy
+//                .route(r -> r.path("/userinfo/**")
+//                        .uri("https://www.sougou.com")
+//                ).build();
+//    }
+
+
+//    @Bean
+//    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+//        return builder.routes()
+//                //basic proxy
+//                .route("userinfo-server",r -> r.path("/product/**")
+//                        .uri("lb://userinfo-server")
+//                ).build();
+//    }
 }

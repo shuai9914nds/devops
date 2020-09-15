@@ -225,66 +225,6 @@ public class MenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andModuleIdIsNull() {
-            addCriterion("module_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdIsNotNull() {
-            addCriterion("module_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdEqualTo(Integer value) {
-            addCriterion("module_id =", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdNotEqualTo(Integer value) {
-            addCriterion("module_id <>", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdGreaterThan(Integer value) {
-            addCriterion("module_id >", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("module_id >=", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdLessThan(Integer value) {
-            addCriterion("module_id <", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("module_id <=", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdIn(List<Integer> values) {
-            addCriterion("module_id in", values, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdNotIn(List<Integer> values) {
-            addCriterion("module_id not in", values, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdBetween(Integer value1, Integer value2) {
-            addCriterion("module_id between", value1, value2, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("module_id not between", value1, value2, "moduleId");
-            return (Criteria) this;
-        }
-
         public Criteria andPermissionIsNull() {
             addCriterion("permission is null");
             return (Criteria) this;

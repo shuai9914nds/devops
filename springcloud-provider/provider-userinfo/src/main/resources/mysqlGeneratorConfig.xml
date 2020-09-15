@@ -46,12 +46,6 @@
         <table tableName="menu_role_rel">
             <columnOverride column="is_available" javaType="Boolean"/>
         </table>
-        <table tableName="module">
-        </table>
-        <table tableName="module_role">
-        </table>
-        <table tableName="module_role_rel">
-        </table>
         <table tableName="syslog">
         </table>
         <table tableName="user_info">

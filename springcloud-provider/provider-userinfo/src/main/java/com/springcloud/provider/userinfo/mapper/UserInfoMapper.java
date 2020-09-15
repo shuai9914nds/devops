@@ -3,8 +3,6 @@ package com.springcloud.provider.userinfo.mapper;
 import com.springcloud.provider.userinfo.model.UserInfo;
 import com.springcloud.provider.userinfo.model.UserInfoExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserInfoMapper {

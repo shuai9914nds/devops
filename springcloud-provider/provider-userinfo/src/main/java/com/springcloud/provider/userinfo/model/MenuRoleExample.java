@@ -105,123 +105,63 @@ public class MenuRoleExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andModuleRoleIdIsNull() {
-            addCriterion("module_role_id is null");
+        public Criteria andMenuRoleIdIsNull() {
+            addCriterion("menu_role_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdIsNotNull() {
-            addCriterion("module_role_id is not null");
+        public Criteria andMenuRoleIdIsNotNull() {
+            addCriterion("menu_role_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdEqualTo(Integer value) {
-            addCriterion("module_role_id =", value, "moduleRoleId");
+        public Criteria andMenuRoleIdEqualTo(Integer value) {
+            addCriterion("menu_role_id =", value, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdNotEqualTo(Integer value) {
-            addCriterion("module_role_id <>", value, "moduleRoleId");
+        public Criteria andMenuRoleIdNotEqualTo(Integer value) {
+            addCriterion("menu_role_id <>", value, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdGreaterThan(Integer value) {
-            addCriterion("module_role_id >", value, "moduleRoleId");
+        public Criteria andMenuRoleIdGreaterThan(Integer value) {
+            addCriterion("menu_role_id >", value, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("module_role_id >=", value, "moduleRoleId");
+        public Criteria andMenuRoleIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("menu_role_id >=", value, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdLessThan(Integer value) {
-            addCriterion("module_role_id <", value, "moduleRoleId");
+        public Criteria andMenuRoleIdLessThan(Integer value) {
+            addCriterion("menu_role_id <", value, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("module_role_id <=", value, "moduleRoleId");
+        public Criteria andMenuRoleIdLessThanOrEqualTo(Integer value) {
+            addCriterion("menu_role_id <=", value, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdIn(List<Integer> values) {
-            addCriterion("module_role_id in", values, "moduleRoleId");
+        public Criteria andMenuRoleIdIn(List<Integer> values) {
+            addCriterion("menu_role_id in", values, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdNotIn(List<Integer> values) {
-            addCriterion("module_role_id not in", values, "moduleRoleId");
+        public Criteria andMenuRoleIdNotIn(List<Integer> values) {
+            addCriterion("menu_role_id not in", values, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdBetween(Integer value1, Integer value2) {
-            addCriterion("module_role_id between", value1, value2, "moduleRoleId");
+        public Criteria andMenuRoleIdBetween(Integer value1, Integer value2) {
+            addCriterion("menu_role_id between", value1, value2, "menuRoleId");
             return (Criteria) this;
         }
 
-        public Criteria andModuleRoleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("module_role_id not between", value1, value2, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdIsNull() {
-            addCriterion("module_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdIsNotNull() {
-            addCriterion("module_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdEqualTo(Integer value) {
-            addCriterion("module_id =", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdNotEqualTo(Integer value) {
-            addCriterion("module_id <>", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdGreaterThan(Integer value) {
-            addCriterion("module_id >", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("module_id >=", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdLessThan(Integer value) {
-            addCriterion("module_id <", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("module_id <=", value, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdIn(List<Integer> values) {
-            addCriterion("module_id in", values, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdNotIn(List<Integer> values) {
-            addCriterion("module_id not in", values, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdBetween(Integer value1, Integer value2) {
-            addCriterion("module_id between", value1, value2, "moduleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("module_id not between", value1, value2, "moduleId");
+        public Criteria andMenuRoleIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("menu_role_id not between", value1, value2, "menuRoleId");
             return (Criteria) this;
         }
 

@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.springcloud.provider.userinfo.model.Menu" >
     <id column="menu_id" property="menuId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
-    <result column="module_id" property="moduleId" jdbcType="INTEGER" />
     <result column="permission" property="permission" jdbcType="VARCHAR" />
     <result column="resource_type" property="resourceType" jdbcType="SMALLINT" />
     <result column="url" property="url" jdbcType="VARCHAR" />
@@ -77,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    menu_id, parent_id, module_id, permission, resource_type, url, is_show, icon, order_num, 
-    `path`, component, create_time, create_by, update_time, update_by
+    menu_id, parent_id, permission, resource_type, url, is_show, icon, order_num, `path`, 
+    component, create_time, create_by, update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springcloud.provider.userinfo.model.MenuExample" >
     select
@@ -111,18 +110,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.springcloud.provider.userinfo.model.Menu" >
-    insert into menu (menu_id, parent_id, module_id, 
-      permission, resource_type, url, 
-      is_show, icon, order_num, 
-      `path`, component, create_time, 
-      create_by, update_time, update_by
-      )
-    values (#{menuId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{moduleId,jdbcType=INTEGER}, 
-      #{permission,jdbcType=VARCHAR}, #{resourceType,jdbcType=SMALLINT}, #{url,jdbcType=VARCHAR}, 
-      #{isShow,jdbcType=BIT}, #{icon,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
-      #{path,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
-      )
+    insert into menu (menu_id, parent_id, permission, 
+      resource_type, url, is_show, 
+      icon, order_num, `path`, 
+      component, create_time, create_by, 
+      update_time, update_by)
+    values (#{menuId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR}, 
+      #{resourceType,jdbcType=SMALLINT}, #{url,jdbcType=VARCHAR}, #{isShow,jdbcType=BIT}, 
+      #{icon,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, 
+      #{component,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.springcloud.provider.userinfo.model.Menu" >
     insert into menu
@@ -132,9 +129,6 @@
       </if>
       <if test="parentId != null" >
         parent_id,
-      </if>
-      <if test="moduleId != null" >
-        module_id,
       </if>
       <if test="permission != null" >
         permission,
@@ -179,9 +173,6 @@
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="moduleId != null" >
-        #{moduleId,jdbcType=INTEGER},
       </if>
       <if test="permission != null" >
         #{permission,jdbcType=VARCHAR},
@@ -236,9 +227,6 @@
       <if test="record.parentId != null" >
         parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
-      <if test="record.moduleId != null" >
-        module_id = #{record.moduleId,jdbcType=INTEGER},
-      </if>
       <if test="record.permission != null" >
         permission = #{record.permission,jdbcType=VARCHAR},
       </if>
@@ -284,7 +272,6 @@
     update menu
     set menu_id = #{record.menuId,jdbcType=INTEGER},
       parent_id = #{record.parentId,jdbcType=INTEGER},
-      module_id = #{record.moduleId,jdbcType=INTEGER},
       permission = #{record.permission,jdbcType=VARCHAR},
       resource_type = #{record.resourceType,jdbcType=SMALLINT},
       url = #{record.url,jdbcType=VARCHAR},
@@ -306,9 +293,6 @@
     <set >
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="moduleId != null" >
-        module_id = #{moduleId,jdbcType=INTEGER},
       </if>
       <if test="permission != null" >
         permission = #{permission,jdbcType=VARCHAR},
@@ -352,7 +336,6 @@
   <update id="updateByPrimaryKey" parameterType="com.springcloud.provider.userinfo.model.Menu" >
     update menu
     set parent_id = #{parentId,jdbcType=INTEGER},
-      module_id = #{moduleId,jdbcType=INTEGER},
       permission = #{permission,jdbcType=VARCHAR},
       resource_type = #{resourceType,jdbcType=SMALLINT},
       url = #{url,jdbcType=VARCHAR},

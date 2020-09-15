@@ -283,66 +283,6 @@ public class UserRoleRelExample {
             addCriterion("menu_role_id not between", value1, value2, "menuRoleId");
             return (Criteria) this;
         }
-
-        public Criteria andModuleRoleIdIsNull() {
-            addCriterion("module_role_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdIsNotNull() {
-            addCriterion("module_role_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdEqualTo(Integer value) {
-            addCriterion("module_role_id =", value, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdNotEqualTo(Integer value) {
-            addCriterion("module_role_id <>", value, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdGreaterThan(Integer value) {
-            addCriterion("module_role_id >", value, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("module_role_id >=", value, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdLessThan(Integer value) {
-            addCriterion("module_role_id <", value, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("module_role_id <=", value, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdIn(List<Integer> values) {
-            addCriterion("module_role_id in", values, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdNotIn(List<Integer> values) {
-            addCriterion("module_role_id not in", values, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdBetween(Integer value1, Integer value2) {
-            addCriterion("module_role_id between", value1, value2, "moduleRoleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModuleRoleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("module_role_id not between", value1, value2, "moduleRoleId");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {

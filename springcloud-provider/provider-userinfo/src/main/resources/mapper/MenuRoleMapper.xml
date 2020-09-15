@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.springcloud.provider.userinfo.mapper.MenuRoleMapper" >
   <resultMap id="BaseResultMap" type="com.springcloud.provider.userinfo.model.MenuRole" >
-    <id column="module_role_id" property="moduleRoleId" jdbcType="INTEGER" />
-    <result column="module_id" property="moduleId" jdbcType="INTEGER" />
+    <id column="menu_role_id" property="menuRoleId" jdbcType="INTEGER" />
     <result column="is_available" property="isAvailable" jdbcType="BIT" />
     <result column="menu_role_identify" property="menuRoleIdentify" jdbcType="VARCHAR" />
     <result column="menu_role_name" property="menuRoleName" jdbcType="VARCHAR" />
@@ -71,8 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    module_role_id, module_id, is_available, menu_role_identify, menu_role_name, create_time, 
-    create_by, update_time, update_by
+    menu_role_id, is_available, menu_role_identify, menu_role_name, create_time, create_by, 
+    update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springcloud.provider.userinfo.model.MenuRoleExample" >
     select
@@ -92,11 +91,11 @@
     select 
     <include refid="Base_Column_List" />
     from menu_role
-    where module_role_id = #{moduleRoleId,jdbcType=INTEGER}
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from menu_role
-    where module_role_id = #{moduleRoleId,jdbcType=INTEGER}
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.springcloud.provider.userinfo.model.MenuRoleExample" >
     delete from menu_role
@@ -105,23 +104,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.springcloud.provider.userinfo.model.MenuRole" >
-    insert into menu_role (module_role_id, module_id, is_available, 
-      menu_role_identify, menu_role_name, create_time, 
-      create_by, update_time, update_by
-      )
-    values (#{moduleRoleId,jdbcType=INTEGER}, #{moduleId,jdbcType=INTEGER}, #{isAvailable,jdbcType=BIT}, 
-      #{menuRoleIdentify,jdbcType=VARCHAR}, #{menuRoleName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
-      )
+    insert into menu_role (menu_role_id, is_available, menu_role_identify, 
+      menu_role_name, create_time, create_by, 
+      update_time, update_by)
+    values (#{menuRoleId,jdbcType=INTEGER}, #{isAvailable,jdbcType=BIT}, #{menuRoleIdentify,jdbcType=VARCHAR}, 
+      #{menuRoleName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.springcloud.provider.userinfo.model.MenuRole" >
     insert into menu_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="moduleRoleId != null" >
-        module_role_id,
-      </if>
-      <if test="moduleId != null" >
-        module_id,
+      <if test="menuRoleId != null" >
+        menu_role_id,
       </if>
       <if test="isAvailable != null" >
         is_available,
@@ -146,11 +140,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="moduleRoleId != null" >
-        #{moduleRoleId,jdbcType=INTEGER},
-      </if>
-      <if test="moduleId != null" >
-        #{moduleId,jdbcType=INTEGER},
+      <if test="menuRoleId != null" >
+        #{menuRoleId,jdbcType=INTEGER},
       </if>
       <if test="isAvailable != null" >
         #{isAvailable,jdbcType=BIT},
@@ -184,11 +175,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update menu_role
     <set >
-      <if test="record.moduleRoleId != null" >
-        module_role_id = #{record.moduleRoleId,jdbcType=INTEGER},
-      </if>
-      <if test="record.moduleId != null" >
-        module_id = #{record.moduleId,jdbcType=INTEGER},
+      <if test="record.menuRoleId != null" >
+        menu_role_id = #{record.menuRoleId,jdbcType=INTEGER},
       </if>
       <if test="record.isAvailable != null" >
         is_available = #{record.isAvailable,jdbcType=BIT},
@@ -218,8 +206,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update menu_role
-    set module_role_id = #{record.moduleRoleId,jdbcType=INTEGER},
-      module_id = #{record.moduleId,jdbcType=INTEGER},
+    set menu_role_id = #{record.menuRoleId,jdbcType=INTEGER},
       is_available = #{record.isAvailable,jdbcType=BIT},
       menu_role_identify = #{record.menuRoleIdentify,jdbcType=VARCHAR},
       menu_role_name = #{record.menuRoleName,jdbcType=VARCHAR},
@@ -234,9 +221,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.provider.userinfo.model.MenuRole" >
     update menu_role
     <set >
-      <if test="moduleId != null" >
-        module_id = #{moduleId,jdbcType=INTEGER},
-      </if>
       <if test="isAvailable != null" >
         is_available = #{isAvailable,jdbcType=BIT},
       </if>
@@ -259,18 +243,17 @@
         update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
     </set>
-    where module_role_id = #{moduleRoleId,jdbcType=INTEGER}
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.springcloud.provider.userinfo.model.MenuRole" >
     update menu_role
-    set module_id = #{moduleId,jdbcType=INTEGER},
-      is_available = #{isAvailable,jdbcType=BIT},
+    set is_available = #{isAvailable,jdbcType=BIT},
       menu_role_identify = #{menuRoleIdentify,jdbcType=VARCHAR},
       menu_role_name = #{menuRoleName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR}
-    where module_role_id = #{moduleRoleId,jdbcType=INTEGER}
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </update>
 </mapper>
