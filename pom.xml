@@ -22,6 +22,7 @@
         <module>springcloud-provider</module>
         <module>springcloud-provider-api</module>
         <module>springcloud-customer</module>
+        <module>springcloud-login</module>
     </modules>
 
     <properties>
