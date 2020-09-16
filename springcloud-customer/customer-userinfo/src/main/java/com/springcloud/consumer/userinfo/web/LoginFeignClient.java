@@ -1,7 +1,7 @@
 package com.springcloud.consumer.userinfo.web;
 
 
-import com.springcloud.consumer.userinfo.client.UserInfoClient;
+import com.springcloud.userinfoapi.api.QueryUserInfoFeignApi;
 import com.springcloud.userinfoapi.dto.UserInfoDto;
 import common.Result;
 import io.swagger.annotations.Api;
@@ -23,10 +23,10 @@ import java.util.List;
 public class LoginFeignClient {
 
     @Autowired
-    private UserInfoClient userInfoClient;
+    private QueryUserInfoFeignApi queryUserInfoFeignApi;
 
     @PostMapping("/getUserInfos")
     public Result<List<UserInfoDto>> getUserInfos() {
-        return userInfoClient.getUserInfos();
+        return queryUserInfoFeignApi.getUserInfos();
     }
 }

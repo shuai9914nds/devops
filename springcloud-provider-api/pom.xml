@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springcloud</groupId>
-    <artifactId>springcloud-userinfo-api</artifactId>
+    <artifactId>api</artifactId>
     <version>1.8.0-SNAPSHOT</version>
-    <name>springcloud-provider-api</name>
+    <name>api</name>
     <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
 

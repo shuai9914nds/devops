@@ -19,6 +19,7 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryUserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@FeignClient(name = "userinfo-server", path = "/product")
 public interface QueryUserInfoFeignApi {
 
     /**
@@ -27,5 +28,6 @@ public interface QueryUserInfoFeignApi {
      * @return
      */
     @ApiOperation(httpMethod = "POST", value = "查询全部用户信息")
+    @RequestMapping(value = "/getUserInfos", method = RequestMethod.POST)
     Result<List<UserInfoDto>> getUserInfos();
 }
