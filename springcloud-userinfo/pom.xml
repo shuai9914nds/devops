@@ -6,13 +6,16 @@
         <groupId>com.springcloud.parent</groupId>
         <artifactId>springcloud-parent</artifactId>
         <version>1.8.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springcloud</groupId>
-    <artifactId>springcloud-consumer</artifactId>
+    <artifactId>springcloud-userinfo</artifactId>
     <version>1.8.0-SNAPSHOT</version>
-    <name>springcloud-consumer</name>
-    <packaging>pom</packaging>
+    <name>springcloud-userinfo</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <!-- 项目中用到了Feign注解，引入此包 -->
@@ -32,8 +35,13 @@
         </dependency>
     </dependencies>
 
-    <modules>
-        <module>customer-userinfo</module>
-    </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.springcloud</groupId>
-        <artifactId>api</artifactId>
+        <artifactId>springcloud-api</artifactId>
         <version>1.8.0-SNAPSHOT</version>
     </parent>
     <groupId>com.springcloud</groupId>
     <artifactId>userinfo-api</artifactId>
     <version>1.8.0-SNAPSHOT</version>
-    <name>springcloud-userinfo-api</name>
+    <name>userinfo-api</name>
     <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
 

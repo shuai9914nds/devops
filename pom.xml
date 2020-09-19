@@ -21,7 +21,7 @@
         <module>eureka-server</module>
         <module>springcloud-provider</module>
         <module>springcloud-api</module>
-        <module>springcloud-customer</module>
+        <module>springcloud-userinfo</module>
         <module>springcloud-login</module>
     </modules>
 
