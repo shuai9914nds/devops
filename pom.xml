@@ -20,7 +20,7 @@
         <module>springcloud-gateway</module>
         <module>eureka-server</module>
         <module>springcloud-provider</module>
-        <module>springcloud-provider-api</module>
+        <module>springcloud-api</module>
         <module>springcloud-customer</module>
         <module>springcloud-login</module>
     </modules>
