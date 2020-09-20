@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.springcloud.provider.userinfo.mapper.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.springcloud.provider.userinfo.entity.UserInfo" >
-    <id column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="id_card_num" property="idCardNum" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="BIT" />
+<mapper namespace="com.springcloud.provider.menu.mapper.MenuRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.springcloud.provider.menu.entity.MenuRole" >
+    <id column="menu_role_id" property="menuRoleId" jdbcType="INTEGER" />
+    <result column="is_available" property="isAvailable" jdbcType="BIT" />
+    <result column="menu_role_identify" property="menuRoleIdentify" jdbcType="VARCHAR" />
+    <result column="menu_role_name" property="menuRoleName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -72,16 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    `uid`, username, `password`, `name`, id_card_num, `state`, create_time, create_by, 
+    menu_role_id, is_available, menu_role_identify, menu_role_name, create_time, create_by, 
     update_time, update_by
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springcloud.provider.userinfo.entity.UserInfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springcloud.provider.menu.entity.MenuRoleExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_info
+    from menu_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,49 +90,41 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_info
-    where `uid` = #{uid,jdbcType=INTEGER}
+    from menu_role
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_info
-    where `uid` = #{uid,jdbcType=INTEGER}
+    delete from menu_role
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.springcloud.provider.userinfo.entity.UserInfoExample" >
-    delete from user_info
+  <delete id="deleteByExample" parameterType="com.springcloud.provider.menu.entity.MenuRoleExample" >
+    delete from menu_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.springcloud.provider.userinfo.entity.UserInfo" >
-    insert into user_info (`uid`, username, `password`, 
-      `name`, id_card_num, `state`, 
-      create_time, create_by, update_time, 
-      update_by)
-    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{idCardNum,jdbcType=VARCHAR}, #{state,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.springcloud.provider.menu.entity.MenuRole" >
+    insert into menu_role (menu_role_id, is_available, menu_role_identify, 
+      menu_role_name, create_time, create_by, 
+      update_time, update_by)
+    values (#{menuRoleId,jdbcType=INTEGER}, #{isAvailable,jdbcType=BIT}, #{menuRoleIdentify,jdbcType=VARCHAR}, 
+      #{menuRoleName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.springcloud.provider.userinfo.entity.UserInfo" >
-    insert into user_info
+  <insert id="insertSelective" parameterType="com.springcloud.provider.menu.entity.MenuRole" >
+    insert into menu_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uid != null" >
-        `uid`,
+      <if test="menuRoleId != null" >
+        menu_role_id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="isAvailable != null" >
+        is_available,
       </if>
-      <if test="password != null" >
-        `password`,
+      <if test="menuRoleIdentify != null" >
+        menu_role_identify,
       </if>
-      <if test="name != null" >
-        `name`,
-      </if>
-      <if test="idCardNum != null" >
-        id_card_num,
-      </if>
-      <if test="state != null" >
-        `state`,
+      <if test="menuRoleName != null" >
+        menu_role_name,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -150,23 +140,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
+      <if test="menuRoleId != null" >
+        #{menuRoleId,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="isAvailable != null" >
+        #{isAvailable,jdbcType=BIT},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="menuRoleIdentify != null" >
+        #{menuRoleIdentify,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="idCardNum != null" >
-        #{idCardNum,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=BIT},
+      <if test="menuRoleName != null" >
+        #{menuRoleName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -182,32 +166,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.springcloud.provider.userinfo.entity.UserInfoExample" resultType="java.lang.Integer" >
-    select count(*) from user_info
+  <select id="countByExample" parameterType="com.springcloud.provider.menu.entity.MenuRoleExample" resultType="java.lang.Integer" >
+    select count(*) from menu_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user_info
+    update menu_role
     <set >
-      <if test="record.uid != null" >
-        `uid` = #{record.uid,jdbcType=INTEGER},
+      <if test="record.menuRoleId != null" >
+        menu_role_id = #{record.menuRoleId,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.isAvailable != null" >
+        is_available = #{record.isAvailable,jdbcType=BIT},
       </if>
-      <if test="record.password != null" >
-        `password` = #{record.password,jdbcType=VARCHAR},
+      <if test="record.menuRoleIdentify != null" >
+        menu_role_identify = #{record.menuRoleIdentify,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        `name` = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.idCardNum != null" >
-        id_card_num = #{record.idCardNum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.state != null" >
-        `state` = #{record.state,jdbcType=BIT},
+      <if test="record.menuRoleName != null" >
+        menu_role_name = #{record.menuRoleName,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -227,13 +205,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user_info
-    set `uid` = #{record.uid,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=VARCHAR},
-      `name` = #{record.name,jdbcType=VARCHAR},
-      id_card_num = #{record.idCardNum,jdbcType=VARCHAR},
-      `state` = #{record.state,jdbcType=BIT},
+    update menu_role
+    set menu_role_id = #{record.menuRoleId,jdbcType=INTEGER},
+      is_available = #{record.isAvailable,jdbcType=BIT},
+      menu_role_identify = #{record.menuRoleIdentify,jdbcType=VARCHAR},
+      menu_role_name = #{record.menuRoleName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -242,23 +218,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.provider.userinfo.entity.UserInfo" >
-    update user_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.provider.menu.entity.MenuRole" >
+    update menu_role
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="isAvailable != null" >
+        is_available = #{isAvailable,jdbcType=BIT},
       </if>
-      <if test="password != null" >
-        `password` = #{password,jdbcType=VARCHAR},
+      <if test="menuRoleIdentify != null" >
+        menu_role_identify = #{menuRoleIdentify,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="idCardNum != null" >
-        id_card_num = #{idCardNum,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null" >
-        `state` = #{state,jdbcType=BIT},
+      <if test="menuRoleName != null" >
+        menu_role_name = #{menuRoleName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -273,19 +243,17 @@
         update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
     </set>
-    where `uid` = #{uid,jdbcType=INTEGER}
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.springcloud.provider.userinfo.entity.UserInfo" >
-    update user_info
-    set username = #{username,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      `name` = #{name,jdbcType=VARCHAR},
-      id_card_num = #{idCardNum,jdbcType=VARCHAR},
-      `state` = #{state,jdbcType=BIT},
+  <update id="updateByPrimaryKey" parameterType="com.springcloud.provider.menu.entity.MenuRole" >
+    update menu_role
+    set is_available = #{isAvailable,jdbcType=BIT},
+      menu_role_identify = #{menuRoleIdentify,jdbcType=VARCHAR},
+      menu_role_name = #{menuRoleName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_by = #{createBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR}
-    where `uid` = #{uid,jdbcType=INTEGER}
+    where menu_role_id = #{menuRoleId,jdbcType=INTEGER}
   </update>
 </mapper>

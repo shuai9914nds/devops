@@ -22,7 +22,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成Model类存放位置 -->
-        <javaModelGenerator targetPackage="com.springcloud.provider.userinfo.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.springcloud.provider.menu.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
@@ -32,20 +32,19 @@
         </sqlMapGenerator>
         <!-- 生成Dao类存放位置 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="
-        com.springcloud.provider.userinfo.mapper" targetProject="src/main/java">
+        com.springcloud.provider.menu.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 生成对应表及类名 -->
-        <table tableName="user_info">
-            <columnOverride column="state" javaType="Boolean"/>
+        <table tableName="menu">
+            <columnOverride column="resource_type" javaType="Integer"/>
+            <columnOverride column="is_show" javaType="Boolean"/>
         </table>
-        <table tableName="user_role_rel">
+        <table tableName="menu_role">
+            <columnOverride column="is_available" javaType="Boolean"/>
         </table>
-        <!--		<table tableName="user_info"-->
-        <!--			   domainObjectName="UserInfo"-->
-        <!--			   enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--			   enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--			   selectByExampleQueryId="false">-->
-        <!--		</table>-->
+        <table tableName="menu_role_rel">
+            <columnOverride column="is_available" javaType="Boolean"/>
+        </table>
     </context>
 </generatorConfiguration>

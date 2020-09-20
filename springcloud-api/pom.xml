@@ -17,6 +17,7 @@
 
     <modules>
         <module>userinfo-api</module>
+        <module>menu-api</module>
     </modules>
 
     <properties>

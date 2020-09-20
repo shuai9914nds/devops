@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.springcloud.provider.userinfo.mapper.UserRoleRelMapper" >
-  <resultMap id="BaseResultMap" type="com.springcloud.provider.userinfo.entity.UserRoleRel" >
+<mapper namespace="com.springcloud.provider.menu.mapper.MenuRoleRelMapper" >
+  <resultMap id="BaseResultMap" type="com.springcloud.provider.menu.entity.MenuRoleRel" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="menu_id" property="menuId" jdbcType="INTEGER" />
     <result column="menu_role_id" property="menuRoleId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -65,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, `uid`, menu_role_id
+    id, menu_id, menu_role_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRelExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springcloud.provider.menu.entity.MenuRoleRelExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_role_rel
+    from menu_role_rel
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,33 +84,33 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_role_rel
+    from menu_role_rel
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_role_rel
+    delete from menu_role_rel
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRelExample" >
-    delete from user_role_rel
+  <delete id="deleteByExample" parameterType="com.springcloud.provider.menu.entity.MenuRoleRelExample" >
+    delete from menu_role_rel
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRel" >
-    insert into user_role_rel (id, `uid`, menu_role_id
+  <insert id="insert" parameterType="com.springcloud.provider.menu.entity.MenuRoleRel" >
+    insert into menu_role_rel (id, menu_id, menu_role_id
       )
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{menuRoleId,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}, #{menuRoleId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRel" >
-    insert into user_role_rel
+  <insert id="insertSelective" parameterType="com.springcloud.provider.menu.entity.MenuRoleRel" >
+    insert into menu_role_rel
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="uid != null" >
-        `uid`,
+      <if test="menuId != null" >
+        menu_id,
       </if>
       <if test="menuRoleId != null" >
         menu_role_id,
@@ -120,28 +120,28 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
       </if>
       <if test="menuRoleId != null" >
         #{menuRoleId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRelExample" resultType="java.lang.Integer" >
-    select count(*) from user_role_rel
+  <select id="countByExample" parameterType="com.springcloud.provider.menu.entity.MenuRoleRelExample" resultType="java.lang.Integer" >
+    select count(*) from menu_role_rel
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user_role_rel
+    update menu_role_rel
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.uid != null" >
-        `uid` = #{record.uid,jdbcType=INTEGER},
+      <if test="record.menuId != null" >
+        menu_id = #{record.menuId,jdbcType=INTEGER},
       </if>
       <if test="record.menuRoleId != null" >
         menu_role_id = #{record.menuRoleId,jdbcType=INTEGER},
@@ -152,19 +152,19 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user_role_rel
+    update menu_role_rel
     set id = #{record.id,jdbcType=INTEGER},
-      `uid` = #{record.uid,jdbcType=INTEGER},
+      menu_id = #{record.menuId,jdbcType=INTEGER},
       menu_role_id = #{record.menuRoleId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRel" >
-    update user_role_rel
+  <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.provider.menu.entity.MenuRoleRel" >
+    update menu_role_rel
     <set >
-      <if test="uid != null" >
-        `uid` = #{uid,jdbcType=INTEGER},
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=INTEGER},
       </if>
       <if test="menuRoleId != null" >
         menu_role_id = #{menuRoleId,jdbcType=INTEGER},
@@ -172,9 +172,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.springcloud.provider.userinfo.entity.UserRoleRel" >
-    update user_role_rel
-    set `uid` = #{uid,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.springcloud.provider.menu.entity.MenuRoleRel" >
+    update menu_role_rel
+    set menu_id = #{menuId,jdbcType=INTEGER},
       menu_role_id = #{menuRoleId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

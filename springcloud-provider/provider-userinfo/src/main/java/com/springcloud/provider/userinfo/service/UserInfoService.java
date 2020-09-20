@@ -1,8 +1,8 @@
 package com.springcloud.provider.userinfo.service;
 
 import com.springcloud.provider.userinfo.mapper.UserInfoMapper;
-import com.springcloud.provider.userinfo.model.UserInfo;
-import com.springcloud.userinfoapi.dto.UserInfoDto;
+import com.springcloud.provider.userinfo.entity.UserInfo;
+import com.userinfo.api.dto.UserInfoDto;
 import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

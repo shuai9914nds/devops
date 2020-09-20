@@ -1,7 +1,7 @@
 package com.springcloud.provider.userinfo.mapper;
 
-import com.springcloud.provider.userinfo.model.UserRoleRel;
-import com.springcloud.provider.userinfo.model.UserRoleRelExample;
+import com.springcloud.provider.userinfo.entity.UserRoleRel;
+import com.springcloud.provider.userinfo.entity.UserRoleRelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

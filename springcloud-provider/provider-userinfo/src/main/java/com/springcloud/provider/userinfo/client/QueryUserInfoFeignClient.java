@@ -2,8 +2,8 @@ package com.springcloud.provider.userinfo.client;
 
 
 import com.springcloud.provider.userinfo.service.UserInfoService;
-import com.springcloud.userinfoapi.api.QueryUserInfoFeignApi;
-import com.springcloud.userinfoapi.dto.UserInfoDto;
+import com.userinfo.api.userinfo.query.QueryUserInfoFeignApi;
+import com.userinfo.api.dto.UserInfoDto;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

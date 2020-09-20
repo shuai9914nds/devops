@@ -1,6 +1,6 @@
 spring:
   application:
-    name: userinfo-server
+    name: menu-server
     #数据库连接配置
   datasource:
     driverClassName: com.mysql.jdbc.Driver
@@ -10,9 +10,9 @@ spring:
   main:
     allow-bean-definition-overriding: true
 server:
-  port: 9090
+  port: 9091
   servlet:
-    context-path: /userinfo
+    context-path: /menu
 
 eureka:
   client:

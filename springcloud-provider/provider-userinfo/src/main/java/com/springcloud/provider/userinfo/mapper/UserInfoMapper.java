@@ -1,7 +1,7 @@
 package com.springcloud.provider.userinfo.mapper;
 
-import com.springcloud.provider.userinfo.model.UserInfo;
-import com.springcloud.provider.userinfo.model.UserInfoExample;
+import com.springcloud.provider.userinfo.entity.UserInfo;
+import com.springcloud.provider.userinfo.entity.UserInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

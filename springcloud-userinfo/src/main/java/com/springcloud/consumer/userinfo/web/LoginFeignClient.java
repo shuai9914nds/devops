@@ -1,8 +1,8 @@
 package com.springcloud.consumer.userinfo.web;
 
 
-import com.springcloud.userinfoapi.api.QueryUserInfoFeignApi;
-import com.springcloud.userinfoapi.dto.UserInfoDto;
+import com.userinfo.api.userinfo.query.QueryUserInfoFeignApi;
+import com.userinfo.api.dto.UserInfoDto;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
