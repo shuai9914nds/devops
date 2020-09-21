@@ -2,6 +2,7 @@ package com.springcloud.provider.menu.service;
 
 import com.springcloud.menu.dto.MenuDto;
 import com.springcloud.provider.menu.entity.Menu;
+import com.springcloud.provider.menu.entity.MenuExample;
 import com.springcloud.provider.menu.mapper.MenuMapper;
 import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,11 @@ public class MenuService {
     }
 
     public List<MenuDto> queryMenuList() {
+        MenuExample menuExample = new MenuExample();
+        menuExample.setOrderByClause("order_num asc");
         // 原始的数据
-        List<Menu> menus = menuMapper.selectByExample(null);
+        List<Menu> menus = menuMapper.selectByExample(menuExample);
         List<MenuDto> menuDtos = BeanConverter.convertList(menus, MenuDto.class);
-
         // 最后的结果
         List<MenuDto> menuDtoList = new ArrayList<>();
         // 先找到所有的一级菜单
