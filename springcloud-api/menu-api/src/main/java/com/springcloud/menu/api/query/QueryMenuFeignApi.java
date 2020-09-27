@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +27,6 @@ public interface QueryMenuFeignApi {
      * @return
      */
     @ApiOperation(httpMethod = "GET", value = "查询全部菜单列表")
-    @RequestMapping(value = "/selectMenuListAll", method = RequestMethod.GET)
+    @PostMapping(value = "/selectMenuListAll")
     Result<List<MenuDto>> selectMenuListAll();
 }
