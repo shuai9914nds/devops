@@ -1,8 +1,8 @@
 package com.springcloud.menu.service;
 
-import com.springcloud.menu.dto.MenuDto;
 import com.springcloud.menu.entity.Menu;
 import com.springcloud.menu.entity.MenuExample;
+import com.menu.api.dto.MenuDto;
 import com.springcloud.menu.mapper.MenuMapper;
 import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;

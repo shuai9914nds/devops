@@ -1,15 +1,13 @@
 package com.springcloud.menu.controller.query;
 
-import com.springcloud.menu.api.query.QueryMenuFeignApi;
-import com.springcloud.menu.dto.MenuDto;
+import com.menu.api.query.QueryMenuFeignApi;
+import com.menu.api.dto.MenuDto;
 import com.springcloud.menu.service.MenuService;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class QueryMenuController implements QueryMenuFeignApi {
 
 
     @Override
-    @RequestMapping(value = "/selectMenuListAll", method = RequestMethod.POST)
+    @GetMapping(value = "/selectMenuListAll")
     public Result<List<MenuDto>> selectMenuListAll() {
         return menuService.getMenuListAll();
     }

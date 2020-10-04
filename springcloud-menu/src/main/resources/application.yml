@@ -10,7 +10,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
 server:
-  port: 9091
+  port: 9092
   servlet:
     context-path: /menu
 

@@ -3,6 +3,7 @@ package com.springcloud.menu.mapper;
 import com.springcloud.menu.entity.MenuRole;
 import com.springcloud.menu.entity.MenuRoleExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface MenuRoleMapper {

@@ -1,18 +1,17 @@
-package com.springcloud.menu;
+package com.springcloud.user;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients("com.menu.api.query")
-@MapperScan(basePackages = {"com.springcloud.menu.mapper"})
+@EnableFeignClients("com.userinfo.api.query")
+@MapperScan(basePackages = {"com.springcloud.user.mapper"})
 @SpringBootApplication
-public class MenuApplication {
+public class UserApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MenuApplication.class, args);
+        SpringApplication.run(UserApplication.class, args);
     }
-
 
 }
