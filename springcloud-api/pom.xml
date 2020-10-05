@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>userinfo-api</module>
+        <module>user-api</module>
         <module>menu-api</module>
     </modules>
 

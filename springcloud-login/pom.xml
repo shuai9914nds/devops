@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>com.springcloud</groupId>
-            <artifactId>userinfo-api</artifactId>
+            <artifactId>user-api</artifactId>
             <version>${com.springcloud.version}</version>
         </dependency>
         <dependency>

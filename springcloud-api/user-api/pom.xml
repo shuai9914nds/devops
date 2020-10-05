@@ -7,11 +7,7 @@
         <artifactId>springcloud-api</artifactId>
         <version>1.8.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.springcloud</groupId>
-    <artifactId>userinfo-api</artifactId>
-    <version>1.8.0-SNAPSHOT</version>
-    <name>userinfo-api</name>
-    <description>Demo project for Spring Boot</description>
+    <artifactId>user-api</artifactId>
     <packaging>jar</packaging>
 
     <properties>

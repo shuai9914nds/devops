@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = {"com.menu.api.query", "com.userinfo.api.query"})
+@EnableFeignClients(basePackages = {"com.menu.api.query", "com.user.api.query"})
 @SpringCloudApplication
 public class LoginApplication {
 

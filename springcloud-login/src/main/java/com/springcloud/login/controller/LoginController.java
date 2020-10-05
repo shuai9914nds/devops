@@ -3,7 +3,6 @@ package com.springcloud.login.controller;
 import com.springcloud.login.dto.LoginDto;
 import com.menu.api.query.QueryMenuFeignApi;
 import com.menu.api.dto.MenuDto;
-import com.userinfo.api.query.QueryUserInfoFeignApi;
 import common.ErrorCode;
 import common.Result;
 import org.apache.shiro.SecurityUtils;
@@ -32,8 +31,6 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
-    private QueryUserInfoFeignApi queryUserInfoFeignApi;
-    @Autowired
     private QueryMenuFeignApi queryMenuFeignApi;
 
     @GetMapping("/getmenu")
@@ -52,7 +49,6 @@ public class LoginController {
             logger.warn("loginDto不能为空，登录失败");
             return new Result<>(ErrorCode.PARAM_ERROR);
         }
-        Result<String> result = queryUserInfoFeignApi.getPasswordByUserName("zhangsan");
         String username = loginDto.getUsername();
         String password = loginDto.getPassword();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password,false);
