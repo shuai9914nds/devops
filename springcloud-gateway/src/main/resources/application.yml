@@ -12,14 +12,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: shuai
-          uri: https://www.baidu.com
+#        - id: shuai
+#          uri: https://www.baidu.com
+#          predicates:
+#            - Path=/shuai/**
+        - id: login
+          uri: lb://login-service
           predicates:
-            - Path=/shuai/**
-        - id: userinfo
-          uri: lb://userinfo-server
-          predicates:
-            - Path=/userinfo/**
+            - Path=//login/**
 #          filters:
 #            - StripPrefix= 1 #过滤几个前缀/为间隔
 

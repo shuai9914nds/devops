@@ -1,6 +1,6 @@
 spring:
   application:
-    name: login
+    name: login-service
   redis:
     database: 0
     host: 172.16.24.3
