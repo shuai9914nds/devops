@@ -23,7 +23,6 @@ import java.util.List;
  * @description：
  */
 @RestController
-@CrossOrigin(maxAge=3600)
 public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);

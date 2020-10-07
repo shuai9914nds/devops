@@ -16,10 +16,10 @@ spring:
 #          uri: https://www.baidu.com
 #          predicates:
 #            - Path=/shuai/**
-        - id: login
-          uri: lb://login-service
-          predicates:
-            - Path=//login/**
+#        - id: login
+#          uri: lb://login-service
+#          predicates:
+#            - Path=//login/**
 #          filters:
 #            - StripPrefix= 1 #过滤几个前缀/为间隔
 

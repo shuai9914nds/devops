@@ -66,7 +66,7 @@
         },
         methods: {
             login() {
-                this.$axios.post('http://localhost:8769/login/login', {
+                this.$axios.post('/login/login', {
                     username: this.user.username,
                     password: this.user.password
                 }).then((response) => {
