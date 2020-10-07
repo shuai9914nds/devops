@@ -1,5 +1,5 @@
 <template>
-  <div id="aa">
+  <div id="home">
     <Login/>
   </div>
 </template>
@@ -15,12 +15,8 @@ export default {
 </script>
 
 <style>
-#aa {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#home {
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 </style>
