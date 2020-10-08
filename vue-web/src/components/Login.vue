@@ -27,6 +27,10 @@
                         </span>
                             </p>
                         </div>
+                        <div class="code" @click="refreshCode">
+                            <input v-model="user.identifyCode" class="input" >
+                            <SIdentify :identifyCode="identifyCode"></SIdentify>
+                        </div>
                         <div class="field">
                             <p class="control">
                                 <button @click="login()" type="submit" class="button is-success login-btn">
@@ -40,12 +44,17 @@
         </div>
     </section>
 </template>
+
 <script>
+    import SIdentify from './identify'
+
     export default {
         name: "login",
         data() {
             return {
                 user: {},
+                identifyCodes: "1234567890",
+                identifyCode: "",
                 rules: {
                     username: [{
                         required: true, message: "请输入用户名", trigger: 'blur'
@@ -64,6 +73,13 @@
                 }
             }
         },
+        mounted() {
+            this.identifyCode = "";
+            this.makeCode(this.identifyCodes, 4);
+        },
+        components: {
+            SIdentify
+        },
         methods: {
             login() {
                 this.$axios.post('/login/login', {
@@ -75,6 +91,21 @@
                     console.log(error);
                 });
 
+            },
+            randomNum(min, max) {
+                return Math.floor(Math.random() * (max - min) + min);
+            },
+            refreshCode() {
+                this.identifyCode = "";
+                this.makeCode(this.identifyCodes, 4);
+            },
+            makeCode(o, l) {
+                for (let i = 0; i < l; i++) {
+                    this.identifyCode += this.identifyCodes[
+                        this.randomNum(0, this.identifyCodes.length)
+                        ];
+                }
+                console.log(this.identifyCode);
             }
         }
     }
