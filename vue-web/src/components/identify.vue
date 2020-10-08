@@ -13,23 +13,23 @@
             },
             fontSizeMin: {
                 type: Number,
-                default: 16
+                default: 25
             },
             fontSizeMax: {
                 type: Number,
-                default: 40
+                default: 30
             },
             backgroundColorMin: {
                 type: Number,
-                default: 180
+                default: 255
             },
             backgroundColorMax: {
                 type: Number,
-                default: 240
+                default: 255
             },
             colorMin: {
                 type: Number,
-                default: 50
+                default: 0
             },
             colorMax: {
                 type: Number,
@@ -37,11 +37,11 @@
             },
             lineColorMin: {
                 type: Number,
-                default: 40
+                default: 100
             },
             lineColorMax: {
                 type: Number,
-                default: 180
+                default: 255
             },
             dotColorMin: {
                 type: Number,
@@ -57,7 +57,7 @@
             },
             contentHeight: {
                 type: Number,
-                default: 38
+                default: 31
             }
         },
         methods: {
@@ -102,7 +102,7 @@
             },
             drawLine(ctx) {
                 // 绘制干扰线
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i < 5; i++) {
                     ctx.strokeStyle = this.randomColor(this.lineColorMin, this.lineColorMax)
                     ctx.beginPath()
                     ctx.moveTo(this.randomNum(0, this.contentWidth), this.randomNum(0, this.contentHeight))
@@ -112,7 +112,7 @@
             },
             drawDot(ctx) {
                 // 绘制干扰点
-                for (let i = 0; i < 100; i++) {
+                for (let i = 0; i < 80; i++) {
                     ctx.fillStyle = this.randomColor(0, 255)
                     ctx.beginPath()
                     ctx.arc(this.randomNum(0, this.contentWidth), this.randomNum(0, this.contentHeight), 1, 0, 2 * Math.PI)
@@ -130,4 +130,12 @@
         }
     }
 </script>
-
+<style scoped>
+    .s-canvas {
+        height: 38px;
+    }
+    .s-canvas canvas {
+        margin-top: 1px;
+        margin-left: 8px;
+    }
+</style>

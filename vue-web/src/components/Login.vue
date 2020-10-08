@@ -6,11 +6,12 @@
                     <img src="../assets/login/bloger.jpg">
                 </div>
                 <div class="column login-right" :rules="rules">
-                    <div class="login-wrapper">
-                        <h1>Let`s blog together!</h1>
+                    <div>
+                        <h1>欢迎登陆!</h1>
                         <div class="field">
-                            <p class="control has-icons-left has-icons-right">
-                                <input v-model="user.username" class="input" placeholder="用户名">
+                            <p class="control">
+                                <span style="margin-left: -15px">用户名：</span>
+                                <input v-model="user.username" class="code" placeholder="用户名">
                                 <span class="icon is-small is-left">
                           <i class="fa fa-home"></i>
                         </span>
@@ -20,16 +21,23 @@
                             </p>
                         </div>
                         <div class="field">
-                            <p class="control has-icons-left">
-                                <input v-model="user.password" class="input" type="password" placeholder="密码">
+                            <p class="control">
+                                <span>密码：</span>
+                                <input v-model="user.password" class="code" type="password" placeholder="密码">
                                 <span class="icon is-small is-left">
                           <i class="fa fa-lock"></i>
                         </span>
                             </p>
                         </div>
-                        <div class="code" @click="refreshCode">
-                            <input v-model="user.identifyCode" class="input" >
-                            <SIdentify :identifyCode="identifyCode"></SIdentify>
+                        <div class="field code-center">
+                            <div>
+                                <span style="margin-left: 103px">验证码：</span>
+                                <input type="text" v-model="code" class="code" placeholder="验证码"/>
+                            </div>
+                            <div class="login-code " @click="refreshCode">
+                                <!--验证码组件-->
+                                <s-identify :identifyCode="user.identifyCode"></s-identify>
+                            </div>
                         </div>
                         <div class="field">
                             <p class="control">
@@ -46,15 +54,18 @@
 </template>
 
 <script>
-    import SIdentify from './identify'
+    import SIdentify from '../components/identify'
 
     export default {
         name: "login",
+        components: {
+            SIdentify
+        },
         data() {
             return {
                 user: {},
                 identifyCodes: "1234567890",
-                identifyCode: "",
+                code: "",//text框输入的验证码
                 rules: {
                     username: [{
                         required: true, message: "请输入用户名", trigger: 'blur'
@@ -73,18 +84,19 @@
                 }
             }
         },
-        mounted() {
-            this.identifyCode = "";
-            this.makeCode(this.identifyCodes, 4);
+        created() {
+            this.refreshCode();
         },
-        components: {
-            SIdentify
+        mounted() {
+            this.user.identifyCode = "";
+            this.makeCode(this.identifyCodes, 4);
         },
         methods: {
             login() {
                 this.$axios.post('/login/login', {
                     username: this.user.username,
-                    password: this.user.password
+                    password: this.user.password,
+                    identifyCode: this.user.identifyCode
                 }).then((response) => {
                     console.log(response);
                 }).catch((error) => {
@@ -96,22 +108,36 @@
                 return Math.floor(Math.random() * (max - min) + min);
             },
             refreshCode() {
-                this.identifyCode = "";
+                this.user.identifyCode = "";
                 this.makeCode(this.identifyCodes, 4);
             },
             makeCode(o, l) {
                 for (let i = 0; i < l; i++) {
-                    this.identifyCode += this.identifyCodes[
+                    this.user.identifyCode += this.identifyCodes[
                         this.randomNum(0, this.identifyCodes.length)
                         ];
                 }
-                console.log(this.identifyCode);
+                console.log(this.user.identifyCode);
             }
         }
     }
 </script>
 
 
-<style scoped>
+<style>
+    /*验证码样式*/
+    .code {
+        width: 124px;
+        height: 25px;
+        border: 1px solid rgba(186, 186, 186, 1);
+    }
 
+    .code-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-code {
+        cursor: pointer;
+    }
 </style>
