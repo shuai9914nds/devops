@@ -31,14 +31,12 @@
                         </div>
                         <div class="field code-center">
                             <div>
-                                <span style="margin-left: 103px">验证码：</span>
-                                <input type="text" v-model="code" class="code" placeholder="验证码"/>
+                                <span style="margin-left: 80px">验证码：</span>
+                                <input type="text" class="code" placeholder="验证码"/>
                             </div>
-                            <div class="login-code " @click="refreshCode">
-                                <!--验证码组件-->
-                                <s-identify :identifyCode="user.identifyCode"></s-identify>
-                            </div>
+                            <img :src="verifyimg" style="margin-left: 15px;" @click="getCode"/>
                         </div>
+
                         <div class="field">
                             <p class="control">
                                 <button @click="login()" type="submit" class="button is-success login-btn">
@@ -54,18 +52,13 @@
 </template>
 
 <script>
-    import SIdentify from '../components/identify'
 
     export default {
         name: "login",
-        components: {
-            SIdentify
-        },
         data() {
             return {
                 user: {},
-                identifyCodes: "1234567890",
-                code: "",//text框输入的验证码
+                verifyimg: "",
                 rules: {
                     username: [{
                         required: true, message: "请输入用户名", trigger: 'blur'
@@ -85,11 +78,10 @@
             }
         },
         created() {
-            this.refreshCode();
+            this.getCode();
         },
         mounted() {
             this.user.identifyCode = "";
-            this.makeCode(this.identifyCodes, 4);
         },
         methods: {
             login() {
@@ -104,20 +96,23 @@
                 });
 
             },
-            randomNum(min, max) {
-                return Math.floor(Math.random() * (max - min) + min);
-            },
-            refreshCode() {
-                this.user.identifyCode = "";
-                this.makeCode(this.identifyCodes, 4);
-            },
-            makeCode(o, l) {
-                for (let i = 0; i < l; i++) {
-                    this.user.identifyCode += this.identifyCodes[
-                        this.randomNum(0, this.identifyCodes.length)
-                        ];
-                }
-                console.log(this.user.identifyCode);
+            /**
+             * 获取验证码
+             * 将验证码写到login.html页面的id = verifyimg 的地方
+             */
+            getCode() {
+                this.$axios.get('/login/verifyCode', {
+                    responseType: 'arraybuffer'
+                }).then((response) => {
+                    return 'data:image/jpeg;base64,' + btoa(
+                        new Uint8Array(response.data)
+                            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                    );
+                }).then(data => {
+                    this.verifyimg = data;
+                }).catch((error) => {
+                    console.log(error);
+                });
             }
         }
     }

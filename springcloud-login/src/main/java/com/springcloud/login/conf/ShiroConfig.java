@@ -42,8 +42,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
 //        filterChainDefinitionMap.put("/login", "anon");
 //        filterChainDefinitionMap.put("/regist", "anon");
-        filterChainDefinitionMap.put("/login/login", "anon");
-        filterChainDefinitionMap.put("/login/save", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/verifyCode", "anon");
 
 
         // 剩余请求需要身份认证
