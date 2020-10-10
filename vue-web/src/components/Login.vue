@@ -1,54 +1,50 @@
 <template>
-    <section class="login-main">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-three-fifths login-left">
-                    <img src="../assets/login/bloger.jpg">
-                </div>
-                <div class="column login-right" :rules="rules">
-                    <div>
-                        <h1>欢迎登陆!</h1>
-                        <div class="field">
-                            <p class="control">
-                                <span style="margin-left: -15px">用户名：</span>
-                                <input v-model="user.username" class="code" placeholder="用户名">
-                                <span class="icon is-small is-left">
+    <div class="columns">
+        <div class="column is-three-fifths login-left">
+            <img src="../assets/login/bloger.jpg">
+        </div>
+        <el-form class="column login-right" :model="user" :rules="fieldRules">
+            <div>
+                <h1>欢迎登陆!</h1>
+                <div class="field">
+                    <p class="control">
+                        <span style="margin-left: -15px">用户名：</span>
+                        <el-input v-model="user.username" style="width: 130px"/>
+                        <span class="icon is-small">
                           <i class="fa fa-home"></i>
                         </span>
-                                <span class="icon is-small is-right">
+                        <span class="icon is-small">
                           <i class="fa fa-check"></i>
                         </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control">
-                                <span>密码：</span>
-                                <input v-model="user.password" class="code" type="password" placeholder="密码">
-                                <span class="icon is-small is-left">
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <span>密码：</span>
+                        <el-input v-model="user.password" style="width: 130px" type="password"></el-input>
+                        <span class="icon is-small">
                           <i class="fa fa-lock"></i>
                         </span>
-                            </p>
-                        </div>
-                        <div class="field code-center">
-                            <div>
-                                <span style="margin-left: 80px">验证码：</span>
-                                <input type="text" class="code" placeholder="验证码"/>
-                            </div>
-                            <img :src="verifyimg" style="margin-left: 15px;" @click="getCode"/>
-                        </div>
-
-                        <div class="field">
-                            <p class="control">
-                                <button @click="login()" type="submit" class="button is-success login-btn">
-                                    登录
-                                </button>
-                            </p>
-                        </div>
+                    </p>
+                </div>
+                <div class="field code-center">
+                    <div>
+                        <span style="margin-left: 80px">验证码：</span>
+                        <el-input v-model="user.identifyCode" type="text" style="width: 130px"/>
                     </div>
+                    <img :src="identifyImg" style="margin-left: 15px;" @click="getCode"/>
+                </div>
+
+                <div class="field">
+                    <p class="control">
+                        <button @click="login" type="submit" class="button">
+                            登录
+                        </button>
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </el-form>
+    </div>
 </template>
 
 <script>
@@ -57,31 +53,34 @@
         name: "login",
         data() {
             return {
-                user: {},
-                verifyimg: "",
-                rules: {
+                user: {
+                    username: "",
+                    password: "",
+                    identifyCode: ""
+                },
+                identifyImg: "",
+                fieldRules: {
                     username: [{
                         required: true, message: "请输入用户名", trigger: 'blur'
                     }, {
-                        min: 2,
+                        min: 10,
                         max: 15,
                         message: '长度在 2 到 15 个字符'
                     }, /*{
                         pattern: /^[\u4E00-\u9FA5]+$/,
                         message: '用户名只能为中文'
                     }*/],
-                    password: [
-                        {required: true, message: "请输入密码", trigger: 'blur'}
-
-                    ]
+                    password: [{
+                        required: true, message: "请输入密码", trigger: 'blur'
+                    }],
+                    identifyCode: [{
+                        required: true, message: "请输入验证码", trigger: 'blur'
+                    }]
                 }
             }
         },
         created() {
             this.getCode();
-        },
-        mounted() {
-            this.user.identifyCode = "";
         },
         methods: {
             login() {
@@ -109,7 +108,7 @@
                             .reduce((data, byte) => data + String.fromCharCode(byte), '')
                     );
                 }).then(data => {
-                    this.verifyimg = data;
+                    this.identifyImg = data;
                 }).catch((error) => {
                     console.log(error);
                 });
