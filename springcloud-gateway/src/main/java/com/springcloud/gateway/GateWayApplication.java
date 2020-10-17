@@ -1,5 +1,6 @@
 package com.springcloud.gateway;
 
+import com.springcloud.gateway.filter.TokenFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -30,5 +31,10 @@ public class GateWayApplication {
                 .route("login-service",r -> r.path("/login/**")
                         .uri("lb://login-service")
                 ).build();
+    }
+
+    @Bean
+    public TokenFilter tokenFilter() {
+        return new TokenFilter();
     }
 }
