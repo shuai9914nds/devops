@@ -1,5 +1,6 @@
 package com.springcloud.gateway;
 
+import com.springcloud.gateway.filter.AuthFilter;
 import com.springcloud.gateway.filter.TokenFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,7 +35,29 @@ public class GateWayApplication {
     }
 
     @Bean
+    public RouteLocator userRouteLocator(RouteLocatorBuilder builder) {
+        return builder.routes()
+                //basic proxy
+                .route("user-server",r -> r.path("/user/**")
+                        .uri("lb://user-server")
+                ).build();
+    }
+
+    @Bean
+    public RouteLocator menuRouteLocator(RouteLocatorBuilder builder) {
+        return builder.routes()
+                //basic proxy
+                .route("menu-server",r -> r.path("/menu/**")
+                        .uri("lb://menu-server")
+                ).build();
+    }
+
+    @Bean
     public TokenFilter tokenFilter() {
         return new TokenFilter();
+    }
+    @Bean
+    public AuthFilter authFilter() {
+        return new AuthFilter();
     }
 }
