@@ -24,8 +24,11 @@ public enum ErrorCode {
     PARAM_ERROR(100001, "参数非法"),
     PARAM_OUT_RANGE_ERROR(100002, "参数的值超出范围"),
 
+    TOKEN_IS_NULL(200001, "token不能为空"),
+
 
     /**
+     *
      * 具体业务错误码
      **/
 

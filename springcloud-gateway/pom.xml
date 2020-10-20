@@ -36,6 +36,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
+        <dependency>
+            <artifactId>springcloud-common</artifactId>
+            <version>${project.version}</version>
+            <groupId>com.springcloud.parent</groupId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

@@ -9,9 +9,9 @@ server:
 spring:
   application:
     name: service-gateway
-  cloud:
-    gateway:
-      routes:
+#  cloud:
+#    gateway:
+#      routes:
 #        - id: shuai
 #          uri: https://www.baidu.com
 #          predicates:

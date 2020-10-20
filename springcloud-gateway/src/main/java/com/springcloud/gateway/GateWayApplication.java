@@ -1,7 +1,6 @@
 package com.springcloud.gateway;
 
 import com.springcloud.gateway.filter.AuthFilter;
-import com.springcloud.gateway.filter.TokenFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -52,10 +51,10 @@ public class GateWayApplication {
                 ).build();
     }
 
-    @Bean
-    public TokenFilter tokenFilter() {
-        return new TokenFilter();
-    }
+//    @Bean
+//    public TokenFilter tokenFilter() {
+//        return new TokenFilter();
+//    }
     @Bean
     public AuthFilter authFilter() {
         return new AuthFilter();
