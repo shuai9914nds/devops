@@ -1,6 +1,5 @@
 package com.springcloud.user.client;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
 
@@ -31,26 +30,26 @@ public class QueryUserClient implements QueryUserFeignApi {
     /**
      * 根据用户名查询密码
      *
-     * @param userName
-     * @return
+     * @param username 用户名
+     * @return Result<UserInfoDto
      */
     @Override
-    @GetMapping(value = "/getUserByUserName")
-    public Result<UserInfoDto> getUserByUserName(@RequestParam("userName") String userName) {
-        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", userName);
+    @GetMapping(value = "/user")
+    public Result<UserInfoDto> getUserByUserName(@RequestParam("username") String username) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername(username);
         return new Result<>(
-                BeanConverter.convert(iUserInfoService.getOne(queryWrapper), UserInfoDto.class));
+                BeanConverter.convert(iUserInfoService.getOneByCondition(userInfo), UserInfoDto.class));
     }
 
     /**
-     * 根据用户名查询密码
+     * 查询全部用户
      *
      * @param
      * @return
      */
     @Override
-    @GetMapping(value = "/getUserAll")
+    @GetMapping(value = "/users")
     public Result<List<UserInfoDto>> getUserAll() {
         List<UserInfo> userInfos = iUserInfoService.getBaseMapper().selectList(null);
         return new Result<>(BeanConverter.convertList(userInfos, UserInfoDto.class));

@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--    <parent>-->
-    <!--        <groupId>com.springcloud.provider</groupId>-->
-    <!--        <artifactId>springcloud-provider</artifactId>-->
-    <!--        <version>1.8.0-SNAPSHOT</version>-->
-    <!--    </parent>-->
+        <parent>
+            <groupId>com.springcloud.provider</groupId>
+            <artifactId>springcloud-provider</artifactId>
+            <version>1.8.0-SNAPSHOT</version>
+        </parent>
     <groupId>com.springcloud</groupId>
     <artifactId>user</artifactId>
     <version>1.8.0-SNAPSHOT</version>
@@ -62,6 +62,13 @@
             <artifactId>user-api</artifactId>
             <version>1.8.0-SNAPSHOT</version>
         </dependency>
+        <!-- jwt依赖 -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.3</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

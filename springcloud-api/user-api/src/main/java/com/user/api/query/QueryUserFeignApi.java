@@ -26,8 +26,8 @@ public interface QueryUserFeignApi {
      * @return
      */
     @ApiOperation(httpMethod = "GET", value = "根据用户名查询密码")
-    @GetMapping(value = "/getUserByUserName")
-    Result<UserInfoDto> getUserByUserName(@RequestParam("userName") String userName);
+    @GetMapping(value = "/user/1")
+    Result<UserInfoDto> getUserByUserName(@RequestParam("username") String username);
 
     /**
      * 查询全部用户信息列表
@@ -35,6 +35,6 @@ public interface QueryUserFeignApi {
      * @return
      */
     @ApiOperation(httpMethod = "GET", value = "查询全部用户信息列表")
-    @GetMapping(value = "/getUserAll")
+    @GetMapping(value = "/users")
     Result<List<UserInfoDto>> getUserAll();
 }

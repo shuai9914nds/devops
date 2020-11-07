@@ -26,7 +26,7 @@ public class QueryMenuController implements QueryMenuFeignApi {
 
 
     @Override
-    @GetMapping(value = "/selectMenuListAll")
+    @GetMapping(value = "/menus")
     public Result<List<MenuDto>> selectMenuListAll() {
         return menuService.getMenuListAll();
     }

@@ -33,7 +33,7 @@ public class AuthFilter implements Ordered, GlobalFilter {
         ServerHttpRequest request = exchange.getRequest();
         //指定的url放行
         String path = request.getURI().getPath();
-        if ("/user/getUserByUserName".equals(path) || "/login/verifyCode".equals(path)) {
+        if ("/login/login".equals(path) || "/login/verifyCode".equals(path)) {
             return chain.filter(exchange);
         }
         String token = exchange.getRequest().getHeaders().getFirst("token");
