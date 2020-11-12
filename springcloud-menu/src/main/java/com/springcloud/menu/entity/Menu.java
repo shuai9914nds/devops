@@ -1,145 +1,71 @@
 package com.springcloud.menu.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class Menu {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author shuai
+ * @since 2020-11-12
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value="Menu对象", description="")
+public class Menu implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "菜单id")
+    @TableId(value = "menu_id", type = IdType.AUTO)
     private Integer menuId;
 
+    @ApiModelProperty(value = "父编号,本权限可能是该父编号权限的子权限")
     private Integer parentId;
 
+    @ApiModelProperty(value = "权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view")
     private String permission;
 
+    @ApiModelProperty(value = "资源类型，101菜单，201按钮")
     private Integer resourceType;
 
+    @ApiModelProperty(value = "菜单路径 如：/userinfo/list")
     private String url;
 
+    @ApiModelProperty(value = "是否展示，0隐藏，1展示")
     private Boolean isShow;
 
+    @ApiModelProperty(value = "菜单图标")
     private String icon;
 
+    @ApiModelProperty(value = "菜单顺序")
     private Integer orderNum;
 
+    @ApiModelProperty(value = "路由地址")
     private String path;
 
+    @ApiModelProperty(value = "组件路径")
     private String component;
 
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(value = "创建人")
     private String createBy;
 
+    @ApiModelProperty(value = "修改时间")
     private Date updateTime;
 
+    @ApiModelProperty(value = "修改人")
     private String updateBy;
 
-    public Integer getMenuId() {
-        return menuId;
-    }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
-
-    public Integer getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(Integer resourceType) {
-        this.resourceType = resourceType;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Boolean getIsShow() {
-        return isShow;
-    }
-
-    public void setIsShow(Boolean isShow) {
-        this.isShow = isShow;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public Integer getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getComponent() {
-        return component;
-    }
-
-    public void setComponent(String component) {
-        this.component = component;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
 }

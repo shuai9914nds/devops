@@ -1,85 +1,53 @@
 package com.springcloud.menu.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class MenuRole {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author shuai
+ * @since 2020-11-11
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value="MenuRole对象", description="")
+public class MenuRole implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "menu_role_id", type = IdType.AUTO)
     private Integer menuRoleId;
 
+    @ApiModelProperty(value = "是否可用1可用  0停用")
     private Boolean isAvailable;
 
+    @ApiModelProperty(value = "角色标识程序中判断使用,如admin")
     private String menuRoleIdentify;
 
+    @ApiModelProperty(value = "角色描述,UI界面显示使用")
     private String menuRoleName;
 
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(value = "创建人")
     private String createBy;
 
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
+    @ApiModelProperty(value = "更新人")
     private String updateBy;
 
-    public Integer getMenuRoleId() {
-        return menuRoleId;
-    }
 
-    public void setMenuRoleId(Integer menuRoleId) {
-        this.menuRoleId = menuRoleId;
-    }
-
-    public Boolean getIsAvailable() {
-        return isAvailable;
-    }
-
-    public void setIsAvailable(Boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
-    public String getMenuRoleIdentify() {
-        return menuRoleIdentify;
-    }
-
-    public void setMenuRoleIdentify(String menuRoleIdentify) {
-        this.menuRoleIdentify = menuRoleIdentify;
-    }
-
-    public String getMenuRoleName() {
-        return menuRoleName;
-    }
-
-    public void setMenuRoleName(String menuRoleName) {
-        this.menuRoleName = menuRoleName;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
 }

@@ -2,7 +2,7 @@ package com.springcloud.menu.controller.query;
 
 import com.menu.api.query.QueryMenuFeignApi;
 import com.menu.api.dto.MenuDto;
-import com.springcloud.menu.service.MenuService;
+import com.springcloud.menu.service.IMenuService;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,12 @@ import java.util.List;
 public class QueryMenuController implements QueryMenuFeignApi {
 
     @Autowired
-    private MenuService menuService;
+    private IMenuService iMenuService;
 
 
     @Override
     @GetMapping(value = "/menus")
     public Result<List<MenuDto>> selectMenuListAll() {
-        return menuService.getMenuListAll();
+        return iMenuService.getMenuListAll();
     }
 }
