@@ -19,12 +19,10 @@
         <module>springcloud-common</module>
         <module>springcloud-gateway</module>
         <module>eureka-server</module>
-        <module>springcloud-provider</module>
         <module>springcloud-api</module>
         <module>springcloud-menu</module>
         <module>springcloud-login</module>
     </modules>
-
     <properties>
         <java.version>1.8</java.version>
         <springfox.version>2.6.1</springfox.version>
