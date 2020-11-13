@@ -7,7 +7,6 @@ import com.springcloud.menu.mapper.MenuMapper;
 import com.springcloud.menu.service.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import common.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.BeanConverter;
 

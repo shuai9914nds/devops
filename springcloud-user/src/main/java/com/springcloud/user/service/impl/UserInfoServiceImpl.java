@@ -22,8 +22,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     @Override
     public UserInfo getOneByCondition(UserInfo userInfo) {
-//        return this.baseMapper.selectOne(getLambdaQueryWrapper(userInfo));
-        return null;
+        return this.baseMapper.selectOne(getLambdaQueryWrapper(userInfo));
     }
 
     /**
@@ -32,34 +31,34 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      * @param userInfo 用户信息
      * @return
      */
-//    private LambdaQueryWrapper<UserInfo> getLambdaQueryWrapper(UserInfo userInfo) {
-//        LambdaQueryWrapper<UserInfo> queryMapper = new LambdaQueryWrapper<>();
-//        if (null == userInfo) {
-//            return null;
-//        }
-//        if (null != userInfo.getUid()) {
-//            queryMapper.eq(UserInfo::getUid, userInfo.getUid());
-//        }
-//        if (StringUtils.isNotBlank(userInfo.getName())) {
-//            queryMapper.eq(UserInfo::getName, userInfo.getName());
-//        }
-//        if (StringUtils.isNotBlank(userInfo.getUsername())) {
-//            queryMapper.eq(UserInfo::getUsername, userInfo.getUsername());
-//        }
-//        if (StringUtils.isNotBlank(userInfo.getIdCardNum())) {
-//            queryMapper.eq(UserInfo::getIdCardNum, userInfo.getIdCardNum());
-//        }
-//        if (null == userInfo.getState()) {
-//            queryMapper.eq(UserInfo::getState, UserStateEnum.NORMAL.getCode());
-//        } else {
-//            queryMapper.eq(UserInfo::getState, userInfo.getState());
-//        }
-//        if (StringUtils.isNotBlank(userInfo.getCreateBy())) {
-//            queryMapper.eq(UserInfo::getCreateBy, userInfo.getCreateBy());
-//        }
-//        if (StringUtils.isNotBlank(userInfo.getUpdateBy())) {
-//            queryMapper.eq(UserInfo::getUpdateBy, userInfo.getUpdateBy());
-//        }
-//        return queryMapper;
-//    }
+    private LambdaQueryWrapper<UserInfo> getLambdaQueryWrapper(UserInfo userInfo) {
+        LambdaQueryWrapper<UserInfo> queryMapper = new LambdaQueryWrapper<>();
+        if (null == userInfo) {
+            return null;
+        }
+        if (null != userInfo.getUid()) {
+            queryMapper.eq(UserInfo::getUid, userInfo.getUid());
+        }
+        if (StringUtils.isNotBlank(userInfo.getName())) {
+            queryMapper.eq(UserInfo::getName, userInfo.getName());
+        }
+        if (StringUtils.isNotBlank(userInfo.getUsername())) {
+            queryMapper.eq(UserInfo::getUsername, userInfo.getUsername());
+        }
+        if (StringUtils.isNotBlank(userInfo.getIdCardNum())) {
+            queryMapper.eq(UserInfo::getIdCardNum, userInfo.getIdCardNum());
+        }
+        if (null == userInfo.getState()) {
+            queryMapper.eq(UserInfo::getState, UserStateEnum.NORMAL.getCode());
+        } else {
+            queryMapper.eq(UserInfo::getState, userInfo.getState());
+        }
+        if (StringUtils.isNotBlank(userInfo.getCreateBy())) {
+            queryMapper.eq(UserInfo::getCreateBy, userInfo.getCreateBy());
+        }
+        if (StringUtils.isNotBlank(userInfo.getUpdateBy())) {
+            queryMapper.eq(UserInfo::getUpdateBy, userInfo.getUpdateBy());
+        }
+        return queryMapper;
+    }
 }
