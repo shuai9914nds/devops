@@ -148,8 +148,8 @@ public class GeneratorCodeConfig {
 //        strategy.setSuperEntityColumns("id");
         List<String> tables = new ArrayList<>();
         tables.add("menu");
-//        tables.add("menu_role");
-//        tables.add("menu_role_rel");
+        tables.add("menu_role");
+        tables.add("menu_role_rel");
         strategy.setInclude(tables.toArray(new String[0]));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

@@ -1,13 +1,14 @@
 package com.springcloud.menu.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -15,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author shuai
- * @since 2020-11-12
+ * @since 2020-11-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,14 +32,14 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "父编号,本权限可能是该父编号权限的子权限")
     private Integer parentId;
 
-    @ApiModelProperty(value = "权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view")
+    @ApiModelProperty(value = "权限字符串,menu例子：/user/info")
     private String permission;
 
-    @ApiModelProperty(value = "资源类型，101菜单，201按钮")
+    @ApiModelProperty(value = "资源类型，101菜单，201按钮，301请求地址")
     private Integer resourceType;
 
-    @ApiModelProperty(value = "菜单路径 如：/userinfo/list")
-    private String url;
+    @ApiModelProperty(value = "请求类型，例如GET,POST")
+    private String requestType;
 
     @ApiModelProperty(value = "是否展示，0隐藏，1展示")
     private Boolean isShow;
@@ -48,9 +49,6 @@ public class Menu implements Serializable {
 
     @ApiModelProperty(value = "菜单顺序")
     private Integer orderNum;
-
-    @ApiModelProperty(value = "路由地址")
-    private String path;
 
     @ApiModelProperty(value = "组件路径")
     private String component;

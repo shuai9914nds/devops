@@ -1,7 +1,7 @@
 package com.springcloud.menu.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.springcloud.menu.entity.MenuRoleRel;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.springcloud.menu.entity.MenuRoleRel;
  * </p>
  *
  * @author shuai
- * @since 2020-11-11
+ * @since 2020-11-13
  */
 public interface MenuRoleRelMapper extends BaseMapper<MenuRoleRel> {
 

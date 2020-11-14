@@ -28,6 +28,6 @@ public class QueryMenuController implements QueryMenuFeignApi {
     @Override
     @GetMapping(value = "/menus")
     public Result<List<MenuDto>> selectMenuListAll() {
-        return iMenuService.getMenuListAll();
+        return new Result<>(iMenuService.getMenuListAll());
     }
 }

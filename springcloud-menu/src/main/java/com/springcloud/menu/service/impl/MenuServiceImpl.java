@@ -1,12 +1,11 @@
 package com.springcloud.menu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.menu.api.dto.MenuDto;
 import com.springcloud.menu.entity.Menu;
 import com.springcloud.menu.mapper.MenuMapper;
 import com.springcloud.menu.service.IMenuService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import common.Result;
 import org.springframework.stereotype.Service;
 import utils.BeanConverter;
 
@@ -15,11 +14,11 @@ import java.util.List;
 
 /**
  * <p>
- * 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author shuai
- * @since 2020-11-12
+ * @since 2020-11-13
  */
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
@@ -27,11 +26,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     /**
      * 查询所有菜单列表
      *
-     * @return
+     * @return List<MenuDto>
      */
     @Override
-    public Result<List<MenuDto>> getMenuListAll() {
-        return new Result<>(queryMenuList());
+    public List<MenuDto> getMenuListAll() {
+        return queryMenuList();
     }
 
     public List<MenuDto> queryMenuList() {
