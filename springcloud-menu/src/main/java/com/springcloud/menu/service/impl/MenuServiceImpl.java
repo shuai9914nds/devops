@@ -1,20 +1,31 @@
 package com.springcloud.menu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.menu.api.dto.MenuDto;
 import com.springcloud.menu.entity.Menu;
 import com.springcloud.menu.mapper.MenuMapper;
 import com.springcloud.menu.service.IMenuService;
+import com.springcloud.menu.util.JsonUtils;
+import common.Constant;
+import org.apache.commons.lang.StringUtils;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import utils.BeanConverter;
 
+import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author shuai
@@ -23,14 +34,83 @@ import java.util.List;
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
 
+    @Resource
+    private RedissonClient redissonClient;
+
+    @Resource
+    private MenuMapper menuMapper;
+
     /**
-     * 查询所有菜单列表
+     * 查询所有菜单列表(树形结构)
      *
      * @return List<MenuDto>
      */
     @Override
     public List<MenuDto> getMenuListAll() {
         return queryMenuList();
+    }
+
+    /**
+     * 查询菜单列表（非树形结构）
+     *
+     * @return List<Menu>
+     */
+    @Override
+    public List<Menu> getMenus() {
+        Menu menu = new Menu();
+        menu.setMenuId(4);
+        List<Menu> menus = this.baseMapper.selectList(null);
+        if (CollectionUtils.isEmpty(menus)) {
+            return menus;
+        }
+        return menus.stream().distinct().collect(Collectors.toList());
+    }
+
+    /**
+     * 查询缓存中的菜单数据（非树形结构）
+     *
+     * @return
+     */
+    @Override
+    public List<Menu> getMenusByCache() {
+        RBucket<Object> bucket = redissonClient.getBucket(Constant.REDIS_ALL_MENUS_KEY);
+        Object o = bucket.get();
+        if (null == o) {
+            List<Menu> menus = getMenus();
+            try {
+                bucket.set(JsonUtils.toJson(menus));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return menus;
+        } else {
+            try {
+                return JsonUtils.fromListJson(o.toString(), List.class, Menu.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return Collections.emptyList();
+    }
+
+
+    /**
+     * 刷新菜单缓存
+     */
+    @Override
+    public void refreshMenuCache() {
+        RBucket<Object> bucket = redissonClient.getBucket(Constant.REDIS_ALL_MENUS_KEY);
+        bucket.delete();
+        List<Menu> menus = getMenus();
+        if (CollectionUtils.isEmpty(menus)) {
+            bucket.set("");
+        } else {
+            try {
+                bucket.set(JsonUtils.toJson(menus));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public List<MenuDto> queryMenuList() {
@@ -80,5 +160,41 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
             return null;
         }
         return childList;
+    }
+
+
+    /**
+     * 获取LambdaQueryWrapper<Menu>
+     *
+     * @param menu 菜单
+     * @return LambdaQueryWrapper<Menu>
+     */
+    private LambdaQueryWrapper<Menu> getLambdaQueryWrapper(Menu menu) {
+        if (null == menu) {
+            return null;
+        }
+        LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<>();
+        if (null == menu.getMenuId()) {
+            wrapper.eq(Menu::getMenuId, menu.getMenuId());
+        }
+        if (null == menu.getParentId()) {
+            wrapper.eq(Menu::getParentId, menu.getParentId());
+        }
+        if (StringUtils.isNotBlank(menu.getPermission())) {
+            wrapper.eq(Menu::getPermission, menu.getPermission());
+        }
+        if (null != menu.getResourceType()) {
+            wrapper.eq(Menu::getResourceType, menu.getResourceType());
+        }
+        if (null != menu.getIsShow()) {
+            wrapper.eq(Menu::getIsShow, menu.getIsShow());
+        }
+        if (StringUtils.isNotBlank(menu.getIcon())) {
+            wrapper.eq(Menu::getIcon, menu.getIcon());
+        }
+        if (StringUtils.isNotBlank(menu.getComponent())) {
+            wrapper.eq(Menu::getComponent, menu.getComponent());
+        }
+        return wrapper;
     }
 }

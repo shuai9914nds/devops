@@ -22,4 +22,21 @@ public interface IMenuService extends IService<Menu> {
      * @return List<MenuDto>
      */
     List<MenuDto> getMenuListAll();
+
+    /**
+     * 查询菜单列表（非树形结构）
+     * @return
+     */
+    List<Menu> getMenus();
+
+    /**
+     * 查询缓存中的菜单数据
+     * @return
+     */
+    List<Menu> getMenusByCache();
+
+    /**
+     * 刷新菜单缓存
+     */
+    void refreshMenuCache();
 }
