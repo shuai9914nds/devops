@@ -37,9 +37,11 @@
 
                 <div class="field">
                     <p class="control">
-                        <button @click="login" type="submit" class="button">
-                            登录
-                        </button>
+<!--                        <button @click="login" type="submit" class="button">-->
+<!--                            登录-->
+<!--                        </button>-->
+                        <a-button type="primary" @click="login" class="button">登录</a-button>
+
                     </p>
                 </div>
             </div>
