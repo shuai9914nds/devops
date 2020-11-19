@@ -1,16 +1,12 @@
 package com.springcloud.login.conf;
 
-import com.user.api.dto.UserInfoDto;
 import com.user.api.query.QueryUserFeignApi;
-import common.Result;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
 
@@ -44,22 +40,23 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-        //从主体获取传过来的用户
-        String username = (String) token.getPrincipal();
-
-        Result<UserInfoDto> result = queryUserFeignApi.getUserByUserName(username);
-        UserInfoDto userInfoDB = result.getObj();
-        //通过用户传过来从数据库进行密码
-        if (null == userInfoDB) {
-            return null;
-        }
-
-        //加盐
-        ByteSource salt = ByteSource.Util.bytes(username);
-        String realmName = this.getName();//获取当前自定义的realm
-
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userInfoDB, userInfoDB.getPassword(), salt, realmName);
-        return simpleAuthenticationInfo;
+//        //从主体获取传过来的用户
+//        String username = (String) token.getPrincipal();
+//
+//        Result<UserInfoDto> result = queryUserFeignApi.getUserByUserName(username);
+//        UserInfoDto userInfoDB = result.getObj();
+//        //通过用户传过来从数据库进行密码
+//        if (null == userInfoDB) {
+//            return null;
+//        }
+//
+//        //加盐
+//        ByteSource salt = ByteSource.Util.bytes(username);
+//        String realmName = this.getName();//获取当前自定义的realm
+//
+//        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userInfoDB, userInfoDB.getPassword(), salt, realmName);
+//        return simpleAuthenticationInfo;
+        return null;
     }
 
 }

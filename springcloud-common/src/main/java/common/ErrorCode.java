@@ -28,11 +28,14 @@ public enum ErrorCode {
 
 
     /**
-     *
+     * userinfo服务
+     */
+    UNAME_OR_PASSWORD_ERROR(300001, "用户名或者密码错误"),
+    VERIFY_CODE_ERROR(300002, "验证码错误"),
+
+    /**
      * 具体业务错误码
      **/
-
-    UNAME_OR_PASSWORD_ERROR(100003, "用户名或者密码错误"),
 
 
     SYSTEM_ERROR(999999, "接口异常");

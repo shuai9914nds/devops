@@ -1,25 +1,26 @@
 package com.springcloud.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author shuai
- * @since 2020-10-02
+ * @since 2020-11-18
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@ApiModel(value="UserRoleRel对象", description="")
-public class UserRoleRel extends Model {
+@EqualsAndHashCode(callSuper = false)
+@ApiModel(value = "UserRoleRel对象", description = "")
+public class UserRoleRel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,4 +33,6 @@ public class UserRoleRel extends Model {
 
     @ApiModelProperty(value = "菜单角色id")
     private Integer menuRoleId;
+
+
 }

@@ -87,8 +87,7 @@
 //
 //    //对请求失败结果进行封装
 //    private Mono<Void> responseResult(ServerHttpResponse response, Result result) {
-//        response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
-//        response.setStatusCode(HttpStatus.OK);
+//        response.getHeaders().add(HttpHea77ders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);hhh//        response.setStatusCode(HttpStatus.OK);
 //        DataBufferFactory bufferFactory = response.bufferFactory();
 //        byte[] bytes = JSON.toJSONString(result).getBytes();
 //        DataBuffer buffer = bufferFactory.wrap(bytes);

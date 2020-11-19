@@ -20,6 +20,13 @@ eureka:
       #设置服务注册中心地址
       defaultZone: http://localhost:8761/eureka
 
+mybatis-plus:
+  configuration:
+    #打印sql日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
 
   #mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml

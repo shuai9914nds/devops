@@ -7,8 +7,8 @@ package com.springcloud.user.enumc;
  */
 public enum UserStateEnum {
 
-    DISABLE(0, "停用"),
-    NORMAL(1, "正常"),
+    NORMAL(0, "正常"),
+    DISABLE(1, "停用"),
     LOCKED(2, "锁定");
 
     private final Integer code;

@@ -67,9 +67,9 @@ public class GeneratorCodeConfig {
 //        pc.setModuleName(scanner("模块名"));
         pc.setParent("com.springcloud.provider.user");
         pc.setEntity("entity");
-        pc.setMapper("mapper");
-        pc.setService("service");
-        pc.setServiceImpl("service.impl");
+//        pc.setMapper("mapper");
+//        pc.setService("service");
+//        pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -127,7 +127,6 @@ public class GeneratorCodeConfig {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.baomidou.mybatisplus.extension.activerecord.Model");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
 

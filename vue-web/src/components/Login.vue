@@ -35,12 +35,12 @@
                     <img :src="identifyImg" style="margin-left: 15px;" @click="getCode"/>
                 </div>
 
-                <div class="field">
+                <div class="field" style="margin-top: 10px">
                     <p class="control">
-<!--                        <button @click="login" type="submit" class="button">-->
-<!--                            登录-->
-<!--                        </button>-->
-                        <a-button type="primary" @click="login" class="button">登录</a-button>
+                        <!--                        <button @click="login" type="submit" class="button">-->
+                        <!--                            登录-->
+                        <!--                        </button>-->
+                        <a-button type="Default" @click="login">登录</a-button>
 
                     </p>
                 </div>
@@ -48,6 +48,31 @@
         </el-form>
     </div>
 </template>
+<!--<template>-->
+<!--    <div>-->
+<!--        <a-button type="primary">-->
+<!--            Primary-->
+<!--        </a-button>-->
+<!--        <a-button>Default</a-button>-->
+<!--        <a-button type="dashed">-->
+<!--            Dashed-->
+<!--        </a-button>-->
+<!--        <a-button type="danger">-->
+<!--            Danger-->
+<!--        </a-button>-->
+<!--        <a-config-provider :auto-insert-space-in-button="false">-->
+<!--            <a-button type="primary">-->
+<!--                按钮-->
+<!--            </a-button>-->
+<!--        </a-config-provider>-->
+<!--        <a-button type="primary">-->
+<!--            按钮-->
+<!--        </a-button>-->
+<!--        <a-button type="link">-->
+<!--            Link-->
+<!--        </a-button>-->
+<!--    </div>-->
+<!--</template>-->
 
 <script>
 

@@ -1,20 +1,25 @@
 package com.springcloud.login.controller;
 
-import com.springcloud.login.dto.LoginDto;
-import com.menu.api.query.QueryMenuFeignApi;
 import com.menu.api.dto.MenuDto;
+import com.menu.api.query.QueryMenuFeignApi;
+import com.springcloud.login.dto.LoginDto;
+import com.user.api.entity.UserInfo;
+import com.user.api.query.QueryUserFeignApi;
+import common.Constant;
 import common.ErrorCode;
 import common.Result;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -29,14 +34,19 @@ public class LoginController {
 
     @Autowired
     private QueryMenuFeignApi queryMenuFeignApi;
+    @Resource
+    private QueryUserFeignApi queryUserFeignApi;
+    @Resource
+    private RedissonClient redissonClient;
 
     @GetMapping("/getmenu")
-    public Result<List<MenuDto>> getmenu(){
+    public Result<List<MenuDto>> getmenu() {
         return queryMenuFeignApi.selectMenuListAll();
     }
 
     /**
      * 登录controller
+     *
      * @param loginDto
      * @return
      */
@@ -48,16 +58,29 @@ public class LoginController {
         }
         String username = loginDto.getUsername();
         String password = loginDto.getPassword();
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password,false);
-        //TODO 查看redis是否有对应token
-        token.setRememberMe(true);
-        Subject subject = SecurityUtils.getSubject();
-        try {
-            //登录验证
-            subject.login(token);
-        } catch(AuthenticationException e){
+        //校验验证码是否正确
+        RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + loginDto.getIdentifyCode());
+        Object o = bucket.get();
+        if (null == o) {
+            return new Result<>(ErrorCode.VERIFY_CODE_ERROR);
+        }
+        //校验用户名否正确
+        Result<UserInfo> result = queryUserFeignApi.getUserByUserName(username);
+        if (!result.getSuccess()) {
+            logger.error("查询接口 queryUserFeignApi.getUserByUserNameyi失败,result={}", result);
+            return new Result<>(ErrorCode.SYSTEM_ERROR);
+        }
+        UserInfo userInfo = result.getObj();
+        if (null == userInfo) {
+            logger.warn("用户{}不存在", loginDto.getUsername());
             return new Result<>(ErrorCode.UNAME_OR_PASSWORD_ERROR);
         }
+        //校验密码是否正确
+        if (!userInfo.getPassword().equals(password)) {
+            return new Result<>(ErrorCode.UNAME_OR_PASSWORD_ERROR);
+        }
+        //删除redis中的验证码
+        bucket.delete();
         return new Result<>();
     }
 }

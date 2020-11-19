@@ -2,14 +2,14 @@ package com.springcloud.user.client;
 
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
-
 import com.user.api.dto.UserInfoDto;
-import com.user.api.query.QueryUserFeignApi;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import utils.BeanConverter;
 
 import javax.annotation.Resource;
@@ -22,24 +22,22 @@ import java.util.List;
  */
 @RestController
 @Api(value = "API - QueryUserClient")
-public class QueryUserClient implements QueryUserFeignApi {
+public class QueryUserClient {
     private static final Logger logger = LoggerFactory.getLogger(QueryUserClient.class);
     @Resource
     private IUserInfoService iUserInfoService;
 
     /**
-     * 根据用户名查询密码
+     * 根据用户名查询用户信息 (包含密码，只允许内部调用)
      *
      * @param username 用户名
-     * @return Result<UserInfoDto
+     * @return Result<UserInfoDto>
      */
-    @Override
-    @GetMapping(value = "/user")
-    public Result<UserInfoDto> getUserByUserName(@RequestParam("username") String username) {
+    @GetMapping(value = "/{username}/user")
+    public Result<UserInfo> getUserByUserName(@PathVariable("username") String username) {
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername(username);
-        return new Result<>(
-                BeanConverter.convert(iUserInfoService.getOneByCondition(userInfo), UserInfoDto.class));
+        return new Result<>(iUserInfoService.getOneByCondition(userInfo));
     }
 
     /**
@@ -48,7 +46,6 @@ public class QueryUserClient implements QueryUserFeignApi {
      * @param
      * @return
      */
-    @Override
     @GetMapping(value = "/users")
     public Result<List<UserInfoDto>> getUserAll() {
         List<UserInfo> userInfos = iUserInfoService.getBaseMapper().selectList(null);
