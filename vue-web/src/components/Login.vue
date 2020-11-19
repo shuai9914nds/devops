@@ -3,13 +3,13 @@
         <div class="column is-three-fifths login-left">
             <img src="../assets/login/bloger.jpg">
         </div>
-        <el-form class="column login-right" :model="user" :rules="fieldRules">
+        <form class="column login-right" :model="user" :rules="fieldRules">
             <div>
                 <h1>欢迎登陆!</h1>
                 <div class="field">
                     <p class="control">
                         <span style="margin-left: -15px">用户名：</span>
-                        <el-input v-model="user.username" style="width: 130px"/>
+                        <a-input v-model="user.username" style="width: 130px"/>
                         <span class="icon is-small">
                           <i class="fa fa-home"></i>
                         </span>
@@ -21,7 +21,7 @@
                 <div class="field">
                     <p class="control">
                         <span>密码：</span>
-                        <el-input v-model="user.password" style="width: 130px" type="password"></el-input>
+                        <a-input v-model="user.password" style="width: 130px" type="password"></a-input>
                         <span class="icon is-small">
                           <i class="fa fa-lock"></i>
                         </span>
@@ -30,7 +30,7 @@
                 <div class="field code-center">
                     <div>
                         <span style="margin-left: 80px">验证码：</span>
-                        <el-input v-model="user.identifyCode" type="text" style="width: 130px"/>
+                        <a-input v-model="user.identifyCode" type="text" style="width: 130px"/>
                     </div>
                     <img :src="identifyImg" style="margin-left: 15px;" @click="getCode"/>
                 </div>
@@ -41,7 +41,7 @@
                     </p>
                 </div>
             </div>
-        </el-form>
+        </form>
     </div>
 </template>
 
