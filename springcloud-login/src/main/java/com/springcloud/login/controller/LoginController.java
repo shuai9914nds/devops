@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,10 +59,17 @@ public class LoginController {
         }
         String username = loginDto.getUsername();
         String password = loginDto.getPassword();
+        String identifyCode = loginDto.getIdentifyCode();
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(identifyCode)) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
         //校验验证码是否正确
-        RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + loginDto.getIdentifyCode());
+        RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + identifyCode.toLowerCase());
         Object o = bucket.get();
         if (null == o) {
+            return new Result<>(ErrorCode.VERIFY_CODE_ERROR);
+        }
+        if (!o.toString().equalsIgnoreCase(identifyCode)) {
             return new Result<>(ErrorCode.VERIFY_CODE_ERROR);
         }
         //校验用户名否正确

@@ -50,9 +50,8 @@ public class VerifyCodeController {
             response.setDateHeader("Expires", 0);
             //设置响应内容类型
             response.setContentType("image/jpeg");
-
             //将验证码存入redis
-            RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + code);
+            RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + code.toLowerCase());
             //验证码在redis中时间为5分钟
             bucket.set(code, 5, TimeUnit.MINUTES);
             response.getOutputStream().write(verifyCode.getImgBytes());
