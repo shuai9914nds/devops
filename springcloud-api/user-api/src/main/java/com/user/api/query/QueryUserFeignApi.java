@@ -36,6 +36,6 @@ public interface QueryUserFeignApi {
      * @return
      */
     @ApiOperation(httpMethod = "GET", value = "查询全部用户信息列表")
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/user/list")
     Result<List<UserInfoDto>> getUserAll();
 }

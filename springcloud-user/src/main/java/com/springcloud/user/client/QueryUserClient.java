@@ -1,5 +1,7 @@
 package com.springcloud.user.client;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
 import com.user.api.dto.UserInfoDto;
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import utils.BeanConverter;
 
@@ -46,9 +49,23 @@ public class QueryUserClient {
      * @param
      * @return
      */
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/user/list")
     public Result<List<UserInfoDto>> getUserAll() {
         List<UserInfo> userInfos = iUserInfoService.getBaseMapper().selectList(null);
         return new Result<>(BeanConverter.convertList(userInfos, UserInfoDto.class));
+    }
+
+    /**
+     * 查询全部用户
+     *
+     * @param
+     * @return
+     */
+    @GetMapping(value = "/user/page")
+    public Result<IPage<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size) {
+        Page<UserInfo> page = new Page<>();
+        page.setCurrent(current);
+        page.setSize(size);
+        return new Result<>(iUserInfoService.selectUserPage(page, null));
     }
 }

@@ -1,11 +1,13 @@
 package com.springcloud.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.enumc.UserStateEnum;
 import com.springcloud.user.mapper.UserInfoMapper;
 import com.springcloud.user.service.IUserInfoService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +22,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserInfoService {
 
+    /**
+     * 查询一个用户信息
+     *
+     * @param userInfo 查询条件
+     * @return UserInfo
+     */
     @Override
     public UserInfo getOneByCondition(UserInfo userInfo) {
         return this.baseMapper.selectOne(getLambdaQueryWrapper(userInfo));
     }
 
     /**
+     * 分页查询用户信息
+     *
+     * @param page     分页对象
+     * @param userInfo userInfo对象
+     * @return IPage<UserInfo>
+     */
+    @Override
+    public IPage<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo) {
+        return this.baseMapper.selectPage(page, getLambdaQueryWrapper(userInfo));
+    }
+
+    /**
      * 获取LambdaQueryWrapper<UserInfo>
      *
      * @param userInfo 用户信息
-     * @return
+     * @return LambdaQueryWrapper<UserInfo>
      */
     private LambdaQueryWrapper<UserInfo> getLambdaQueryWrapper(UserInfo userInfo) {
         LambdaQueryWrapper<UserInfo> queryMapper = new LambdaQueryWrapper<>();
