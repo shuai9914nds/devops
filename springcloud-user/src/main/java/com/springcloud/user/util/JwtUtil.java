@@ -3,7 +3,6 @@ package com.springcloud.user.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
 import common.Constant;
@@ -32,9 +31,9 @@ public class JwtUtil {
      * 生成jwt
      *
      * @param user UserInfo对象
-     * @return
+     * @return token
      */
-    public String getToken(UserInfo user) {
+    public static String getToken(UserInfo user) {
 
         if (user == null || user.getUid() == null || user.getName() == null) {
             return null;
@@ -50,26 +49,12 @@ public class JwtUtil {
 
 
     /**
-     * 获取用户信息
-     *
-     * @param token 用户的token
-     * @return
-     */
-    public UserInfo getUser(String token) {
-        DecodedJWT decode = JWT.decode(token);
-        Integer userId = decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(userId);
-        return iUserInfoService.getOneByCondition(userInfo);
-    }
-
-    /**
      * 校验token
      *
-     * @param token
-     * @return
+     * @param token token
+     * @return token是否争取
      */
-    public boolean checkToken(String token, UserInfo userInfo) {
+    public static boolean checkToken(String token, UserInfo userInfo) {
         try {
             Integer uid = userInfo.getUid();
             String name = userInfo.getName();

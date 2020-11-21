@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -38,4 +39,14 @@ public interface QueryUserFeignApi {
     @ApiOperation(httpMethod = "GET", value = "查询全部用户信息列表")
     @GetMapping(value = "/user/list")
     Result<List<UserInfoDto>> getUserAll();
+
+    /**
+     * 创建token
+     *
+     * @param uid  用户id
+     * @param name 用户名称
+     * @return Result<String>
+     */
+    @GetMapping(value = "/create/token")
+    public Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name);
 }

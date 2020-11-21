@@ -1,10 +1,14 @@
 package com.springcloud.user.client;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
+import com.springcloud.user.util.JwtUtil;
 import com.user.api.dto.UserInfoDto;
+import common.Constant;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -67,5 +71,35 @@ public class QueryUserClient {
         page.setCurrent(current);
         page.setSize(size);
         return new Result<>(iUserInfoService.selectUserPage(page, null));
+    }
+
+    /**
+     * 创建token
+     *
+     * @param uid  用户id
+     * @param name 用户名称
+     * @return Result<String>
+     */
+    @GetMapping(value = "/create/token")
+    public Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUid(uid);
+        userInfo.setName(name);
+        return new Result<>(JwtUtil.getToken(userInfo));
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param token 用户的token
+     * @return UserInfo
+     */
+    @GetMapping(value = "/token/user")
+    public UserInfo getUserByToken(String token) {
+        DecodedJWT decode = JWT.decode(token);
+        Integer userId = decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUid(userId);
+        return iUserInfoService.getOneByCondition(userInfo);
     }
 }

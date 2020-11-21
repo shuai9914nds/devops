@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: liushuai
@@ -87,6 +88,15 @@ public class LoginController {
         if (!userInfo.getPassword().equals(password)) {
             return new Result<>(ErrorCode.UNAME_OR_PASSWORD_ERROR);
         }
+        //生成token
+        Result<String> userResult = queryUserFeignApi.createToken(userInfo.getUid(), userInfo.getName());
+        if (!result.getSuccess()) {
+            return new Result<>(ErrorCode.SYSTEM_ERROR);
+        }
+        String token = userResult.getObj();
+        RBucket<Object> tokenBucket = redissonClient.getBucket(Constant.PRE_REDIS_USER_TOKEN + userInfo.getUid());
+        //将token放入redis，5min
+        tokenBucket.set(token, 5, TimeUnit.MINUTES);
         //删除redis中的验证码
         bucket.delete();
         return new Result<>();
