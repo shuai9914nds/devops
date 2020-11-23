@@ -109,8 +109,10 @@ export default {
           identifyCode: values.identifyCode,
         })
         .then((response) => {
+          localStorage.clear();
+          localStorage.setItem('token',response.data.obj.token);
           this.$router.push({
-            name: "BMHome",
+            name: "Home",
           });
           console.log(response);
         })
