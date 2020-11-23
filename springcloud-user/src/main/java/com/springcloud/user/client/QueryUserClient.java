@@ -13,6 +13,7 @@ import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,7 +71,15 @@ public class QueryUserClient {
         Page<UserInfo> page = new Page<>();
         page.setCurrent(current);
         page.setSize(size);
-        return new Result<>(iUserInfoService.selectUserPage(page, null));
+        IPage<UserInfo> userInfoIPage = iUserInfoService.selectUserPage(page, null);
+        List<UserInfo> records = userInfoIPage.getRecords();
+        if (CollectionUtils.isEmpty(records)) {
+            return new Result<>(userInfoIPage);
+        }
+        records.forEach(i -> {
+            i.setPassword("");
+        });
+        return new Result<>(userInfoIPage);
     }
 
     /**

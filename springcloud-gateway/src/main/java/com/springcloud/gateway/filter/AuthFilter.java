@@ -2,6 +2,7 @@ package com.springcloud.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.net.HttpHeaders;
+import common.Constant;
 import common.ErrorCode;
 import common.Result;
 import org.apache.commons.lang.StringUtils;
@@ -18,7 +19,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static com.google.common.net.MediaType.*;
+import static com.google.common.net.MediaType.JSON_UTF_8;
 
 /**
  * @author: liushuai
@@ -36,7 +37,7 @@ public class AuthFilter implements Ordered, GlobalFilter {
         if ("/login/login".equals(path) || "/login/verifyCode".equals(path)) {
             return chain.filter(exchange);
         }
-        String token = exchange.getRequest().getHeaders().getFirst("token");
+        String token = exchange.getRequest().getHeaders().getFirst(Constant.USER_TOKEN);
         if (StringUtils.isBlank(token)) {
             logger.error("token不能为空");
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);

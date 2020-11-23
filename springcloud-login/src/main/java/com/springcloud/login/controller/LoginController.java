@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -53,7 +55,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public Result<Void> login(@RequestBody LoginDto loginDto) {
+    public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
             logger.warn("loginDto不能为空，登录失败");
             return new Result<>(ErrorCode.PARAM_ERROR);
@@ -95,10 +97,14 @@ public class LoginController {
         }
         String token = userResult.getObj();
         RBucket<Object> tokenBucket = redissonClient.getBucket(Constant.PRE_REDIS_USER_TOKEN + userInfo.getUid());
-        //将token放入redis，5min
+        //将token放入re  dis，5min
         tokenBucket.set(token, 5, TimeUnit.MINUTES);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userInfo", userInfo);
+        map.put("token", token);
         //删除redis中的验证码
         bucket.delete();
-        return new Result<>();
+        return new Result<>(map);
     }
 }
