@@ -12,19 +12,22 @@
             :inline-collapsed="collapsed"
             @click="handleClick"
           >
-            <a-menu-item key="home">
+            <a-menu-item key="/home">
               <a-icon type="home" />
               <span>首页</span>
             </a-menu-item>
-            <a-menu-item key="/user/User">
+            <a-menu-item key="/User">
               <a-icon type="usergroup-add" />
-              <span>User</span>
+              <span>用户管理</span>
             </a-menu-item>
             <a-sub-menu key="sub1">
               <span slot="title"
-                ><a-icon type="mail" /><span>权限管理</span></span
+                ><a-icon type="solution" /><span>权限管理</span></span
               >
-              <a-menu-item key="5"> 角色管理</a-menu-item>
+              <a-menu-item key="/Role">
+                <a-icon type="user" />
+                <span>角色管理</span>
+              </a-menu-item>
               <a-menu-item key="6"> 用户授权</a-menu-item>
               <a-menu-item key="7"> Option 7 </a-menu-item>
               <a-menu-item key="8"> Option 8 </a-menu-item>
