@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author shuai
- * @since 2020-10-02
+ * @since 2020-11-24
  */
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserInfoService {
