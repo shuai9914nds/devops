@@ -4,8 +4,7 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     toggleCollapsed() {
@@ -13,7 +12,7 @@ export default {
     },
     handleClick(e) {
       console.log(e);
-      this.$router.push({path: e.key})
+      this.$router.push({ path: e.key });
     },
   },
 };
