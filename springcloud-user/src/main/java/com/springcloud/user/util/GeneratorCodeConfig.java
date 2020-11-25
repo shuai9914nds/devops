@@ -67,47 +67,11 @@ public class GeneratorCodeConfig {
 //        pc.setModuleName(scanner("模块名"));
         pc.setParent("com.springcloud.provider.user");
         pc.setEntity("entity");
-//        pc.setMapper("mapper");
-//        pc.setService("service");
-//        pc.setServiceImpl("service.impl");
+        pc.setMapper("mapper");
+        pc.setService("service");
+        pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);
 
-        // 自定义配置
-//        InjectionConfig cfg = new InjectionConfig() {
-//            @Override
-//            public void initMap() {
-//                // to do nothing
-//            }
-//        };
-
-        // 如果模板引擎是 freemarker
-//        String templatePath = "/templates/mapper.xml.ftl";
-        // 如果模板引擎是 velocity
-        // String templatePath = "/templates/mapper.xml.vm";
-
-        // 自定义输出配置
-//        List<FileOutConfig> focList = new ArrayList<>();
-        // 自定义配置会被优先输出
-//        focList.add(new FileOutConfig(templatePath) {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-//                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-//                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-//            }
-//        });
-        /*
-        cfg.setFileCreate(new IFileCreate() {
-            @Override
-            public boolean isCreate(ConfigBuilder configBuilder, FileType fileType, String filePath) {
-                // 判断自定义文件夹是否需要创建
-                checkDir("调用默认方法创建的目录");
-                return false;
-            }
-        });
-        */
-//        cfg.setFileOutConfigList(focList);
-//        mpg.setCfg(cfg);
 
         // 配置模板
         TemplateConfig templateConfig = new TemplateConfig();
@@ -117,10 +81,11 @@ public class GeneratorCodeConfig {
         // templateConfig.setEntity("templates/entity2.java");
         // templateConfig.setService();
         // templateConfig.setController();
-
+        templateConfig.setMapper("/templates/mapper.java");
         templateConfig.setXml(null);
         //空字符串不生成controller，否则会生成controller
         templateConfig.setController("");
+
         mpg.setTemplate(templateConfig);
 
         // 策略配置
