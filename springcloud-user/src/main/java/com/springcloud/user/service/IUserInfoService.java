@@ -1,7 +1,6 @@
 package com.springcloud.user.service;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.springcloud.user.entity.UserInfo;
@@ -31,5 +30,5 @@ public interface IUserInfoService extends IService<UserInfo> {
      * @param userInfo
      * @return IPage<UserInfo>
      */
-    IPage<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo);
+    Page<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo);
 }

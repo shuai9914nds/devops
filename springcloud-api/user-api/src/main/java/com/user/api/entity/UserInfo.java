@@ -1,6 +1,5 @@
 package com.user.api.entity;
 
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -17,7 +16,7 @@ import java.util.Date;
  * </p>
  *
  * @author shuai
- * @since 2020-11-18
+ * @since 2020-11-24
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -42,8 +41,8 @@ public class UserInfo implements Serializable {
     @ApiModelProperty(value = "用户身份证号")
     private String idCardNum;
 
-    @ApiModelProperty(value = "用户状态：0:正常状态,1：用户被锁定")
-    private Boolean state;
+    @ApiModelProperty(value = "用户状态：0:正常状态,1：用户被锁定,2:用户被禁用")
+    private Integer state;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -56,6 +55,4 @@ public class UserInfo implements Serializable {
 
     @ApiModelProperty(value = "更新人")
     private String updateBy;
-
-
 }

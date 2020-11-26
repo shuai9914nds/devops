@@ -2,7 +2,6 @@ package com.springcloud.user.client;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
@@ -61,17 +60,22 @@ public class QueryUserClient {
     }
 
     /**
-     * 查询全部用户
+     * 分页查询用户信息
      *
-     * @param
-     * @return
+     * @param current 当前页
+     * @param size    每页显示行数
+     * @param name    用户名称
+     * @return Result<IPage < UserInfo>>
      */
     @GetMapping(value = "/user/page")
-    public Result<IPage<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size) {
+    public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
+                                                 @RequestParam(value = "name", required = false) String name) {
         Page<UserInfo> page = new Page<>();
         page.setCurrent(current);
         page.setSize(size);
-        IPage<UserInfo> userInfoIPage = iUserInfoService.selectUserPage(page, null);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setName(name);
+        Page<UserInfo> userInfoIPage = iUserInfoService.selectUserPage(page, userInfo);
         List<UserInfo> records = userInfoIPage.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return new Result<>(userInfoIPage);

@@ -23,7 +23,7 @@ public class AuthUtil {
      * @return String
      */
     public static String getToken() {
-        HttpServletRequest request = ContextHolderUtils.getRequest();
+        HttpServletRequest request = HttpUtil.getRequest();
         Enumeration<String> headers = request.getHeaders(Constant.USER_TOKEN);
         if (headers == null) {
             logger.warn("token为空");

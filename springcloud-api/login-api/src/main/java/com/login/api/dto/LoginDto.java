@@ -1,4 +1,4 @@
-package com.springcloud.login.dto;
+package com.login.api.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

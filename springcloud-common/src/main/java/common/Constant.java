@@ -19,5 +19,7 @@ public class Constant {
     public static final String PRE_REDIS_VERIFY_CODE_KEY = "redis:verify:code:";
     //token的key
     public static final String PRE_REDIS_USER_TOKEN = "redis:user:token:";
+    //request的key
+    public static final String PRE_REDIS_REQUEST_KEY = "pre:redis_request_key:";
 
 }

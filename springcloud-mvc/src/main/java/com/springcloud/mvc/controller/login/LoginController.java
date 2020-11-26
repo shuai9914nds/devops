@@ -1,4 +1,4 @@
-package com.springcloud.gateway.controller.login;
+package com.springcloud.mvc.controller.login;
 
 import com.login.api.LoginApi;
 import com.login.api.dto.LoginDto;
@@ -33,8 +33,8 @@ public class LoginController {
      * @param loginDto
      * @returnzz
      */
-    @PostMapping("/login")
-    public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto){
+    @PostMapping(value = "/login")
+    public Result<Map<String, Object>> loginControl(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
             logger.warn("loginDto不能为空，登录失败");
             return new Result<>(ErrorCode.PARAM_ERROR);

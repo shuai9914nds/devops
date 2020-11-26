@@ -2,17 +2,14 @@ package com.springcloud.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.net.HttpHeaders;
-import common.Constant;
 import common.ErrorCode;
 import common.Result;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
@@ -32,17 +29,19 @@ public class AuthFilter implements Ordered, GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        //将request存入redis
+
         //指定的url放行
         String path = request.getURI().getPath();
-        if ("/login/login".equals(path) || "/login/verifyCode".equals(path)) {
-            return chain.filter(exchange);
-        }
-        String token = exchange.getRequest().getHeaders().getFirst(Constant.USER_TOKEN);
-        if (StringUtils.isBlank(token)) {
-            logger.error("token不能为空");
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return getVoidMono(exchange.getResponse(), ErrorCode.TOKEN_IS_NULL);
-        }
+//        if ("/login/login".equals(path) || "/login/verifyCode".equals(path)) {
+//            return chain.filter(exchange);
+//        }
+//        String token = exchange.getRequest().getHeaders().getFirst(Constant.USER_TOKEN);
+//        if (StringUtils.isBlank(token)) {
+//            logger.error("token不能为空");
+//            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//            return getVoidMono(exchange.getResponse(), ErrorCode.TOKEN_IS_NULL);
+//        }
         return chain.filter(exchange);
     }
 

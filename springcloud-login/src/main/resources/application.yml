@@ -1,20 +1,8 @@
 spring:
   application:
-    name: login-service
-  redis:
-    database: 0
-    host: 172.16.24.3
-    jedis:
-      pool:
-        max-active: 20
-        max-idle: 10
-        max-wait: -1
-        min-idle: 0
-    password: ''
-    port: 6379
-    timeout: 1000
+    name: login-server
 server:
-  port: 8084
+  port: 8003
   servlet:
     context-path: /login
 eureka:

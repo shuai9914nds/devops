@@ -13,7 +13,7 @@ import java.util.Objects;
  * @date: 2020/11/21
  * @description：
  */
-public class ContextHolderUtils {
+public class HttpUtil {
 
     public static HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();

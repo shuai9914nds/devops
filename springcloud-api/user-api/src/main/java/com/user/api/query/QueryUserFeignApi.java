@@ -1,5 +1,6 @@
 package com.user.api.query;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.user.api.dto.UserInfoDto;
 import com.user.api.entity.UserInfo;
 import common.Result;
@@ -19,7 +20,7 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryUserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "user-server", path = "/user")
+@FeignClient(name = "user-server", path = "/user", contextId = "queryUser")
 public interface QueryUserFeignApi {
 
     /**
@@ -48,5 +49,17 @@ public interface QueryUserFeignApi {
      * @return Result<String>
      */
     @GetMapping(value = "/create/token")
-    public Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name);
+    Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name);
+
+    /**
+     * 分页查询用户信息
+     *
+     * @param current 当前页
+     * @param size    每页显示行数
+     * @param name    用户名称
+     * @return Result<IPage < UserInfo>>
+     */
+    @GetMapping(value = "/user/page")
+    Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
+                                          @RequestParam(value = "name", required = false) String name);
 }

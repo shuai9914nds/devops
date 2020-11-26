@@ -1,11 +1,9 @@
 package com.springcloud.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springcloud.user.entity.UserInfo;
-import com.springcloud.user.enumc.UserStateEnum;
 import com.springcloud.user.mapper.UserInfoMapper;
 import com.springcloud.user.service.IUserInfoService;
 import org.apache.commons.lang.StringUtils;
@@ -41,7 +39,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      * @return IPage<UserInfo>
      */
     @Override
-    public IPage<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo) {
+    public Page<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo) {
         return this.baseMapper.selectPage(page, getLambdaQueryWrapper(userInfo));
     }
 
@@ -68,9 +66,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         if (StringUtils.isNotBlank(userInfo.getIdCardNum())) {
             queryMapper.eq(UserInfo::getIdCardNum, userInfo.getIdCardNum());
         }
-        if (null == userInfo.getState()) {
-            queryMapper.eq(UserInfo::getState, UserStateEnum.NORMAL.getCode());
-        } else {
+        if (null != userInfo.getState()) {
             queryMapper.eq(UserInfo::getState, userInfo.getState());
         }
         if (StringUtils.isNotBlank(userInfo.getCreateBy())) {

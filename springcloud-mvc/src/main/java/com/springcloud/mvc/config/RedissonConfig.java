@@ -1,4 +1,4 @@
-package com.springcloud.menu.config;
+package com.springcloud.mvc.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

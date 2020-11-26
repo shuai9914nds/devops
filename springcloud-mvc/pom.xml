@@ -65,6 +65,12 @@
             <artifactId>login-api</artifactId>
             <version>1.8.0-SNAPSHOT</version>
         </dependency>
+        <!--redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.10.4</version>
+        </dependency>
     </dependencies>
 
     <build>

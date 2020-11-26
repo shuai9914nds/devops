@@ -52,9 +52,9 @@ public class LoginController {
      * 登录controller
      *
      * @param loginDto
-     * @return
+     * @returnzz
      */
-    @PostMapping("/login")
+    @PostMapping(value = "/login")
     public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
             logger.warn("loginDto不能为空，登录失败");

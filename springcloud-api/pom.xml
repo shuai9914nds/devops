@@ -6,18 +6,16 @@
         <groupId>com.springcloud.parent</groupId>
         <artifactId>springcloud-parent</artifactId>
         <version>1.8.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.springcloud</groupId>
     <artifactId>springcloud-api</artifactId>
-    <version>1.8.0-SNAPSHOT</version>
     <name>springcloud-api</name>
-    <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
 
     <modules>
         <module>user-api</module>
         <module>menu-api</module>
+        <module>login-api</module>
     </modules>
 
     <properties>

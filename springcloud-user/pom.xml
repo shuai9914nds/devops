@@ -11,15 +11,12 @@
     <artifactId>springcloud-user</artifactId>
     <version>1.8.0-SNAPSHOT</version>
     <name>springcloud-user</name>
-    <description>Demo project for Spring Boot</description>
-
     <properties>
         <java.version>1.8</java.version>
         <com.springcloud.version>1.8.0-SNAPSHOT</com.springcloud.version>
         <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
-        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.springcloud</groupId>

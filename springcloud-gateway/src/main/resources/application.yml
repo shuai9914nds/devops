@@ -1,3 +1,6 @@
+spring:
+  application:
+    name: gateway-server
 eureka:
   client:
     serviceUrl:
@@ -5,21 +8,5 @@ eureka:
       instance:
         prefer-ip-address: true
 server:
-  port: 8769
-spring:
-  application:
-    name: service-gateway
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: shuai
-#          uri: https://www.baidu.com
-#          predicates:
-#            - Path=/shuai/**
-#        - id: login
-#          uri: lb://login-service
-#          predicates:
-#            - Path=//login/**
-#          filters:
-#            - StripPrefix= 1 #过滤几个前缀/为间隔
+  port: 8001
 

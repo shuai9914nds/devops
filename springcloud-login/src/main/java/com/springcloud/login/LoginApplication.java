@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = {"com.menu.api", "com.user.api"})
+@EnableFeignClients(basePackages = {"com.menu.api", "com.user.api", "com.login.api"})
 @SpringCloudApplication
 public class LoginApplication {
 
