@@ -103,14 +103,14 @@ export default {
     },
     login(values) {
       this.$axios
-        .post("/login/login", {
+        .post("/login", {
           username: values.username,
           password: values.password,
           identifyCode: values.identifyCode,
         })
         .then((response) => {
           localStorage.clear();
-          localStorage.setItem('token',response.data.obj.token);
+          localStorage.setItem("token", response.data.obj.token);
           this.$router.push({
             name: "Home",
           });
@@ -122,8 +122,11 @@ export default {
     },
     getCode() {
       this.$axios
-        .get("/login/verifyCode", {
+        .get("/verify/code", {
           responseType: "arraybuffer",
+          headers: {
+            "User-Token": "123213",
+          },
         })
         .then((response) => {
           return (

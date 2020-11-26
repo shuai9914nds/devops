@@ -7,8 +7,13 @@
             :loading="loading"
             @change="handleTableChange"
     >
-        <template slot="name" slot-scope="name">
-            {{ name.first }} {{ name.last }}
+        <template slot="state" slot-scope="text, record">
+            <span v-if="record.state == 0">正</span>
+            <span v-if="record.state == 1">福</span>
+        </template>
+
+        <template slot="action" slot-scope="text, record">
+            <span>删除</span>
         </template>
     </a-table>
 </template>
@@ -29,16 +34,18 @@
         {
             title: "用户状态",
             dataIndex: "state",
-            filters: [
-                  { text: 0, value: "正常" },
-                  { text: 1, value: "锁定" },
-                  { text: 2, value: "禁用" },
-                ],
+            scopedSlots: { customRender: 'state'}
         },
         {
             title: "创建人",
             dataIndex: "createBy",
+            
         },
+        {
+            title: '操作',
+            dataIndex: 'action',
+            scopedSlots: { customRender: 'action'}
+        }
         //   {
         //     title: "Gender",
         //     dataIndex: "gender",
