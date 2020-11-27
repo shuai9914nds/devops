@@ -39,7 +39,7 @@ public class VerifyCodeController {
      * @return Result<Void>
      */
     @ApiOperation(value = "验证码")
-    @GetMapping(value = "/verify/code")
+    @GetMapping(value = "/mvc/verify/code")
     public Result<Void> getVerifyCode() {
         HttpServletRequest request = HttpUtil.getRequest();
         HttpServletResponse response = HttpUtil.getResponse();

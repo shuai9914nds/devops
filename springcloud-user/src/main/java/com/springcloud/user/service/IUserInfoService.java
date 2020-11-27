@@ -31,4 +31,19 @@ public interface IUserInfoService extends IService<UserInfo> {
      * @return IPage<UserInfo>
      */
     Page<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo);
+
+    /**
+     * 获取token
+     *
+     * @return token
+     */
+    String getToken();
+
+
+    /**
+     * 更新用户信息
+     *
+     * @param userInfo 用户信息
+     */
+    void updateUserInfo(UserInfo userInfo);
 }

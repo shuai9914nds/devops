@@ -33,8 +33,8 @@ public class LoginController {
      * @param loginDto
      * @returnzz
      */
-    @PostMapping(value = "/login")
-    public Result<Map<String, Object>> loginControl(@RequestBody LoginDto loginDto) {
+    @PostMapping(value = "/mvc/login")
+    public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
             logger.warn("loginDto不能为空，登录失败");
             return new Result<>(ErrorCode.PARAM_ERROR);

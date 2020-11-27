@@ -1,4 +1,4 @@
-package com.springcloud.mvc.controller.user;
+package com.springcloud.mvc.controller.user.query;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.user.api.entity.UserInfo;
@@ -18,8 +18,8 @@ import javax.annotation.Resource;
  * @description：对接前端页面的controller
  */
 @RestController
-public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+public class QueryUserController {
+    private static final Logger logger = LoggerFactory.getLogger(QueryUserController.class);
 
     @Resource
     private QueryUserFeignApi queryUserFeignApi;

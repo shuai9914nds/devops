@@ -7,6 +7,7 @@ spring:
     url: jdbc:mysql://localhost:3306/user_info
     username: root
     password: root
+
 server:
   port: 8004
   servlet:

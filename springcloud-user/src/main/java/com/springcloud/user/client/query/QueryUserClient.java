@@ -1,4 +1,4 @@
-package com.springcloud.user.client;
+package com.springcloud.user.client.query;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -50,8 +50,7 @@ public class QueryUserClient {
     /**
      * 查询全部用户
      *
-     * @param
-     * @return
+     * @return Result<List < UserInfoDto>>
      */
     @GetMapping(value = "/user/list")
     public Result<List<UserInfoDto>> getUserAll() {

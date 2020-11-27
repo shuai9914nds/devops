@@ -1,13 +1,16 @@
 package com.springcloud.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.mapper.UserInfoMapper;
 import com.springcloud.user.service.IUserInfoService;
+import common.Constant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+import utils.HttpUtil;
 
 /**
  * <p>
@@ -44,6 +47,27 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     }
 
     /**
+     * 获取token
+     *
+     * @return token
+     */
+    @Override
+    public String getToken() {
+        return HttpUtil.getRequest().getHeaders(Constant.USER_TOKEN).toString();
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param userInfo 用户信息
+     */
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = getLambdaUpdateWrapper(userInfo);
+        this.baseMapper.update(userInfo, lambdaUpdateWrapper);
+    }
+
+    /**
      * 获取LambdaQueryWrapper<UserInfo>
      *
      * @param userInfo 用户信息
@@ -76,5 +100,40 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             queryMapper.eq(UserInfo::getUpdateBy, userInfo.getUpdateBy());
         }
         return queryMapper;
+    }
+
+    /**
+     * 获取LambdaUpdateWrapper<UserInfo>
+     *
+     * @param userInfo 用户信息
+     * @return LambdaUpdateWrapper<UserInfo>
+     */
+    private LambdaUpdateWrapper<UserInfo> getLambdaUpdateWrapper(UserInfo userInfo) {
+        if (null == userInfo) {
+            return null;
+        }
+        LambdaUpdateWrapper<UserInfo> updateMapper = new LambdaUpdateWrapper<>();
+        if (null != userInfo.getUid()) {
+            updateMapper.eq(UserInfo::getUid, userInfo.getUid());
+        }
+        if (StringUtils.isNotBlank(userInfo.getName())) {
+            updateMapper.eq(UserInfo::getName, userInfo.getName());
+        }
+        if (StringUtils.isNotBlank(userInfo.getUsername())) {
+            updateMapper.eq(UserInfo::getUsername, userInfo.getUsername());
+        }
+        if (StringUtils.isNotBlank(userInfo.getIdCardNum())) {
+            updateMapper.eq(UserInfo::getIdCardNum, userInfo.getIdCardNum());
+        }
+        if (null != userInfo.getState()) {
+            updateMapper.eq(UserInfo::getState, userInfo.getState());
+        }
+        if (StringUtils.isNotBlank(userInfo.getCreateBy())) {
+            updateMapper.eq(UserInfo::getCreateBy, userInfo.getCreateBy());
+        }
+        if (StringUtils.isNotBlank(userInfo.getUpdateBy())) {
+            updateMapper.eq(UserInfo::getUpdateBy, userInfo.getUpdateBy());
+        }
+        return updateMapper;
     }
 }
