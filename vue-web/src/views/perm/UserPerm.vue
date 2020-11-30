@@ -18,7 +18,15 @@
       :loading="loading"
       @change="handleTableChange"
     >
-      <template slot="state" slot-scope="text, record">
+
+     <template slot="roleList" slot-scope="text, record">
+        <span v-if="record.roleList != null || record.roleList.length != 0">
+          <span v-for="(item, i) in record.roleList">
+          {{item.roleName}}
+          </span>
+        </span>
+      </template>
+      <!-- <template slot="state" slot-scope="text, record">
         <span v-if="record.state == 0">正常</span>
         <span v-if="record.state == 1">锁定</span>
         <span v-if="record.state == 2">禁用</span>
@@ -86,7 +94,7 @@
             </a-popconfirm>
           </span>
         </span>
-      </template>
+      </template> -->
     </a-table>
   </div>
 </template>
@@ -103,20 +111,11 @@ const columns = [
   {
     title: "姓名",
     dataIndex: "name",
-    scopedSlots: { customRender: "name" },
   },
   {
-    title: "身份证号",
-    dataIndex: "idCardNum",
-  },
-  {
-    title: "用户状态",
-    dataIndex: "state",
-    scopedSlots: { customRender: "state" },
-  },
-  {
-    title: "创建人",
-    dataIndex: "createBy",
+    title: "角色",
+    dataIndex: "roleList",
+    scopedSlots: { customRender: "roleList" },
   },
   {
     title: "操作",
@@ -208,7 +207,7 @@ export default {
     },
     selectUserPage(params = {}) {
       this.$axios
-        .get("/user/page", {
+        .get("/user/role/page", {
           params: {
             size: 10,
             current: params.current === undefined ? 1 : params.current,

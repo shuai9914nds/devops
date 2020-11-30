@@ -7,10 +7,10 @@
             :loading="loading"
             @change="handleTableChange"
     >
-        <template slot="state" slot-scope="text, record">
+        <!-- <template slot="state" slot-scope="text, record">
             <span v-if="record.state == 0">正</span>
             <span v-if="record.state == 1">福</span>
-        </template>
+        </template> -->
 
         <template slot="action" slot-scope="text, record">
             <span>删除</span>
@@ -20,8 +20,8 @@
 <script>
     const columns = [
         {
-            title: "用户id",
-            dataIndex: "uid",
+            title: "角色id",
+            dataIndex: "roleId",
         },
         {
             title: "用户名",
@@ -32,9 +32,9 @@
             dataIndex: "idCardNum",
         },
         {
-            title: "用户状态",
-            dataIndex: "state",
-            scopedSlots: { customRender: 'state'}
+            title: "角色名称",
+            dataIndex: "roleName",
+            scopedSlots: { customRender: 'roleName'}
         },
         {
             title: "创建人",
@@ -71,7 +71,7 @@
             };
         },
         mounted() {
-            this.getUserPage();
+            this.getRolePage();
         },
         methods: {
             handleTableChange(pagination, filters, sorter) {
@@ -79,7 +79,7 @@
                 const pager = {...this.pagination};
                 pager.current = pagination.current;
                 this.pagination = pager;
-                this.getUserPage({
+                this.getRolePage({
                     size: pagination.pageSize,
                     current: pagination.current,
                     sortField: sorter.field,
@@ -87,9 +87,9 @@
                     ...filters,
                 });
             },
-            getUserPage(params = {}) {
+            getRolePage(params = {}) {
                 this.$axios
-                    .get("/user/user/page", {
+                    .get("/role/page", {
                         params: {
                             size: 10,
                             current: params.current === undefined ? 1 : params.current,

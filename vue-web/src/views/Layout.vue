@@ -27,9 +27,12 @@
                 <a-icon type="user" />
                 <span>角色管理</span>
               </a-menu-item>
-              <a-menu-item key="6"> 用户授权</a-menu-item>
-              <a-menu-item key="7"> Option 7 </a-menu-item>
-              <a-menu-item key="8"> Option 8 </a-menu-item>
+              <a-menu-item key="/UserPerm">
+                <a-icon type="perm" />
+                <span>分配权限</span>
+              </a-menu-item>
+              <a-menu-item key="7">Option 7 </a-menu-item>
+              <a-menu-item key="8">Option 8 </a-menu-item>
             </a-sub-menu>
             <a-sub-menu>
               <span slot="title"

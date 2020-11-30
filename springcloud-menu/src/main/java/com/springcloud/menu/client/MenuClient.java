@@ -1,4 +1,4 @@
-package com.springcloud.menu.controller;
+package com.springcloud.menu.client;
 
 import com.springcloud.menu.entity.Menu;
 import com.springcloud.menu.service.IMenuService;
@@ -15,7 +15,7 @@ import java.util.List;
  * @description：
  */
 @RestController
-public class MenuController {
+public class MenuClient {
 
     @Resource
     private IMenuService iMenuService;

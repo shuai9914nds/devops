@@ -4,7 +4,8 @@ import Layout from '../views/Layout.vue'
 import Login from '../views/Login.vue'
 import Home from '../views/bm/Home.vue'
 import User from '../views/user/User'
-import Role from '../views/role/Role'
+import Role from '../views/perm/Role'
+import UserPerm from '../views/perm/UserPerm'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
         path: '/Role',
         name: 'Role',
         component: Role
+      },
+      {
+        path: '/UserPerm',
+        name: 'UserPerm',
+        component: UserPerm
       }
     ]
   },
