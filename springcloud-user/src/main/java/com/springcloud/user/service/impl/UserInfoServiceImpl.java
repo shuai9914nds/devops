@@ -63,7 +63,9 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
      */
     @Override
     public void updateUserInfo(UserInfo userInfo) {
-        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = getLambdaUpdateWrapper(userInfo);
+        UserInfo user = new UserInfo();
+        user.setUid(userInfo.getUid());
+        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = getLambdaUpdateWrapper(user);
         this.baseMapper.update(userInfo, lambdaUpdateWrapper);
     }
 
@@ -82,7 +84,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             queryMapper.eq(UserInfo::getUid, userInfo.getUid());
         }
         if (StringUtils.isNotBlank(userInfo.getName())) {
-            queryMapper.eq(UserInfo::getName, userInfo.getName());
+            queryMapper.like(UserInfo::getName, userInfo.getName());
         }
         if (StringUtils.isNotBlank(userInfo.getUsername())) {
             queryMapper.eq(UserInfo::getUsername, userInfo.getUsername());

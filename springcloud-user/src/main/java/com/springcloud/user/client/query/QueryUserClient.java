@@ -2,6 +2,7 @@ package com.springcloud.user.client.query;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.springcloud.user.entity.UserInfo;
 import com.springcloud.user.service.IUserInfoService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import utils.BeanConverter;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,10 +70,14 @@ public class QueryUserClient {
      */
     @GetMapping(value = "/user/page")
     public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                                 @RequestParam(value = "name", required = false) String name) {
+                                                 @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
         Page<UserInfo> page = new Page<>();
         page.setCurrent(current);
         page.setSize(size);
+        OrderItem orderItem = new OrderItem();
+        orderItem.setAsc(false);
+        orderItem.setColumn(orderBy);
+        page.setOrders(Collections.singletonList(orderItem));
         UserInfo userInfo = new UserInfo();
         userInfo.setName(name);
         Page<UserInfo> userInfoIPage = iUserInfoService.selectUserPage(page, userInfo);

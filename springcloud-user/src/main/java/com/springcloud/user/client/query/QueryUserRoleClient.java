@@ -1,28 +1,23 @@
 package com.springcloud.user.client.query;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.springcloud.user.entity.UserInfo;
-import com.springcloud.user.service.IUserInfoService;
-import com.springcloud.user.util.JwtUtil;
-import com.user.api.dto.UserInfoDto;
-import common.Constant;
+import com.springcloud.user.entity.UserRoleRel;
+import com.springcloud.user.service.IUserRoleRelService;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import utils.BeanConverter;
+import utils.JacksonUtil;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author: liushuai
@@ -31,103 +26,48 @@ import java.util.List;
  */
 @RestController
 @Api(value = "API - QueryUserClient")
-public class QueryUserClient {
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserClient.class);
+public class QueryUserRoleClient {
+    private static final Logger logger = LoggerFactory.getLogger(QueryUserRoleClient.class);
     @Resource
-    private IUserInfoService iUserInfoService;
+    private IUserRoleRelService iUserRoleRelService;
+
 
     /**
-     * 根据用户名查询用户信息 (包含密码，只允许内部调用)
+     * 根据用户id差列表查询用户角色关联关系
      *
-     * @param username 用户名
-     * @return Result<UserInfoDto>
+     * @param uids 用户id烈烈表
+     * @return key为uid value为这个用户的角色id列表
      */
-    @GetMapping(value = "/{username}/user")
-    public Result<UserInfo> getUserByUserName(@PathVariable("username") String username) {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUsername(username);
-        return new Result<>(iUserInfoService.getOneByCondition(userInfo));
-    }
-
-    /**
-     * 查询全部用户
-     *
-     * @return Result<List < UserInfoDto>>
-     */
-    @GetMapping(value = "/user/list")
-    public Result<List<UserInfoDto>> getUserAll() {
-        List<UserInfo> userInfos = iUserInfoService.getBaseMapper().selectList(null);
-        return new Result<>(BeanConverter.convertList(userInfos, UserInfoDto.class));
-    }
-
-    /**
-     * 分页查询用户信息
-     *
-     * @param current 当前页
-     * @param size    每页显示行数
-     * @param name    用户名称
-     * @return Result<IPage < UserInfo>>
-     */
-    @GetMapping(value = "/user/page")
-    public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                                 @RequestParam(value = "name", required = false) String name,   @RequestParam(value = "orderBy", required = false) String orderBy) {
-        Page<UserInfo> page = new Page<>();
-        page.setCurrent(current);
-        page.setSize(size);
-        OrderItem orderItem = new OrderItem();
-        orderItem.setAsc(false);
-        orderItem.setColumn(orderBy);
-        page.setOrders(Collections.singletonList(orderItem));
-        UserInfo userInfo = new UserInfo();
-        userInfo.setName(name);
-        Page<UserInfo> userInfoIPage = iUserInfoService.selectUserPage(page, userInfo);
-        List<UserInfo> records = userInfoIPage.getRecords();
-        if (CollectionUtils.isEmpty(records)) {
-            return new Result<>(userInfoIPage);
+    @GetMapping(value = "/user/role/id/map")
+    public Result<Map<Integer, List<Integer>>> selectUserRoleIdsByUids(@RequestParam("uids") List<Integer> uids) {
+        List<UserRoleRel> userRoleRels = iUserRoleRelService.selectUserRoleListByUids(uids);
+        Map<Integer, List<UserRoleRel>> uidMap = userRoleRels.stream().collect(Collectors.groupingBy(UserRoleRel::getUid));
+        if (CollectionUtils.isEmpty(uidMap)) {
+            logger.info("查询用户关联关系为空，uids={}", JacksonUtil.toJSon(uids));
+            return new Result<>(Collections.emptyMap());
         }
-        records.forEach(i -> {
-            i.setPassword("");
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        uidMap.forEach((k, v) -> {
+            if (CollectionUtils.isEmpty(v)) {
+                map.put(k, Collections.emptyList());
+            } else {
+                map.put(k, v.stream().map(UserRoleRel::getRoleId).collect(Collectors.toList()));
+            }
         });
-        return new Result<>(userInfoIPage);
+        return new Result<>(map);
     }
 
     /**
-     * 创建token
+     * 根据用户id差列表查询用户角色关联关系
      *
-     * @param uid  用户id
-     * @param name 用户名称
-     * @return Result<String>
+     * @param uids 用户id烈烈表
+     * @return key为uid value为这个用户的角色列表
      */
-    @GetMapping(value = "/create/token")
-    public Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name) {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(uid);
-        userInfo.setName(name);
-        return new Result<>(JwtUtil.getToken(userInfo));
+    @GetMapping(value = "/user/role/map")
+    public Result<Map<Integer, List<UserRoleRel>>> selectUserRoleListByUids(@RequestParam("uids") List<Integer> uids) {
+        List<UserRoleRel> userRoleRels = iUserRoleRelService.selectUserRoleListByUids(uids);
+        Map<Integer, List<UserRoleRel>> uidMap = userRoleRels.stream().collect(Collectors.groupingBy(UserRoleRel::getId));
+        return new Result<>(uidMap);
     }
 
-    /**
-     * 获取用户信息
-     *
-     * @param token 用户的token
-     * @return UserInfo
-     */
-    @GetMapping(value = "/token/user")
-    public UserInfo getUserByToken(String token) {
-        DecodedJWT decode = JWT.decode(token);
-        Integer userId = decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(userId);
-        return iUserInfoService.getOneByCondition(userInfo);
-    }
-
-    /**
-     * 获取token
-     *
-     * @return token
-     */
-    public String getToken() {
-
-        return iUserInfoService.getToken();
-    }
 }

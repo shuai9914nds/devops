@@ -1,12 +1,13 @@
-package com.menu.api.query;
+package com.role.api.query;
 
-import com.menu.api.dto.MenuDto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.role.api.entity.Role;
 import common.Result;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,15 +17,27 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "menu-server", path = "/menu")
-public interface QueryMenuFeignApi {
+@FeignClient(name = "role-server", path = "/role")
+public interface QueryRoleFeignApi {
 
     /**
-     * 查询全部用户信息列表
+     * 查询角色列表
      *
-     * @return
+     * @param roleIds 角色id列表
+     * @return Result<List < Role>>
      */
-    @ApiOperation(httpMethod = "GET", value = "查询全部菜单列表")
-    @GetMapping(value = "/menus")
-    Result<List<MenuDto>> selectMenuListAll();
+    @GetMapping(value = "/role/list")
+    Result<List<Role>> selectRoleList(@RequestParam("roleIds") List<Integer> roleIds);
+
+    /**
+     * 分页查询用户信息
+     *
+     * @param current  当前页
+     * @param size     每页显示行数
+     * @param roleName 角色名称
+     * @return Result<IPage < Role>>
+     */
+    @GetMapping(value = "/role/page")
+    Result<Page<Role>> selectRolePage(@RequestParam("current") Long current, @RequestParam("size") Long size,
+                                      @RequestParam(value = "roleName", required = false) String roleName, @RequestParam(value = "orderBy", required = false) String orderBy);
 }

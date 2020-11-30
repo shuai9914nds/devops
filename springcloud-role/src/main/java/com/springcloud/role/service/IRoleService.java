@@ -1,5 +1,6 @@
 package com.springcloud.role.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.springcloud.role.entity.Role;
 
@@ -30,6 +31,14 @@ public interface IRoleService extends IService<Role> {
      * @param role
      * @return List<Role>
      */
-    List<Role> selectUserList( Role role);
+    List<Role> selectUserList(Role role);
 
+    /**
+     * 分页查询角色信息
+     *
+     * @param page 分页信息
+     * @param role 查询条件
+     * @return IPage<Role>
+     */
+    Page<Role> selectUserPage(Page<Role> page, Role role);
 }

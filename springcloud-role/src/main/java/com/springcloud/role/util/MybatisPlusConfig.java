@@ -1,4 +1,4 @@
-package com.springcloud.menu.util;
+package com.springcloud.role.util;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;

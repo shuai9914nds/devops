@@ -2,6 +2,7 @@ package utils;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import common.ResultPagedData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +33,13 @@ public class BeanConverter<T, R> {
         return source.stream().map(i -> convert(i, clazz)).collect(Collectors.toList());
     }
 
-    public static <T, R> ResultPagedData<R> convertPagedData(ResultPagedData<T> resultPagedData, Class<R> clazz) {
-        ResultPagedData<R> resp = new ResultPagedData<>();
-        resp.setDatas(resultPagedData.getDatas().stream().map(i -> convert(i, clazz)).collect(Collectors.toList()));
-        resp.setPageIndex(resultPagedData.getPageIndex());
-        resp.setPageSize(resultPagedData.getPageSize());
-        resp.setTotalCount(resultPagedData.getTotalCount());
-        resp.setTotalPage(resultPagedData.getTotalPage());
+    public static <T, R> Page<R> convertPageData(Page<T> page, Class<R> clazz) {
+        Page<R> resp = new Page<>();
+        resp.setRecords(page.getRecords().stream().map(i -> convert(i, clazz)).collect(Collectors.toList()));
+        resp.setCurrent(page.getCurrent());
+        resp.setSize(page.getSize());
+        resp.setTotal(page.getTotal());
+        resp.setPages(page.getPages());
         return resp;
     }
 

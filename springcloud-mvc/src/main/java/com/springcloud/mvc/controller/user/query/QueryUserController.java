@@ -34,9 +34,7 @@ public class QueryUserController {
      */
     @GetMapping(value = "/mvc/user/page")
     public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                                   @RequestParam(value = "name", required = false) String name) {
-        Result<Page<UserInfo>> pageResult = queryUserFeignApi.selectUserPage(current, size, name);
-        System.out.println(pageResult);
-        return pageResult;
+                                                 @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
+        return queryUserFeignApi.selectUserPage(current, size, name, orderBy);
     }
 }

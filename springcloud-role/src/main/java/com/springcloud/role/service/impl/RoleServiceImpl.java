@@ -1,6 +1,7 @@
 package com.springcloud.role.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springcloud.role.entity.Role;
 import com.springcloud.role.mapper.RoleMapper;
@@ -42,6 +43,18 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     public List<Role> selectUserList(Role role) {
         LambdaQueryWrapper<Role> queryWrapper = getLambdaQueryWrapper(role);
         return this.baseMapper.selectList(queryWrapper);
+    }
+
+    /**
+     * 分页查询角色信息列表
+     *
+     * @param page 分页信息
+     * @param role 查询条件
+     * @return Page<Role>
+     */
+    @Override
+    public Page<Role> selectUserPage(Page<Role> page, Role role) {
+        return this.baseMapper.selectPage(page, getLambdaQueryWrapper(role));
     }
 
 

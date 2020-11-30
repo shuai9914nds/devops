@@ -23,6 +23,7 @@
         <module>springcloud-menu</module>
         <module>springcloud-login</module>
         <module>springcloud-mvc</module>
+        <module>springcloud-role</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

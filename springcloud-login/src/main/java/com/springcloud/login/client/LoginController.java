@@ -1,4 +1,4 @@
-package com.springcloud.login.controller;
+package com.springcloud.login.client;
 
 import com.menu.api.dto.MenuDto;
 import com.menu.api.query.QueryMenuFeignApi;

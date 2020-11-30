@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-server
+    name: role-server
     #数据库连接配置
   datasource:
     driverClassName: com.mysql.jdbc.Driver

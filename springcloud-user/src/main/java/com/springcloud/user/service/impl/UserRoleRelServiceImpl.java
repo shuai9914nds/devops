@@ -1,14 +1,17 @@
 package com.springcloud.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.springcloud.user.entity.UserRoleRel;
 import com.springcloud.user.mapper.UserRoleRelMapper;
 import com.springcloud.user.service.IUserRoleRelService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author shuai
@@ -16,5 +19,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserRoleRelServiceImpl extends ServiceImpl<UserRoleRelMapper, UserRoleRel> implements IUserRoleRelService {
+
+    /**
+     * 查询用户角色列表
+     *
+     * @param uids 用户id列表
+     * @return List<UserRoleRel>
+     */
+    @Override
+    public List<UserRoleRel> selectUserRoleListByUids(List<Integer> uids) {
+        LambdaQueryWrapper<UserRoleRel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(UserRoleRel::getUid, uids);
+        return this.baseMapper.selectList(queryWrapper);
+    }
 
 }

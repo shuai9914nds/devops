@@ -61,5 +61,5 @@ public interface QueryUserFeignApi {
      */
     @GetMapping(value = "/user/page")
     Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                          @RequestParam(value = "name", required = false) String name);
+                                          @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy);
 }

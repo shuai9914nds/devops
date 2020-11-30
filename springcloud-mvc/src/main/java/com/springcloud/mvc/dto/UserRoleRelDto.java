@@ -1,8 +1,8 @@
-package com.springcloud.role.dto;
+package com.springcloud.mvc.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.springcloud.role.entity.Role;
+import com.role.api.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

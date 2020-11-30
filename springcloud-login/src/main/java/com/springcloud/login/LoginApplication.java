@@ -1,11 +1,12 @@
 package com.springcloud.login;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients(basePackages = {"com.menu.api", "com.user.api", "com.login.api"})
-@SpringCloudApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class LoginApplication {
 
     public static void main(String[] args) {

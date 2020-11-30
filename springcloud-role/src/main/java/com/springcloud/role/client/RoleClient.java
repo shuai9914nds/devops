@@ -9,5 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @description：
  */
 @RestController
-public class MenuClient {
+public class RoleClient {
+
+
 }
