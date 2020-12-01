@@ -1,8 +1,8 @@
 package com.springcloud.menu.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.menu.api.dto.MenuDto;
 import com.springcloud.menu.entity.Menu;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * </p>
  *
  * @author shuai
- * @since 2020-11-13
+ * @since 2020-12-01
  */
 public interface IMenuService extends IService<Menu> {
 

@@ -25,6 +25,6 @@ public interface QueryMenuFeignApi {
      * @return
      */
     @ApiOperation(httpMethod = "GET", value = "查询全部菜单列表")
-    @GetMapping(value = "/menus")
+    @GetMapping(value = "/menu/all/tree")
     Result<List<MenuDto>> selectMenuListAll();
 }

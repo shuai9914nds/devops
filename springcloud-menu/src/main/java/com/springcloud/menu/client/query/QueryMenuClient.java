@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author: liushuai
  * @date: 2020/9/1
- * @description：
+ * @description：提供查询菜单接口
  */
 @RestController
 @Api(value = "API - QueryMenuController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -27,7 +27,7 @@ public class QueryMenuClient implements QueryMenuFeignApi {
 
 
     @Override
-    @GetMapping(value = "/menus")
+    @GetMapping(value = "/menu/all/tree")
     public Result<List<MenuDto>> selectMenuListAll() {
         return new Result<>(iMenuService.getMenuListAll());
     }

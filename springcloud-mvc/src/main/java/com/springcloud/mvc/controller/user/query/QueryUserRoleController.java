@@ -55,7 +55,7 @@ public class QueryUserRoleController {
     }
 
     /**
-     * 分页查询用户信息
+     * 分页查询角色信息
      *
      * @param current  当前页
      * @param size     每页显示行数

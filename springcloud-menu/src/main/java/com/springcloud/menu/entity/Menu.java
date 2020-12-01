@@ -12,15 +12,15 @@ import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author shuai
- * @since 2020-11-13
+ * @since 2020-12-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Menu对象", description="")
+@ApiModel(value = "Menu对象", description = "")
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +28,9 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "菜单id")
     @TableId(value = "menu_id", type = IdType.AUTO)
     private Integer menuId;
+
+    @ApiModelProperty(value = "菜单名称")
+    private String menuName;
 
     @ApiModelProperty(value = "父编号,本权限可能是该父编号权限的子权限")
     private Integer parentId;

@@ -15,7 +15,7 @@ import java.util.List;
  * @description：
  */
 @RestController
-public class MenuCacheClient {
+public class CacheMenuClient {
 
     @Resource
     private IMenuService iMenuService;
@@ -23,7 +23,7 @@ public class MenuCacheClient {
     /**
      * 刷新菜单缓存
      */
-    @GetMapping("/refresh/cache")
+    @GetMapping("/refresh/cache/menu")
     public void refreshMenuCache() {
         iMenuService.refreshMenuCache();
     }
@@ -33,7 +33,7 @@ public class MenuCacheClient {
      *
      * @return
      */
-    @GetMapping("/cache/menus")
+    @GetMapping("/cache/menu/list")
     public Result<List<Menu>> getMenusByCache() {
         return new Result<>(iMenuService.getMenusByCache());
     }

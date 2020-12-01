@@ -1,7 +1,6 @@
 package com.springcloud.menu.util;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
@@ -31,10 +30,11 @@ public class GeneratorCodeConfig {
         gc.setFileOverride(true);
         //实体属性 Swagger2 注解
         gc.setSwagger2(true);
-
-        //去掉接口名称的I
-//        gc.setServiceName("%sService");
         mpg.setGlobalConfig(gc);
+        // 数据源配置
+        gc.setEnableCache(false);// XML 二级缓存
+        gc.setBaseResultMap(true);// XML ResultMap
+        gc.setBaseColumnList(false);// XML columList
 
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://localhost:3306/user_info?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true");
@@ -63,75 +63,28 @@ public class GeneratorCodeConfig {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
+//        pc.setModuleName(scanner("模块名"));
         pc.setParent("com.springcloud.menu");
-        pc.setXml("");
         pc.setEntity("entity");
         pc.setMapper("mapper");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);
 
-        // 自定义配置
-        InjectionConfig cfg = new InjectionConfig() {
-            @Override
-            public void initMap() {
-                // to do nothing
-            }
-        };
 
-        // 如果模板引擎是 freemarker
-//        String templatePath = "/Applications/work/project/springcloud/springcloud-menu/src/main/java/com/springcloud/menu/util/mapper.java.ftl";
-        // 如果模板引擎是 velocity
-        // String templatePath = "/templates/mapper.xml.vm";
-
-        // 自定义输出配置
-//        List<FileOutConfig> focList = new ArrayList<>();
-//        // 自定义配置会被优先输出
-//        focList.add(new FileOutConfig(templatePath) {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-//                return projectPath + "/src/main/resources/mapper/" + pc.getMapper()
-//                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-//            }
-//        });
-//
-//
-//        mpg.setCfg(new InjectionConfig() {
-//            @Override
-//            public void initMap() {
-//                // 注入配置
-//            }
-//        }.setFileOutConfigList(focList));
-
-
-        // 如果模板引擎是 freemarker
-//        String templatePath = "/template/mapper.java.ftl";
-        // 如果模板引擎是 velocity
-        // String templatePath = "/templates/mapper.xml.vm";
-
-        // 自定义输出配置
-//        List<FileOutConfig> focList = new ArrayList<>();
-        // 自定义配置会被优先输出
-//        focList.add(new FileOutConfig(templatePath) {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-//                return projectPath + "/springcloud-menu/src/main/java/com/springcloud/menu/mapper/" + pc.getModuleName()
-//                     + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_JAVA;
-//            }
-//        });
-//        cfg.setFileOutConfigList(focList);
-//        mpg.setCfg(cfg);
-
-
-
-//         配置模板
+        // 配置模板
         TemplateConfig templateConfig = new TemplateConfig();
 
+        // 配置自定义输出模板
+        //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
+        // templateConfig.setEntity("templates/entity2.java");
+        // templateConfig.setService();
+        // templateConfig.setController();
+        templateConfig.setMapper("/templates/mapper.java");
 //        templateConfig.setXml(null);
-//        空字符串不生成controller，否则会生成controller
+        //空字符串不生成controller，否则会生成controller
         templateConfig.setController("");
+
         mpg.setTemplate(templateConfig);
 
         // 策略配置
@@ -147,9 +100,8 @@ public class GeneratorCodeConfig {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         List<String> tables = new ArrayList<>();
+//        tables.add("user_info");
         tables.add("menu");
-        tables.add("menu_role");
-        tables.add("menu_role_rel");
         strategy.setInclude(tables.toArray(new String[0]));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
