@@ -5,13 +5,13 @@
         <div style="width: 200px">
           <div class="logo" />
           <a-menu
-            :default-selected-keys="['/home']"
+            :default-selected-keys="['/Home']"
             mode="inline"
             theme="dark"
             :inline-collapsed="collapsed"
             @click="handleClick"
           >
-            <a-menu-item key="/home">
+            <a-menu-item key="/Home">
               <a-icon type="home" />
               <span>首页</span>
             </a-menu-item>
@@ -28,7 +28,7 @@
                 <span>角色管理</span>
               </a-menu-item>
               <a-menu-item key="/UserPerm">
-                <a-icon type="perm" />
+                <a-icon type="user-add" />
                 <span>分配权限</span>
               </a-menu-item>
               <a-menu-item key="7">Option 7 </a-menu-item>

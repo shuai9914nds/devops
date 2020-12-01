@@ -5,18 +5,18 @@ import ${superMapperClassPackage};
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <p>
+* <p>
  * ${table.comment!} Mapper 接口
  * </p>
- *
- * @author ${author}
- * @since ${date}
- */
-<#if kotlin>
-interface ${table.mapperName} : ${superMapperClass}<${entity}>
-<#else>
+*
+* @author ${author}
+* @since ${date}
+*/
 @Mapper
-public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+<#if kotlin>
+ interface ${table.mapperName} : ${superMapperClass}<${entity}>
+<#else>
+ public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
-}
+ }
 </#if>

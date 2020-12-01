@@ -22,7 +22,7 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: '/home',
+        path: '/Home',
         name: 'Home',
         component: Home
       },
