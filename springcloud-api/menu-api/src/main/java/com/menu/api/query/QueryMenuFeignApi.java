@@ -16,7 +16,7 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "menu-server", path = "/menu")
+@FeignClient(name = "menu-server", path = "/menu", contextId = "queryMenu")
 public interface QueryMenuFeignApi {
 
     /**

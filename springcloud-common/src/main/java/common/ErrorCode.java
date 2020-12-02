@@ -34,6 +34,12 @@ public enum ErrorCode {
     VERIFY_CODE_ERROR(300002, "验证码错误"),
 
     /**
+     * role服务
+     */
+    ROLE_NAME_REPEAT(400001, "角色名称重复"),
+
+
+    /**
      * 具体业务错误码
      **/
 

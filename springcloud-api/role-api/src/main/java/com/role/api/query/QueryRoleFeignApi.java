@@ -17,7 +17,7 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "role-server", path = "/role")
+@FeignClient(name = "role-server", path = "/role", contextId = "queryRole")
 public interface QueryRoleFeignApi {
 
     /**
@@ -40,4 +40,14 @@ public interface QueryRoleFeignApi {
     @GetMapping(value = "/role/page")
     Result<Page<Role>> selectRolePage(@RequestParam("current") Long current, @RequestParam("size") Long size,
                                       @RequestParam(value = "roleName", required = false) String roleName, @RequestParam(value = "orderBy", required = false) String orderBy);
+
+    /**
+     * 查询一个角色
+     *
+     * @param roleId   角色id
+     * @param roleName 角色名称
+     * @return Result<Role>
+     */
+    @GetMapping(value = "/role")
+    Result<Role> selectOne(@RequestParam(value = "roleId", required = false) Integer roleId, @RequestParam(value = "roleName", required = false) String roleName);
 }

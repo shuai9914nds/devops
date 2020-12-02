@@ -8,6 +8,10 @@ spring:
     password: root
   main:
     allow-bean-definition-overriding: true
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
 
 eureka:
   client:
@@ -22,3 +26,7 @@ server:
   servlet:
     #    context-path: /${project.artifactId}
     context-path: /mvc
+
+
+
+

@@ -67,4 +67,19 @@ public class QueryRoleClient {
         return new Result<>(rolePage);
     }
 
+    /**
+     * 查询一个角色
+     *
+     * @param roleId   角色id
+     * @param roleName 角色名称
+     * @return Result<Role>
+     */
+    @GetMapping(value = "/role")
+    public Result<Role> selectOne(@RequestParam(value = "roleId", required = false) Integer roleId, @RequestParam(value = "roleName", required = false) String roleName) {
+        Role role = new Role();
+        role.setRoleName(roleName);
+        role.setRoleId(roleId);
+        return new Result<>(iRoleService.getOneByCondition(role));
+    }
+
 }

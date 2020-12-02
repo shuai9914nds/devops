@@ -67,8 +67,8 @@ public class GeneratorCodeConfig {
         pc.setParent("com.springcloud.menu");
         pc.setEntity("entity");
         pc.setMapper("mapper");
-        pc.setService("service");
-        pc.setServiceImpl("service.impl");
+//        pc.setService("service");
+//        pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);
 
 
@@ -101,7 +101,7 @@ public class GeneratorCodeConfig {
 //        strategy.setSuperEntityColumns("id");
         List<String> tables = new ArrayList<>();
 //        tables.add("user_info");
-        tables.add("menu");
+        tables.add("menu_role_rel");
         strategy.setInclude(tables.toArray(new String[0]));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

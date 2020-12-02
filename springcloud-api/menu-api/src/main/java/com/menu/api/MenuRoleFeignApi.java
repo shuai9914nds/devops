@@ -1,14 +1,12 @@
 package com.menu.api;
 
-import com.menu.api.dto.MenuDto;
+import com.menu.api.dto.MenuRoleDto;
 import common.Result;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author: liushuai
@@ -16,15 +14,15 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "menu-server", path = "/menu")
-public interface MenuFeignApi {
+@FeignClient(name = "menu-server", path = "/menu", contextId = "menuRole")
+public interface MenuRoleFeignApi {
 
     /**
-     * 查询全部用户信息列表
+     * 新增角色菜单关联关系
      *
-     * @return
+     * @param menuRoleDto 菜单角色实体类
+     * @return Result<Void>
      */
-    @ApiOperation(httpMethod = "GET", value = "查询全部菜单列表")
-    @GetMapping(value = "/menu/all/tree")
-    Result<List<MenuDto>> selectMenuListAll();
+    @PutMapping("/menu/role")
+    Result<Void> addMenuRole(@RequestBody MenuRoleDto menuRoleDto);
 }

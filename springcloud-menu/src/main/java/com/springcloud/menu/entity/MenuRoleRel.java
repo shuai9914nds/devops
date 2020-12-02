@@ -8,14 +8,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author shuai
- * @since 2020-11-13
+ * @since 2020-12-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,7 +32,19 @@ public class MenuRoleRel implements Serializable {
     private Integer menuId;
 
     @ApiModelProperty(value = "菜单角色id")
-    private Integer menuRoleId;
+    private Integer roleId;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "创建人")
+    private String createBy;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
+    @ApiModelProperty(value = "更新人")
+    private String updateBy;
 
 
 }

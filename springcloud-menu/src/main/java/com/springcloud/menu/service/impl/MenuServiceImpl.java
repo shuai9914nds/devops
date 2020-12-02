@@ -129,7 +129,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         }
         // 为一级菜单设置子菜单，getChild是递归调用的
         for (MenuDto menuDto : menuDtoList) {
-            menuDto.setChildMenus(getChild(menuDto.getMenuId(), menuDtos));
+            menuDto.setChildren(getChild(menuDto.getMenuId(), menuDtos));
         }
         return menuDtoList;
     }
@@ -154,7 +154,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         }
         // 把子菜单的子菜单再循环一遍
         for (MenuDto menuDto : childList) {
-            menuDto.setChildMenus(getChild(menuDto.getMenuId(), menuDtos));
+            menuDto.setChildren(getChild(menuDto.getMenuId(), menuDtos));
         } // 递归退出条件
         if (childList.size() == 0) {
             return null;

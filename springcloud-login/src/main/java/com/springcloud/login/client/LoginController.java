@@ -1,8 +1,8 @@
 package com.springcloud.login.client;
 
+import com.login.api.dto.LoginDto;
 import com.menu.api.dto.MenuDto;
 import com.menu.api.query.QueryMenuFeignApi;
-import com.springcloud.login.dto.LoginDto;
 import com.user.api.entity.UserInfo;
 import com.user.api.query.QueryUserFeignApi;
 import common.Constant;

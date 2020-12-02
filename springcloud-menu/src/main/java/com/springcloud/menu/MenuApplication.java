@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients("com.menu.api.query")
+@EnableFeignClients({"com.menu.api.query", "com.menu.api", "com.role.api.query", "com.role.api"})
 @MapperScan(basePackages = {"com.springcloud.menu.mapper"})
 @SpringBootApplication
 public class MenuApplication {

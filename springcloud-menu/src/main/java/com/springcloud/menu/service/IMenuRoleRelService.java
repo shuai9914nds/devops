@@ -1,7 +1,7 @@
 package com.springcloud.menu.service;
 
-import com.springcloud.menu.entity.MenuRoleRel;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.springcloud.menu.entity.MenuRoleRel;
 
 /**
  * <p>
