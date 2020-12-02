@@ -9,28 +9,36 @@
           </a-col>
         </a-row>
         <a-modal v-model="visible" title="新增角色" on-ok="handleOk">
+          <a-row>
+            <a-col :span="1"></a-col>
+            <a-col :span="15">
+              <a-form layout="inline">
+                <a-form-item label="角色名称">
+                  <a-input v-model="roleRelParam.roleName" />
+                </a-form-item>
+              </a-form>
+            </a-col>
+          </a-row>
           <template slot="footer">
-            <a-button key="back" @click="handleCancel"> Return</a-button>
+            <a-button key="back" @click="handleCancel"> 关闭</a-button>
             <a-button
               key="submit"
               type="primary"
               :loading="loading"
               @click="handleOk"
             >
-              Submit
+              确认
             </a-button>
           </template>
           <template>
             <a-tree
               checkable
               :tree-data="treeData"
-              :default-expanded-keys="['0-0-0', '0-0-1']"
               :default-selected-keys="['0-0-0', '0-0-1']"
               :default-checked-keys="['0-0-0', '0-0-1']"
               @select="onSelect"
               @check="onCheck"
             >
-              <span slot="title0010" style="color: #1890ff">sss</span>
             </a-tree>
           </template>
         </a-modal>
@@ -93,42 +101,6 @@ const columns = [
     dataIndex: "action",
     scopedSlots: { customRender: "action" },
   },
-  //   {
-  //     title: "Gender",
-  //     dataIndex: "gender",
-  //     filters: [
-  //       { text: "Male", value: "male" },
-  //       { text: "Female", value: "female" },
-  //     ],
-  //     width: "20%",
-  //   },
-  //   {
-  //     title: "Email",
-  //     dataIndex: "email",
-  //   },
-];
-
-const treeData = [
-  {
-    title: "parent 1",
-    key: "0-0",
-    children: [
-      {
-        title: "parent 1-0",
-        key: "0-0-0",
-        disabled: true,
-        children: [
-          { title: "leaf", key: "0-0-0-0", disableCheckbox: true },
-          { title: "leaf", key: "0-0-0-1" },
-        ],
-      },
-      {
-        title: "parent 1-1",
-        key: "0-0-1",
-        children: [{ key: "0-0-1-0", slots: { title: "title0010" } }],
-      },
-    ],
-  },
 ];
 
 export default {
@@ -140,11 +112,17 @@ export default {
       columns,
       loading: false,
       visible: false,
-      treeData,
+      treeData: [],
+      roleRelParam: {
+        menuIds: [],
+        roleName: "",
+        roleId: null,
+      },
     };
   },
   mounted() {
     this.getRolePage();
+    this.getPerms();
   },
   methods: {
     handleTableChange(pagination, filters, sorter) {
@@ -186,11 +164,45 @@ export default {
           console.log(error);
         });
     },
+    getPerms(params = {}) {
+      this.$axios
+        .get("/menu/all/tree", {
+          params: {},
+          headers: {
+            "User-Token": localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          this.treeData = response.data.obj;
+          const list = response.data.obj;
+          if (list.length > 0) {
+            for (var i = 0; i < list.length; i++) {
+              this.treeData[i].key = list[i].menuId;
+              this.treeData[i].title = list[i].menuName;
+              if (list[i].children != null && list[i].children.length > 0) {
+                this.treeData[i].children = list[i].children;
+                const children = list[i].children;
+                for (var j = 0; j < children.length; j++) {
+                  this.treeData[i].children[j].key = children[j].menuId;
+                  this.treeData[i].children[j].title = children[j].menuName;
+                }
+              }
+            }
+          }
+          console.log(this.treeData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     showModal() {
       this.visible = true;
     },
     handleOk(e) {
+      console.log("roleName：" + this.roleRelParam.roleName);
+      console.log("menuIds：" + this.roleRelParam.menuIds);
       this.loading = true;
+      this.addMenuRole();
       setTimeout(() => {
         this.visible = false;
         this.loading = false;
@@ -204,6 +216,30 @@ export default {
     },
     onCheck(checkedKeys, info) {
       console.log("onCheck", checkedKeys, info);
+      console.log(checkedKeys)
+      this.roleRelParam.menuIds = checkedKeys;
+    },
+    addMenuRole() {
+      this.$axios
+        .put(
+          "/menu/role",
+          {
+            roleName: this.roleRelParam.roleName,
+            menuIds: this.roleRelParam.menuIds,
+          },
+          {
+            headers: {
+              // "content-type": "application/json",
+              "User-Token": localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((response) => {
+          this.selectUserPage();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
