@@ -47,7 +47,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      */
     @Override
     public List<MenuDto> getMenuListAll() {
-        return queryMenuList();
+        return queryPermList();
     }
 
     /**
@@ -56,7 +56,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      * @return List<Menu>
      */
     @Override
-    public List<Menu> getMenus() {
+    public List<Menu> getPerms() {
         Menu menu = new Menu();
         menu.setMenuId(4);
         List<Menu> menus = this.baseMapper.selectList(null);
@@ -67,16 +67,27 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     /**
+     * 根据菜单id查询权限列表
+     *
+     * @param menuIdList 菜单id
+     * @return Result<List < MenuDto>>
+     */
+    public List<MenuDto> selectPermListByMenuIds(List<Integer> menuIdList) {
+        List<Menu> menus = this.baseMapper.selectBatchIds(menuIdList);
+        return getPermTree(menus);
+    }
+
+    /**
      * 查询缓存中的菜单数据（非树形结构）
      *
      * @return
      */
     @Override
-    public List<Menu> getMenusByCache() {
+    public List<Menu> getPermsByCache() {
         RBucket<Object> bucket = redissonClient.getBucket(Constant.REDIS_ALL_MENUS_KEY);
         Object o = bucket.get();
         if (null == o) {
-            List<Menu> menus = getMenus();
+            List<Menu> menus = getPerms();
             try {
                 bucket.set(JsonUtils.toJson(menus));
             } catch (IOException e) {
@@ -98,10 +109,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      * 刷新菜单缓存
      */
     @Override
-    public void refreshMenuCache() {
+    public void refreshPermCache() {
         RBucket<Object> bucket = redissonClient.getBucket(Constant.REDIS_ALL_MENUS_KEY);
         bucket.delete();
-        List<Menu> menus = getMenus();
+        List<Menu> menus = getPerms();
         if (CollectionUtils.isEmpty(menus)) {
             bucket.set("");
         } else {
@@ -113,11 +124,26 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         }
     }
 
-    public List<MenuDto> queryMenuList() {
+    public List<MenuDto> queryPermList() {
 
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByAsc("order_num");
-        List<MenuDto> menuDtos = BeanConverter.convertList(this.baseMapper.selectList(queryWrapper), MenuDto.class);
+        List<Menu> menus = this.baseMapper.selectList(queryWrapper);
+        return getPermTree(menus);
+    }
+
+    /**
+     * 获取权限树结构
+     *
+     * @param menus
+     * @return
+     */
+    private List<MenuDto> getPermTree(List<Menu> menus) {
+        if (CollectionUtils.isEmpty(menus)) {
+            return Collections.emptyList();
+        }
+        List<Menu> menuList = menus.stream().distinct().collect(Collectors.toList());
+        List<MenuDto> menuDtos = BeanConverter.convertList(menuList, MenuDto.class);
         // 最后的结果
         List<MenuDto> menuDtoList = new ArrayList<>();
         // 先找到所有的一级菜单

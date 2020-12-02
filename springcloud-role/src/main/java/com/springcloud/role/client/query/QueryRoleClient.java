@@ -5,18 +5,22 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.springcloud.role.entity.Role;
 import com.springcloud.role.service.IRoleService;
+import common.ErrorCode;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: liushuai
@@ -30,6 +34,8 @@ public class QueryRoleClient {
     private static final Logger logger = LoggerFactory.getLogger(QueryRoleClient.class);
     @Resource
     private IRoleService iRoleService;
+    @Resource
+    private QueryUserRoleClient queryUserRoleClient;
 
 
     /**
@@ -81,5 +87,33 @@ public class QueryRoleClient {
         role.setRoleId(roleId);
         return new Result<>(iRoleService.getOneByCondition(role));
     }
+
+    /**
+     * 查询一个用户拥有的角色
+     *
+     * @param uid 用户id
+     * @return Result<Role>
+     */
+    @GetMapping(value = "/role/list/{uid}")
+    public Result<List<Role>> selectRoleListByUid(@PathVariable(value = "uid") Integer uid) {
+        //查询用户的角色id列表
+        Result<Map<Integer, List<Integer>>> userRoleResult = queryUserRoleClient.selectUserRoleIdsByUids(Collections.singletonList(uid));
+        if (!userRoleResult.getSuccess()) {
+            logger.error("调用接口queryUserRoleClient.selectUserRoleIdsByUids失败,result={}", userRoleResult);
+            return new Result<>(ErrorCode.SYSTEM_ERROR);
+        }
+        Map<Integer, List<Integer>> map = userRoleResult.getObj();
+        if (CollectionUtils.isEmpty(map)) {
+            return new Result<>();
+        }
+        List<Integer> roleList = map.get(uid);
+        if (CollectionUtils.isEmpty(roleList)) {
+            logger.error("uid={},在user_role_rel表里的角色id为空", uid);
+            return new Result<>();
+        }
+        List<Role> roles = iRoleService.listByIds(roleList);
+        return new Result<>(roles);
+    }
+
 
 }

@@ -1,73 +1,80 @@
 package com.springcloud.role.client.query;
 
-import com.springcloud.role.entity.UserRoleRel;
-import com.springcloud.role.service.IUserRoleRelService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.springcloud.role.entity.MenuRoleRel;
+import com.springcloud.role.entity.Role;
+import com.springcloud.role.service.IMenuRoleRelService;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import utils.JacksonUtil;
 
 import javax.annotation.Resource;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * @author: liushuai
  * @date: 2020/10/3
- * @description：
+ * @description：菜单角色相关
  */
 @RestController
-@Api(value = "API - QueryUserClient")
-public class QueryUserRoleClient {
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserRoleClient.class);
+@Api(value = "API - QueryMenuRoleClient")
+public class QueryMenuRoleClient {
+    private static final Logger logger = LoggerFactory.getLogger(QueryMenuRoleClient.class);
     @Resource
-    private IUserRoleRelService iUserRoleRelService;
+    private IMenuRoleRelService iMenuRoleRelService;
+    @Resource
+    private QueryRoleClient queryRoleClient;
 
 
     /**
-     * 根据用户id差列表查询用户角色关联关系
+     * 查询用户所拥有的的权限id列表
      *
-     * @param uids 用户id烈烈表
-     * @return key为uid value为这个用户的角色id列表
+     * @return Result<List < Integer>>
      */
-    @GetMapping(value = "/user/role/id/map")
-    public Result<Map<Integer, List<Integer>>> selectUserRoleIdsByUids(@RequestParam("uids") List<Integer> uids) {
-        List<UserRoleRel> userRoleRels = iUserRoleRelService.selectUserRoleListByUids(uids);
-        Map<Integer, List<UserRoleRel>> uidMap = userRoleRels.stream().collect(Collectors.groupingBy(UserRoleRel::getUid));
-        if (CollectionUtils.isEmpty(uidMap)) {
-            logger.info("查询用户关联关系为空，uids={}", JacksonUtil.toJSon(uids));
-            return new Result<>(Collections.emptyMap());
+    @GetMapping(value = "/perm/list/{uid}")
+    public Result<List<Integer>> selectPermByUid(@PathVariable("uid") Integer uid) {
+        Result<List<Role>> roleResult = queryRoleClient.selectRoleListByUid(uid);
+        if (!roleResult.getSuccess()) {
+            logger.error("调用queryRoleClient.selectRoleListByUid服务失败，result={}", roleResult);
+            return new Result<>(Collections.emptyList());
         }
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        uidMap.forEach((k, v) -> {
-            if (CollectionUtils.isEmpty(v)) {
-                map.put(k, Collections.emptyList());
-            } else {
-                map.put(k, v.stream().map(UserRoleRel::getRoleId).collect(Collectors.toList()));
-            }
-        });
-        return new Result<>(map);
+        List<Role> roleList = roleResult.getObj();
+        if (CollectionUtils.isEmpty(roleList)) {
+            return new Result<>(Collections.emptyList());
+        }
+        List<Integer> roleIdList = roleList.stream().map(Role::getRoleId).distinct().collect(Collectors.toList());
+        LambdaQueryWrapper<MenuRoleRel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(MenuRoleRel::getId, roleIdList);
+        List<MenuRoleRel> userRoleRelList = iMenuRoleRelService.list(queryWrapper);
+        if (CollectionUtils.isEmpty(userRoleRelList)) {
+            return new Result<>(Collections.emptyList());
+        }
+        List<Integer> menuIdList = userRoleRelList.stream().map(MenuRoleRel::getMenuId).distinct().collect(Collectors.toList());
+        return new Result<>(menuIdList);
     }
 
     /**
-     * 根据用户id差列表查询用户角色关联关系
+     * 查询某个角色对应的权限id列表
      *
-     * @param uids 用户id烈烈表
-     * @return key为uid value为这个用户的角色列表
+     * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/user/role/map")
-    public Result<Map<Integer, List<UserRoleRel>>> selectUserRoleListByUids(@RequestParam("uids") List<Integer> uids) {
-        List<UserRoleRel> userRoleRels = iUserRoleRelService.selectUserRoleListByUids(uids);
-        Map<Integer, List<UserRoleRel>> uidMap = userRoleRels.stream().collect(Collectors.groupingBy(UserRoleRel::getId));
-        return new Result<>(uidMap);
-    }
+    @GetMapping(value = "/{roleId}/menuId/list")
+    public Result<List<Integer>> selectPermIdListByRoleId(@PathVariable("roleId") Integer roleId) {
+        LambdaQueryWrapper<MenuRoleRel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(MenuRoleRel::getRoleId, roleId);
+        List<MenuRoleRel> menuRoleRelList = iMenuRoleRelService.list(queryWrapper);
+        if (CollectionUtils.isEmpty(menuRoleRelList)) {
+            return new Result<>(Collections.emptyList());
+        }
+        List<Integer> menuIdList = menuRoleRelList.stream().map(MenuRoleRel::getMenuId).distinct().collect(Collectors.toList());
+        return new Result<>(menuIdList);
 
+    }
 }

@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -50,4 +51,13 @@ public interface QueryRoleFeignApi {
      */
     @GetMapping(value = "/role")
     Result<Role> selectOne(@RequestParam(value = "roleId", required = false) Integer roleId, @RequestParam(value = "roleName", required = false) String roleName);
+
+    /**
+     * 查询一个用户拥有的角色
+     *
+     * @param uid 用户id
+     * @return Result<Role>
+     */
+    @GetMapping(value = "/role/list/{uid}")
+    Result<List<Role>> selectRoleListByUid(@PathVariable(value = "uid") Integer uid);
 }

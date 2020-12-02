@@ -1,15 +1,13 @@
 package com.role.api.query;
 
-import com.role.api.entity.UserRoleRel;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: liushuai
@@ -17,24 +15,22 @@ import java.util.Map;
  * @description：
  */
 @Api(value = "API - QueryUserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "role-server", path = "role", contextId = "queryUserRole")
-public interface QueryUserRoleFeignApi {
+@FeignClient(name = "role-server", path = "role", contextId = "queryMenuRole")
+public interface QueryMenuRoleFeignApi {
 
     /**
-     * 根据用户id差列表查询用户角色关联关系
+     * 查询用户所拥有的的权限id列表
      *
-     * @param uids 用户id烈烈表
-     * @return key为uid value为这个用户的角色id列表
+     * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/user/role/id/map")
-    Result<Map<Integer, List<Integer>>> selectUserRoleIdsByUids(@RequestParam("uids") List<Integer> uids);
+    @GetMapping(value = "/perm/list/{uid}")
+    Result<List<Integer>> selectPermByUid(@PathVariable("uid") Integer uid);
 
     /**
-     * 根据用户id差列表查询用户角色关联关系
+     * 查询某个角色对应的权限id列表
      *
-     * @param uids 用户id烈烈表
-     * @return key为uid value为这个用户的角色列表
+     * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/user/role/map")
-    Result<Map<Integer, List<UserRoleRel>>> selectUserRoleListByUids(@RequestParam("uids") List<Integer> uids);
+    @GetMapping(value = "/{roleId}/menuId/list")
+    Result<List<Integer>> selectPermIdListByRoleId(@PathVariable("roleId") Integer roleId);
 }

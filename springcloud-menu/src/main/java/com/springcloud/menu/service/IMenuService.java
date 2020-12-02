@@ -25,18 +25,28 @@ public interface IMenuService extends IService<Menu> {
 
     /**
      * 查询菜单列表（非树形结构）
+     *
      * @return
      */
-    List<Menu> getMenus();
+    List<Menu> getPerms();
 
     /**
      * 查询缓存中的菜单数据
+     *
      * @return
      */
-    List<Menu> getMenusByCache();
+    List<Menu> getPermsByCache();
 
     /**
      * 刷新菜单缓存
      */
-    void refreshMenuCache();
+    void refreshPermCache();
+
+    /**
+     * 根据菜单id查询权限列表
+     *
+     * @param menuIdList 菜单id
+     * @return Result<List < MenuDto>>
+     */
+    List<MenuDto> selectPermListByMenuIds(List<Integer> menuIdList);
 }

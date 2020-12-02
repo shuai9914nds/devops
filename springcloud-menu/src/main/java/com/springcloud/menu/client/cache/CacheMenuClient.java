@@ -25,7 +25,7 @@ public class CacheMenuClient {
      */
     @GetMapping("/refresh/cache/menu")
     public void refreshMenuCache() {
-        iMenuService.refreshMenuCache();
+        iMenuService.refreshPermCache();
     }
 
     /**
@@ -35,6 +35,6 @@ public class CacheMenuClient {
      */
     @GetMapping("/cache/menu/list")
     public Result<List<Menu>> getMenusByCache() {
-        return new Result<>(iMenuService.getMenusByCache());
+        return new Result<>(iMenuService.getPermsByCache());
     }
 }

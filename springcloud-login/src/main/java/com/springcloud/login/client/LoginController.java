@@ -1,8 +1,6 @@
 package com.springcloud.login.client;
 
 import com.login.api.dto.LoginDto;
-import com.menu.api.dto.MenuDto;
-import com.menu.api.query.QueryMenuFeignApi;
 import com.user.api.entity.UserInfo;
 import com.user.api.query.QueryUserFeignApi;
 import common.Constant;
@@ -12,17 +10,14 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -36,17 +31,10 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
-    private QueryMenuFeignApi queryMenuFeignApi;
     @Resource
     private QueryUserFeignApi queryUserFeignApi;
     @Resource
     private RedissonClient redissonClient;
-
-    @GetMapping("/getmenu")
-    public Result<List<MenuDto>> getmenu() {
-        return queryMenuFeignApi.selectMenuListAll();
-    }
 
     /**
      * 登录controller
