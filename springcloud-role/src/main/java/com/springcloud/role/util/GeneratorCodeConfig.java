@@ -82,7 +82,7 @@ public class GeneratorCodeConfig {
         // templateConfig.setService();
         // templateConfig.setController();
         templateConfig.setMapper("/templates/mapper.java");
-        templateConfig.setXml(null);
+//        templateConfig.setXml(null);
         //空字符串不生成controller，否则会生成controller
         templateConfig.setController("");
 
@@ -101,7 +101,8 @@ public class GeneratorCodeConfig {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         List<String> tables = new ArrayList<>();
-        tables.add("role");
+        tables.add("user_role_rel");
+        tables.add("menu_role_rel");
         strategy.setInclude(tables.toArray(new String[0]));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

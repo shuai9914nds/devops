@@ -1,15 +1,12 @@
-package com.springcloud.menu.service.impl;
+package com.springcloud.role.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.springcloud.menu.entity.MenuRoleRel;
-import com.springcloud.menu.mapper.MenuMapper;
-import com.springcloud.menu.mapper.MenuRoleRelMapper;
-import com.springcloud.menu.service.IMenuRoleRelService;
+import com.springcloud.role.entity.MenuRoleRel;
+import com.springcloud.role.mapper.MenuRoleRelMapper;
+import com.springcloud.role.service.IMenuRoleRelService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * <p>
@@ -21,9 +18,6 @@ import javax.annotation.Resource;
  */
 @Service
 public class MenuRoleRelServiceImpl extends ServiceImpl<MenuRoleRelMapper, MenuRoleRel> implements IMenuRoleRelService {
-
-    @Resource
-    private MenuMapper menuMapper;
 
 
     /**

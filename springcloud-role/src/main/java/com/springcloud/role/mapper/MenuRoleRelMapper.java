@@ -1,7 +1,7 @@
-package com.springcloud.menu.mapper;
+package com.springcloud.role.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.springcloud.menu.entity.MenuRoleRel;
+import com.springcloud.role.entity.MenuRoleRel;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

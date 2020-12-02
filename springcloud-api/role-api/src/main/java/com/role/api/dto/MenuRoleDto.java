@@ -1,4 +1,4 @@
-package com.menu.api.dto;
+package com.role.api.dto;
 
 import lombok.Data;
 

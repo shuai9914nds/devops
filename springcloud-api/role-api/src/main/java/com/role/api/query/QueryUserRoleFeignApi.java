@@ -1,6 +1,6 @@
-package com.user.api.query;
+package com.role.api.query;
 
-import com.user.api.entity.UserRoleRel;
+import com.role.api.entity.UserRoleRel;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,7 +17,7 @@ import java.util.Map;
  * @description：
  */
 @Api(value = "API - QueryUserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "user-server", path = "user", contextId = "queryUserRole")
+@FeignClient(name = "role-server", path = "role", contextId = "queryUserRole")
 public interface QueryUserRoleFeignApi {
 
     /**

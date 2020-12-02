@@ -1,6 +1,6 @@
-package com.menu.api;
+package com.role.api;
 
-import com.menu.api.dto.MenuRoleDto;
+import com.role.api.dto.MenuRoleDto;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "menu-server", path = "/menu", contextId = "menuRole")
+@FeignClient(name = "role-server", path = "role", contextId = "menuRole")
 public interface MenuRoleFeignApi {
 
     /**

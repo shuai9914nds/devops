@@ -1,7 +1,7 @@
-package com.springcloud.user.client.query;
+package com.springcloud.role.client.query;
 
-import com.springcloud.user.entity.UserRoleRel;
-import com.springcloud.user.service.IUserRoleRelService;
+import com.springcloud.role.entity.UserRoleRel;
+import com.springcloud.role.service.IUserRoleRelService;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package com.springcloud.user.service;
+package com.springcloud.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.springcloud.user.entity.UserRoleRel;
+import com.springcloud.role.entity.UserRoleRel;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;

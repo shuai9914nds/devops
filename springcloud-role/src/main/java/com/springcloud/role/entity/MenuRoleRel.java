@@ -1,4 +1,4 @@
-package com.springcloud.menu.entity;
+package com.springcloud.role.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -16,7 +16,7 @@ import java.util.Date;
  * </p>
  *
  * @author shuai
- * @since 2020-12-01
+ * @since 2020-12-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

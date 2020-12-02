@@ -1,10 +1,10 @@
-package com.springcloud.user.service.impl;
+package com.springcloud.role.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.springcloud.user.entity.UserRoleRel;
-import com.springcloud.user.mapper.UserRoleRelMapper;
-import com.springcloud.user.service.IUserRoleRelService;
+import com.springcloud.role.entity.UserRoleRel;
+import com.springcloud.role.mapper.UserRoleRelMapper;
+import com.springcloud.role.service.IUserRoleRelService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

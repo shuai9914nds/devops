@@ -1,11 +1,12 @@
-package com.springcloud.menu.client;
+package com.springcloud.role.client;
 
-import com.menu.api.dto.MenuRoleDto;
+
 import com.role.api.RoleFeignApi;
+import com.role.api.dto.MenuRoleDto;
 import com.role.api.entity.Role;
 import com.role.api.query.QueryRoleFeignApi;
-import com.springcloud.menu.entity.MenuRoleRel;
-import com.springcloud.menu.service.IMenuRoleRelService;
+import com.springcloud.role.entity.MenuRoleRel;
+import com.springcloud.role.service.IMenuRoleRelService;
 import common.ErrorCode;
 import common.Result;
 import org.slf4j.Logger;

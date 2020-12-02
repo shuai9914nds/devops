@@ -1,7 +1,7 @@
 package com.springcloud.mvc.controller.menu;
 
-import com.menu.api.MenuRoleFeignApi;
-import com.menu.api.dto.MenuRoleDto;
+import com.role.api.MenuRoleFeignApi;
+import com.role.api.dto.MenuRoleDto;
 import common.ErrorCode;
 import common.Result;
 import io.swagger.annotations.Api;
