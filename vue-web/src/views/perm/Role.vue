@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="21"></a-col>
           <a-col :span="3">
-            <a-button type="primary" @click="showModal"> 新增角色</a-button>
+            <a-button type="primary" @click="addRole"> 新增角色</a-button>
           </a-col>
         </a-row>
         <a-modal v-model="visible" title="新增角色" on-ok="handleOk">
@@ -59,12 +59,7 @@
 
       <template slot="action" slot-scope="text, record">
         <span>
-          <a-popconfirm
-            v-if="data.length"
-            @confirm="() => updateRole(record.roleId, '1')"
-          >
-            <a href="javascript:;">修改</a>
-          </a-popconfirm>
+          <a href="javascript:;" @click="updateRole(record.roleId)">修改</a>
 
           <a-divider type="vertical" />
         </span>
@@ -122,7 +117,6 @@ export default {
   },
   mounted() {
     this.getRolePage();
-    this.getPerms();
   },
   methods: {
     handleTableChange(pagination, filters, sorter) {
@@ -166,7 +160,7 @@ export default {
     },
     getPerms(params = {}) {
       this.$axios
-        .get("/menu/all/tree", {
+        .get("/perm/all/tree", {
           params: {},
           headers: {
             "User-Token": localStorage.getItem("token"),
@@ -195,12 +189,33 @@ export default {
           console.log(error);
         });
     },
+    addRole() {
+      this.getPerms();
+      this.showModal();
+    },
     showModal() {
       this.visible = true;
     },
+    updateRole(roleId) {
+      this.getPerms;
+      this.$axios
+        .get(roleId+"/permId/list", {
+          params: {},
+          headers: {
+            "User-Token": localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          const list = response.data.obj;
+          console.log(list)
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.showModal();
+    },
     handleOk(e) {
-      console.log("roleName：" + this.roleRelParam.roleName);
-      console.log("menuIds：" + this.roleRelParam.menuIds);
       this.loading = true;
       this.addMenuRole();
       setTimeout(() => {
@@ -216,7 +231,6 @@ export default {
     },
     onCheck(checkedKeys, info) {
       console.log("onCheck", checkedKeys, info);
-      console.log(checkedKeys)
       this.roleRelParam.menuIds = checkedKeys;
     },
     addMenuRole() {

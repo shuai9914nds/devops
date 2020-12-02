@@ -29,6 +29,8 @@
             <a-popconfirm
               v-if="data.length"
               title="是否锁定该用户?"
+              ok-text="确定"
+              cancel-text="取消"
               @confirm="() => updateUserState(record.uid, '1')"
             >
               <a href="javascript:;">锁定</a>
@@ -39,6 +41,8 @@
           <span>
             <a-popconfirm
               title="是否禁用该用户?"
+              ok-text="确定"
+              cancel-text="取消"
               @confirm="() => updateUserState(record.uid, '2')"
             >
               <a href="javascript:;">禁用</a>
@@ -50,6 +54,8 @@
             <a-popconfirm
               v-if="data.length"
               title="是否恢复正常?"
+              ok-text="确定"
+              cancel-text="取消"
               @confirm="() => updateUserState(record.uid, '0')"
             >
               <a href="javascript:;">恢复正常</a>
@@ -70,6 +76,8 @@
             <a-popconfirm
               v-if="data.length"
               title="是否恢复正常?"
+              ok-text="确定"
+              cancel-text="取消"
               @confirm="() => updateUserState(record.uid, '0')"
             >
               <a href="javascript:;">恢复正常</a>
@@ -80,6 +88,8 @@
           <span>
             <a-popconfirm
               title="是否锁定该用户?"
+              ok-text="确定"
+              cancel-text="取消"
               @confirm="() => updateUserState(record.uid, '1')"
             >
               <a href="javascript:;">锁定</a>
@@ -160,7 +170,7 @@ export default {
             size: 10,
             current: params.current === undefined ? 1 : params.current,
             name: this.name,
-            orderBy: 'state',
+            orderBy: "state",
             ...params,
           },
           headers: {
@@ -189,15 +199,7 @@ export default {
         this.dataSource = dataSource;
       }
     },
-    // updateUserState(uid) {
-    //   const dataSource = [...this.data];
-    //   const params = dataSource.filter((item) => item.uid == uid);
-    //   this.updateUserState({
-    //     uid: params[0].uid,
-    //     state: params[0].state,
-    //   });
-    // },
-    updateUserState() {
+    updateUserState(uid, state) {
       this.$axios
         .post(
           "/user/state",
