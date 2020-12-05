@@ -5,8 +5,7 @@ import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: liushuai
@@ -25,5 +24,23 @@ public interface RoleFeignApi {
      */
     @PutMapping(value = "/role")
     Result<Role> addRole(@RequestBody Role role);
+
+    /**
+     * 删除一个角色
+     *
+     * @param roleId 角色id
+     * @return Result<Void>
+     */
+    @DeleteMapping(value = "/role")
+    Result<Void> deleteRole(@RequestParam(value = "roleId") Integer roleId);
+
+    /**
+     * 更新一个角色
+     *
+     * @param roleId 角色id
+     * @return Result<Void>
+     */
+    @PostMapping(value = "/role")
+    Result<Void> updateRole(@RequestParam(value = "roleId") Integer roleId, @RequestParam(value = "roleName", required = false) String roleName);
 
 }

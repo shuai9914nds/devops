@@ -1,6 +1,6 @@
 package com.springcloud.mvc.controller.menu;
 
-import com.role.api.MenuRoleFeignApi;
+import com.role.api.PermRoleFeignApi;
 import com.role.api.dto.MenuRoleDto;
 import common.ErrorCode;
 import common.Result;
@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +23,10 @@ import javax.annotation.Resource;
  */
 @RestController
 @Api(value = "API - MenuRoleController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class MenuRoleController {
+public class PermRoleController {
 
     @Resource
-    private MenuRoleFeignApi menuRoleFeignApi;
+    private PermRoleFeignApi permRoleFeignApi;
 
     /**
      * 新增角色菜单关联关系
@@ -38,6 +39,20 @@ public class MenuRoleController {
         if (null == menuRoleDto || StringUtils.isBlank(menuRoleDto.getRoleName()) || CollectionUtils.isEmpty(menuRoleDto.getMenuIds())) {
             return new Result<>(ErrorCode.PARAM_ERROR);
         }
-        return menuRoleFeignApi.addMenuRole(menuRoleDto);
+        return permRoleFeignApi.addMenuRole(menuRoleDto);
+    }
+
+    /**
+     * 修改角色菜单关联关系
+     *
+     * @param menuRoleDto 菜单角色dto
+     * @return Result<Void>
+     */
+    @PostMapping("/mvc/menu/role")
+    public Result<Void> updateMenuRole(@RequestBody MenuRoleDto menuRoleDto) {
+        if (null == menuRoleDto || null == menuRoleDto.getRoleId() || StringUtils.isBlank(menuRoleDto.getRoleName())) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
+        return permRoleFeignApi.updateMenuRole(menuRoleDto);
     }
 }

@@ -1,12 +1,11 @@
-package com.springcloud.mvc.controller.user;
+package com.springcloud.mvc.controller.role;
 
-import com.user.api.UserFeignApi;
-import com.user.api.entity.UserInfo;
+import com.role.api.RoleFeignApi;
 import common.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,20 +16,20 @@ import javax.annotation.Resource;
  * @description：对接前端页面的controller
  */
 @RestController
-public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+public class RoleController {
+    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Resource
-    private UserFeignApi userFeignApi;
+    private RoleFeignApi roleFeignApi;
 
     /**
-     * 修改用户状态
+     * 删除一个角色
      *
-     * @param userInfo 用户对象
+     * @param roleId 角色id
      * @return Result<Void>
      */
-    @PostMapping(value = "/mvc/user/state")
-    public Result<Void> updateUserState(@RequestBody UserInfo userInfo) {
-        return userFeignApi.updateUserState(userInfo.getUid(), userInfo.getState());
+    @DeleteMapping(value = "/mvc/role")
+    Result<Void> deleteRole(@RequestParam(value = "roleId") Integer roleId) {
+        return roleFeignApi.deleteRole(roleId);
     }
 }

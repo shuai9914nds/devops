@@ -2,7 +2,9 @@ package com.springcloud.mvc.controller.menu.query;
 
 import com.menu.api.dto.MenuDto;
 import com.menu.api.query.QueryPermFeignApi;
+import com.role.api.entity.Role;
 import com.role.api.query.QueryMenuRoleFeignApi;
+import com.role.api.query.QueryRoleFeignApi;
 import common.Result;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -34,6 +38,8 @@ public class QueryPermController {
     private QueryPermFeignApi queryPermFeignApi;
     @Resource
     private QueryMenuRoleFeignApi queryMenuRoleFeignApi;
+    @Resource
+    private QueryRoleFeignApi queryRoleFeignApi;
 
 
     /**
@@ -98,17 +104,25 @@ public class QueryPermController {
      *
      * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/mvc/{roleId}/permId/list")
-    Result<List<Integer>> selectPermIdListByRoleId(@PathVariable("roleId") Integer roleId) {
-        Result<List<Integer>> roleResult = queryMenuRoleFeignApi.selectPermIdListByRoleId(roleId);
+    @GetMapping(value = "/mvc/perm/map/{roleId}")
+    Result<Map<String, Object>> selectPermIdListByRoleId(@PathVariable("roleId") Integer roleId) {
+        Result<List<Integer>> menuRoleResult = queryMenuRoleFeignApi.selectPermIdListByRoleId(roleId);
+        if (!menuRoleResult.getSuccess()) {
+            logger.error("调用接口queryMenuRoleFeignApi.selectPermIdListByRoleId失败,result={}", menuRoleResult);
+            return new Result<>(Collections.emptyMap());
+        }
+        List<Integer> permIdList = menuRoleResult.getObj();
+        Map<String, Object> map = new HashMap<>();
+
+        if (!CollectionUtils.isEmpty(permIdList)) {
+            map.put("permIdList", permIdList);
+        }
+        Result<Role> roleResult = queryRoleFeignApi.selectOne(roleId, "");
         if (!roleResult.getSuccess()) {
-            logger.error("调用接口queryMenuRoleFeignApi.selectPermIdListByRoleId失败,result={}", roleResult);
-            return new Result<>(Collections.emptyList());
+            logger.error("调用接口queryRoleFeignApi.selectOne失败,result={}", roleResult);
         }
-        List<Integer> menuIdList = roleResult.getObj();
-        if (CollectionUtils.isEmpty(menuIdList)) {
-            return new Result<>(Collections.emptyList());
-        }
-        return new Result<>(menuIdList);
+        Role role = roleResult.getObj();
+        map.put("role", role);
+        return new Result<>(map);
     }
 }
