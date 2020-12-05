@@ -5,10 +5,10 @@
         <a-row>
           <a-col :span="21"></a-col>
           <a-col :span="3">
-            <a-button type="primary" @click="addRole"> 新增角色</a-button>
+            <a-button type="primary" @click="addShowRole"> 新增角色</a-button>
           </a-col>
         </a-row>
-        <a-modal v-model="visible" title="新增角色" on-ok="handleOk">
+        <a-modal v-model="addVisible" title="新增角色" on-ok="addHandleOk">
           <a-row>
             <a-col :span="1"></a-col>
             <a-col :span="15">
@@ -20,24 +20,61 @@
             </a-col>
           </a-row>
           <template slot="footer">
-            <a-button key="back" @click="handleCancel"> 关闭</a-button>
+            <a-button key="back" @click="addHandleCancel"> 关闭</a-button>
             <a-button
               key="submit"
               type="primary"
               :loading="loading"
-              @click="handleOk"
+              @click="addHandleOk"
             >
               确认
             </a-button>
           </template>
           <template>
             <a-tree
+              v-model="checkedKeys"
               checkable
               :tree-data="treeData"
-              :default-selected-keys="['0-0-0', '0-0-1']"
-              :default-checked-keys="['0-0-0', '0-0-1']"
-              @select="onSelect"
-              @check="onCheck"
+              @select="addSelect"
+              @check="addCheck"
+            >
+            </a-tree>
+          </template>
+        </a-modal>
+
+        <a-modal
+          v-model="updateVisible"
+          title="修改角色"
+          on-ok="updateHandleOk"
+        >
+          <a-row>
+            <a-col :span="1"></a-col>
+            <a-col :span="15">
+              <a-form layout="inline">
+                <a-form-item label="角色名称">
+                  <a-input v-model="roleRelParam.roleName" />
+                </a-form-item>
+              </a-form>
+            </a-col>
+          </a-row>
+          <template slot="footer">
+            <a-button key="back" @click="updateHandleCancel"> 关闭</a-button>
+            <a-button
+              key="submit"
+              type="primary"
+              :loading="loading"
+              @click="updateHandleOk"
+            >
+              确认
+            </a-button>
+          </template>
+          <template>
+            <a-tree
+              v-model="checkedKeys"
+              checkable
+              :tree-data="treeData"
+              @select="updateSelect"
+              @check="updateCheck"
             >
             </a-tree>
           </template>
@@ -59,11 +96,22 @@
 
       <template slot="action" slot-scope="text, record">
         <span>
-          <a href="javascript:;" @click="updateRole(record.roleId)">修改</a>
-
-          <a-divider type="vertical" />
+          <a href="javascript:;" @click="updateShowRole(record.roleId)">修改</a>
         </span>
-        <span>删除</span>
+        <a-divider type="vertical" />
+        <!-- <span>
+          <a href="javascript:;" @click="deleteRole(record.roleId)">删除</a>
+        </span> -->
+
+        <a-popconfirm
+          v-if="data.length"
+          title="是否删除这个角色?"
+          ok-text="确定"
+          cancel-text="取消"
+          @confirm="deleteRole(record.roleId)"
+        >
+          <a href="javascript:;">删除</a>
+        </a-popconfirm>
         <a-divider type="vertical" />
         <span v-if="record.isAvailable == true">停用</span>
         <span v-if="record.isAvailable == false">启用</span>
@@ -106,13 +154,16 @@ export default {
       loading: false,
       columns,
       loading: false,
-      visible: false,
+      addVisible: false,
+      updateVisible: false,
       treeData: [],
       roleRelParam: {
         menuIds: [],
         roleName: "",
         roleId: null,
       },
+      roleId: null,
+      checkedKeys: [],
     };
   },
   mounted() {
@@ -158,7 +209,7 @@ export default {
           console.log(error);
         });
     },
-    getPerms(params = {}) {
+    getPermTree() {
       this.$axios
         .get("/perm/all/tree", {
           params: {},
@@ -189,51 +240,82 @@ export default {
           console.log(error);
         });
     },
-    addRole() {
-      this.getPerms();
-      this.showModal();
+    addShowRole() {
+      this.getPermTree();
+      this.checkedKeys = [];
+      this.roleRelParam.roleName="";
+      this.roleRelParam.roleId=null;
+      this.addVisible = true;
     },
-    showModal() {
-      this.visible = true;
+    updateShowRole(roleId) {
+      this.getRoleByRoleId(roleId);
+      this.roleRelParam.roleId = roleId;
+      this.updateVisible = true;
     },
-    updateRole(roleId) {
-      this.getPerms;
+
+    getRoleByRoleId(roleId) {
+      this.getPermTree();
       this.$axios
-        .get(roleId+"/permId/list", {
+        .get("/perm/map/" + roleId, {
           params: {},
           headers: {
             "User-Token": localStorage.getItem("token"),
           },
         })
         .then((response) => {
-          const list = response.data.obj;
-          console.log(list)
-
+          const data = response.data.obj;
+          if (data != null) {
+            const role = data.role;
+            if (role != null) {
+              this.roleRelParam.roleName = role.roleName;
+              this.roleRelParam.roleId = role.roleId;
+            }
+            this.checkedKeys = data.permIdList;
+          }
         })
         .catch((error) => {
           console.log(error);
         });
-      this.showModal();
+      this.updateVisible = false;
     },
-    handleOk(e) {
+    addHandleOk(e) {
+      console.log(e);
       this.loading = true;
-      this.addMenuRole();
+      this.addRole();
       setTimeout(() => {
-        this.visible = false;
+        this.addVisible = false;
         this.loading = false;
       }, 3000);
     },
-    handleCancel(e) {
-      this.visible = false;
+    updateHandleOk(e) {
+      this.loading = true;
+      this.updateRole()
+      setTimeout(() => {
+        this.updateVisible = false;
+        this.loading = false;
+      }, 3000);
     },
-    onSelect(selectedKeys, info) {
-      console.log("selected", selectedKeys, info);
+    addHandleCancel(e) {
+      this.addVisible = false;
     },
-    onCheck(checkedKeys, info) {
-      console.log("onCheck", checkedKeys, info);
-      this.roleRelParam.menuIds = checkedKeys;
+    updateHandleCancel(e) {
+      this.updateVisible = false;
     },
-    addMenuRole() {
+    addSelect() {
+      console.log("selected", this.checkedKeys);
+    },
+    addCheck(checkedKeys, info) {
+      console.log("checked", this.checkedKeys);
+      this.roleRelParam.menuIds = this.checkedKeys;
+    },
+    updateSelect() {
+      console.log("selected", this.checkedKeys);
+    },
+    updateCheck(checkedKeys, info) {
+      console.log("checked", this.checkedKeys);
+      this.roleRelParam.menuIds = this.checkedKeys;
+    },
+    addRole() {
       this.$axios
         .put(
           "/menu/role",
@@ -249,7 +331,48 @@ export default {
           }
         )
         .then((response) => {
-          this.selectUserPage();
+          this.getRolePage();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    updateRole() {
+      this.$axios
+        .post(
+          "/menu/role",
+          {
+            roleName: this.roleRelParam.roleName,
+            menuIds: this.checkedKeys,
+            roleId:this.roleRelParam.roleId,
+          },
+          {
+            headers: {
+              // "content-type": "application/json",
+              "User-Token": localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((response) => {
+          this.getRolePage();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    deleteRole(roleId) {
+      this.getPermTree();
+      this.$axios
+        .delete("/role", {
+          params: {
+            roleId: roleId,
+          },
+          headers: {
+            "User-Token": localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          this.getRolePage();
         })
         .catch((error) => {
           console.log(error);
