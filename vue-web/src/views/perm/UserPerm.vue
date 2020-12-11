@@ -12,16 +12,37 @@
     <template>
       <div>
         <a-modal v-model="visible" title="分配角色" on-ok="addHandle">
+          <div>
+            <a-row>
+              <a-col :span="4"> 添加角色：</a-col>
+              <a-col :span="10">
+                <a-select
+                        default-value="lucy"
+                        style="width: 200px"
+                        @change="handleChange"
+                >
+                  <a-select-option value="jack"> Jack</a-select-option>
+                  <a-select-option value="lucy"> Lucy</a-select-option>
+                  <a-select-option value="disabled"> Disabled</a-select-option>
+                  <a-select-option value="Yiminghe"> yiminghe</a-select-option>
+                </a-select>
+              </a-col>
+              <a-col :span="2"></a-col>
+              <a-col :span="3">
+                <a-button type="primary" @click="getRolePage"> 添加</a-button>
+              </a-col>
+            </a-row>
+          </div>
           <template slot="footer">
             <a-button key="back" @click="handleCancel"> 关闭</a-button>
-            <a-button
+            <!-- <a-button
               key="submit"
               type="primary"
               :loading="loading"
               @click="addHandle"
             >
               新增
-            </a-button>
+            </a-button> -->
           </template>
           <a-table
             :columns="smapllColumns"
@@ -40,7 +61,11 @@
             </template>
             <template slot="action" slot-scope="text, record">
               <span>
-                <a href="javascript:;" @click="showModal">删除</a>
+                <a
+                        href="javascript:;"
+                        @click="deleteUserRole(record.uid, record.roleId)"
+                >删除</a
+                >
               </span>
             </template>
           </a-table>
@@ -223,6 +248,28 @@ export default {
     },
     handleChange(value) {
       console.log(`selected ${value}`);
+    },
+    deleteUserRole(uid, roleId) {
+      this.$axios
+              .delete(
+                      "/role",
+                      {
+                        uid: uid,
+                        roleId: roleId,
+                      },
+                      {
+                        headers: {
+                          // "content-type": "application/json",
+                          "User-Token": localStorage.getItem("token"),
+                        },
+                      }
+              )
+              .then((response) => {
+                debugger;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
     },
   },
 };

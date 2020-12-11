@@ -4,6 +4,7 @@ package com.springcloud.role.client;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.springcloud.role.entity.UserRoleRel;
 import com.springcloud.role.service.IUserRoleRelService;
+import common.ErrorCode;
 import common.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,9 @@ public class UserRoleClient {
     @DeleteMapping("/user/role")
     public Result<Void> deleteUserRole(@RequestParam(value = "roleId", required = false) Integer roleId,
                                        @RequestParam(value = "uid", required = false) Integer uid) {
+        if (null == roleId && null == uid) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
         LambdaQueryWrapper<UserRoleRel> queryWrapper = new LambdaQueryWrapper<>();
         if (null != roleId) {
             queryWrapper.eq(UserRoleRel::getRoleId, roleId);

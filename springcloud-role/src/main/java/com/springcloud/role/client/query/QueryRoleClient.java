@@ -116,4 +116,13 @@ public class QueryRoleClient {
     }
 
 
+    /**
+     * 查询全部角色列表
+     *
+     * @return Result<List < Role>>
+     */
+    @GetMapping("/role/all/list")
+    public Result<List<Role>> selectRoleList() {
+        return new Result<>(iRoleService.list());
+    }
 }

@@ -60,4 +60,12 @@ public interface QueryRoleFeignApi {
      */
     @GetMapping(value = "/role/list/{uid}")
     Result<List<Role>> selectRoleListByUid(@PathVariable(value = "uid") Integer uid);
+
+    /**
+     * 查询全部角色列表
+     *
+     * @return Result<List < Role>>
+     */
+    @GetMapping("/role/all/list")
+    Result<List<Role>> selectRoleList();
 }

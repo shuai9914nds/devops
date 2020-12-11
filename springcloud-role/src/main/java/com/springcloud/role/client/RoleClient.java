@@ -67,7 +67,7 @@ public class RoleClient {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping("/menu/role")
-    Result<Void> updateMenuRole(@RequestBody MenuRoleDto menuRoleDto) {
+    public Result<Void> updateMenuRole(@RequestBody MenuRoleDto menuRoleDto) {
         Role role = new Role();
         role.setRoleName(menuRoleDto.getRoleName());
         role.setRoleId(menuRoleDto.getRoleId());
