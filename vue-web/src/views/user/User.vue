@@ -98,8 +98,11 @@
         </span>
       </template>
     </a-table>
+
   </div>
+  
 </template>
+
 <script>
 const columns = [
   {
@@ -144,6 +147,7 @@ export default {
       columns,
       name,
       collapsed: false,
+
     };
   },
   mounted() {

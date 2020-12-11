@@ -3,7 +3,21 @@
     <template>
       <div>
         <a-row>
-          <a-col :span="21"></a-col>
+          <!-- <a-col :span="2"> </a-col> -->
+          <a-col :span="8">
+            <a-form layout="inline">
+              <a-form-item label="角色名称">
+                <a-input v-model="roleRelParam.roleName" />
+              </a-form-item>
+
+              <a-config-provider :auto-insert-space-in-button="false">
+                <a-button type="primary" @click="getRolePage">
+                  查询
+                </a-button>
+              </a-config-provider>
+            </a-form>
+          </a-col>
+          <a-col :span="13"> </a-col>
           <a-col :span="3">
             <a-button type="primary" @click="addShowRole"> 新增角色</a-button>
           </a-col>
@@ -99,10 +113,6 @@
           <a href="javascript:;" @click="updateShowRole(record.roleId)">修改</a>
         </span>
         <a-divider type="vertical" />
-        <!-- <span>
-          <a href="javascript:;" @click="deleteRole(record.roleId)">删除</a>
-        </span> -->
-
         <a-popconfirm
           v-if="data.length"
           title="是否删除这个角色?"
@@ -112,9 +122,6 @@
         >
           <a href="javascript:;">删除</a>
         </a-popconfirm>
-        <a-divider type="vertical" />
-        <span v-if="record.isAvailable == true">停用</span>
-        <span v-if="record.isAvailable == false">启用</span>
       </template>
     </a-table>
   </div>
@@ -189,6 +196,7 @@ export default {
           params: {
             size: 10,
             current: params.current === undefined ? 1 : params.current,
+            roleName: this.roleRelParam.roleName,
             ...params,
           },
           headers: {
@@ -234,6 +242,7 @@ export default {
               }
             }
           }
+          this.roleRelParam.roleName = "";
           console.log(this.treeData);
         })
         .catch((error) => {
@@ -243,8 +252,8 @@ export default {
     addShowRole() {
       this.getPermTree();
       this.checkedKeys = [];
-      this.roleRelParam.roleName="";
-      this.roleRelParam.roleId=null;
+      this.roleRelParam.roleName = "";
+      this.roleRelParam.roleId = null;
       this.addVisible = true;
     },
     updateShowRole(roleId) {
@@ -289,7 +298,7 @@ export default {
     },
     updateHandleOk(e) {
       this.loading = true;
-      this.updateRole()
+      this.updateRole();
       setTimeout(() => {
         this.updateVisible = false;
         this.loading = false;
@@ -344,7 +353,7 @@ export default {
           {
             roleName: this.roleRelParam.roleName,
             menuIds: this.checkedKeys,
-            roleId:this.roleRelParam.roleId,
+            roleId: this.roleRelParam.roleId,
           },
           {
             headers: {
