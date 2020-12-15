@@ -9,6 +9,7 @@ import common.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +48,24 @@ public class UserRoleClient {
             queryWrapper.eq(UserRoleRel::getUid, uid);
         }
         iUserRoleRelService.remove(queryWrapper);
+        return new Result<>();
+    }
+
+
+    /**
+     * 为用户添加角色
+     *
+     * @param roleId 角色id
+     * @param uid    用户id
+     * @return Result<Void>
+     */
+    @PutMapping("/user/role")
+    public Result<Void> addUserRole(@RequestParam(value = "roleId") Integer roleId,
+                                    @RequestParam(value = "uid") Integer uid) {
+        UserRoleRel userRoleRel = new UserRoleRel();
+        userRoleRel.setRoleId(roleId);
+        userRoleRel.setUid(uid);
+        iUserRoleRelService.save(userRoleRel);
         return new Result<>();
     }
 
