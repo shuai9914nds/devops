@@ -1,4 +1,5 @@
 <template>
+<div class="w50">
   <a-form
     id="components-form-demo-normal-login"
     :form="form"
@@ -76,6 +77,7 @@
       <a href=""> register now! </a>
     </a-form-item>
   </a-form>
+</div>
 </template>
 
 <script>
@@ -160,5 +162,9 @@ export default {
 
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
+}
+.w50{
+  width: 50%;
+  margin: 100px auto 0;
 }
 </style>

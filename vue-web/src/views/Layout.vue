@@ -5,7 +5,7 @@
         <div style="width: 200px">
           <div class="logo" />
           <a-menu
-            :default-selected-keys="['/Home']"
+            :default-selected-keys="[$route.path]"
             mode="inline"
             theme="dark"
             :inline-collapsed="collapsed"
@@ -31,10 +31,10 @@
                 <a-icon type="user-add" />
                 <span>分配权限</span>
               </a-menu-item>
-              <a-menu-item key="7">Option 7 </a-menu-item>
-              <a-menu-item key="8">Option 8 </a-menu-item>
+              <!-- <a-menu-item key="7">Option 7 </a-menu-item>
+              <a-menu-item key="8">Option 8 </a-menu-item> -->
             </a-sub-menu>
-            <a-sub-menu>
+            <!-- <a-sub-menu>
               <span slot="title"
                 ><a-icon type="appstore" /><span>Navigation Two</span></span
               >
@@ -44,7 +44,7 @@
                 <a-menu-item key="11"> Option 11 </a-menu-item>
                 <a-menu-item key="12"> Option 12 </a-menu-item>
               </a-sub-menu>
-            </a-sub-menu>
+            </a-sub-menu> -->
           </a-menu>
         </div>
       </a-layout-sider>
@@ -76,6 +76,8 @@ export default {
     return {
       collapsed: false,
     };
+  },
+  created() {
   },
   methods: {
     toggleCollapsed() {
