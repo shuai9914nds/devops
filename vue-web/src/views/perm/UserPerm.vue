@@ -16,33 +16,25 @@
             <a-row>
               <a-col :span="4"> 添加角色：</a-col>
               <a-col :span="10">
-                <a-select
-                        default-value="lucy"
-                        style="width: 200px"
-                        @change="handleChange"
-                >
-                  <a-select-option value="jack"> Jack</a-select-option>
-                  <a-select-option value="lucy"> Lucy</a-select-option>
-                  <a-select-option value="disabled"> Disabled</a-select-option>
-                  <a-select-option value="Yiminghe"> yiminghe</a-select-option>
+                <a-select style="width: 200px" @change="handleChange">
+                  <!-- <a-select style="width: 200px" @change="addUserRole"> -->
+                  <a-select-option
+                    v-for="item in roleList"
+                    :key="item"
+                    :value="item"
+                  >
+                    {{ item.roleName }}
+                  </a-select-option>
                 </a-select>
               </a-col>
               <a-col :span="2"></a-col>
               <a-col :span="3">
-                <a-button type="primary" @click="getRolePage"> 添加</a-button>
+                <a-button type="primary" @click="addUserRole"> 添加</a-button>
               </a-col>
             </a-row>
           </div>
           <template slot="footer">
             <a-button key="back" @click="handleCancel"> 关闭</a-button>
-            <!-- <a-button
-              key="submit"
-              type="primary"
-              :loading="loading"
-              @click="addHandle"
-            >
-              新增
-            </a-button> -->
           </template>
           <a-table
             :columns="smapllColumns"
@@ -52,19 +44,17 @@
             :loading="loading"
             @change="handleTableChange"
           >
-            <template slot="roleList" slot-scope="text, record">
-              <span v-if="record.roleList != null">
-                <span v-for="(item, i) in record.roleList" :key="i">
-                  {{ item.roleName }}
-                </span>
+            <template slot="role" slot-scope="text, record">
+              <span v-if="record != null">
+                {{ record.role.roleName }}
               </span>
             </template>
             <template slot="action" slot-scope="text, record">
               <span>
                 <a
-                        href="javascript:;"
-                        @click="deleteUserRole(record.uid, record.roleId)"
-                >删除</a
+                  href="javascript:;"
+                  @click="deleteUserRole(record.uid, record.role)"
+                  >删除</a
                 >
               </span>
             </template>
@@ -130,8 +120,8 @@ const smapllColumns = [
   },
   {
     title: "角色",
-    dataIndex: "roleList",
-    scopedSlots: { customRender: "roleList" },
+    dataIndex: "role",
+    scopedSlots: { customRender: "role" },
   },
   {
     title: "操作",
@@ -153,10 +143,14 @@ export default {
       collapsed: false,
       loading: false,
       visible: false,
+      roleList: [],
+      addRoleId: "",
+      addUid: "",
     };
   },
   mounted() {
     this.selectUserRolePage();
+    this.selectAllRoleList();
   },
   methods: {
     handleTableChange(pagination, filters, sorter) {
@@ -232,8 +226,20 @@ export default {
     },
     showModal(data) {
       this.visible = true;
-      this.data1[0] = data;
-      console.log(this.data1[0]);
+      if (null != data) {
+        const list = data.roleList;
+        if (null != list && list.length > 0) {
+          for (var i = 0; i < list.length; i++) {
+            if (!this.data1[i]) {
+              this.data1[i] = {};
+            }
+            this.data1[i].role = list[i];
+            this.data1[i].name = data.name;
+            this.data1[i].uid = data.uid;
+          }
+        }
+      }
+      this.addUid = data.uid;
       console.log(this.data1);
     },
     addHandle(e) {
@@ -246,30 +252,69 @@ export default {
     handleCancel(e) {
       this.visible = false;
     },
-    handleChange(value) {
-      console.log(`selected ${value}`);
-    },
-    deleteUserRole(uid, roleId) {
+    addUserRole() {
       this.$axios
-              .delete(
-                      "/role",
-                      {
-                        uid: uid,
-                        roleId: roleId,
-                      },
-                      {
-                        headers: {
-                          // "content-type": "application/json",
-                          "User-Token": localStorage.getItem("token"),
-                        },
-                      }
-              )
-              .then((response) => {
-                debugger;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+        .put(
+          "/user/role",
+          {
+            uid: this.addUid,
+            roleId: this.addRoleId,
+          },
+          {
+            headers: {
+              // "content-type": "application/json",
+              "User-Token": localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((response) => {
+          this.getRolePage();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    deleteUserRole(paramUid, paramRole) {
+      this.$axios
+        .delete("/role", {
+          params: {
+            uid: paramUid,
+            roleId: paramRole.roleId,
+          },
+
+          headers: {
+            // "content-type": "application/json",
+            "User-Token": localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          this.selectUserRolePage();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    selectAllRoleList() {
+      this.$axios
+        .get("/role/all/list", {
+          params: {},
+          headers: {
+            "User-Token": localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          this.roleList = response.data.obj;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    handleChange(data) {
+      this.addRoleId = data.roleId;
+    },
+    filteredOptions() {
+      return this.roleList.filter((o) => !this.selectedItems.includes(o));
     },
   },
 };
