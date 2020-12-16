@@ -24,6 +24,7 @@
         <module>springcloud-login</module>
         <module>springcloud-mvc</module>
         <module>springcloud-role</module>
+        <module>springcloud-log</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
