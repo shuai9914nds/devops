@@ -17,6 +17,7 @@
         <module>menu-api</module>
         <module>login-api</module>
         <module>role-api</module>
+        <module>log-api</module>
     </modules>
 
     <properties>

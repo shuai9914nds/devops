@@ -5,9 +5,8 @@ import com.springcloud.user.service.IUserInfoService;
 import common.ErrorCode;
 import common.Result;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +20,8 @@ import javax.annotation.Resource;
  */
 @RestController
 @Api(value = "API - QueryUserClient")
+@Slf4j
 public class UserClient {
-    private static final Logger logger = LoggerFactory.getLogger(UserClient.class);
     @Resource
     private IUserInfoService iUserInfoService;
 
@@ -38,7 +37,7 @@ public class UserClient {
     public Result<Void> updateUserState(@RequestParam("uid") Integer uid, @RequestParam("state") Integer state) {
         String token = iUserInfoService.getToken();
         if (StringUtils.isBlank(token)) {
-            logger.error("token为空");
+            log.error("token为空");
             return new Result<>(ErrorCode.SYSTEM_ERROR);
         }
         UserInfo userInfo = new UserInfo();

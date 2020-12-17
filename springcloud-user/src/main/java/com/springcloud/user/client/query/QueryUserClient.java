@@ -11,8 +11,7 @@ import com.user.api.dto.UserInfoDto;
 import common.Constant;
 import common.Result;
 import io.swagger.annotations.Api;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,10 +28,10 @@ import java.util.List;
  * @date: 2020/10/3
  * @description：
  */
+@Slf4j
 @RestController
 @Api(value = "API - QueryUserClient")
 public class QueryUserClient {
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserClient.class);
     @Resource
     private IUserInfoService iUserInfoService;
 
@@ -68,6 +67,7 @@ public class QueryUserClient {
      * @param name    用户名称
      * @return Result<IPage < UserInfo>>
      */
+    @annotation.MyLog
     @GetMapping(value = "/user/page")
     public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
                                                  @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {

@@ -57,6 +57,16 @@
             <artifactId>java-jwt</artifactId>
             <version>3.10.3</version>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.springcloud</groupId>-->
+        <!--            <artifactId>springcloud-log</artifactId>-->
+        <!--            <version>1.8.0-SNAPSHOT</version>-->
+        <!--        </dependency>-->
+        <!--添加aop依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

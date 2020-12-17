@@ -7,6 +7,8 @@ spring:
     url: jdbc:mysql://localhost:3306/user_info
     username: root
     password: root
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8007
