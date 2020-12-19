@@ -25,11 +25,6 @@
         </dependency>
         <dependency>
             <groupId>com.springcloud</groupId>
-            <artifactId>user-api</artifactId>
-            <version>${com.springcloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.springcloud</groupId>
             <artifactId>login-api</artifactId>
             <version>${com.springcloud.version}</version>
         </dependency>

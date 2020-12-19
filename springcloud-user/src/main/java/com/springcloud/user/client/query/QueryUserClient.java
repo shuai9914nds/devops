@@ -1,5 +1,6 @@
 package com.springcloud.user.client.query;
 
+import annotation.MyLog;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -67,7 +68,7 @@ public class QueryUserClient {
      * @param name    用户名称
      * @return Result<IPage < UserInfo>>
      */
-    @annotation.MyLog
+    @MyLog(operation = "分页查询用户信息")
     @GetMapping(value = "/user/page")
     public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
                                                  @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {

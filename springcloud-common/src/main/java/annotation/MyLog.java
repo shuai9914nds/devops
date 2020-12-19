@@ -13,4 +13,6 @@ import java.lang.annotation.*;
 public @interface MyLog {
 
     String value() default "";
+
+    String operation() default "";
 }
