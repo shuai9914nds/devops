@@ -9,9 +9,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
@@ -25,8 +23,8 @@ import java.util.Optional;
 @Slf4j
 public class MyLogAspect implements Ordered {
 
-    @Resource
-    private RestTemplate restTemplate;
+//    @Resource
+//    private RestTemplate restTemplate;
 
 
     //定义切点
