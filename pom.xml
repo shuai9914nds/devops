@@ -3,85 +3,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.springcloud.parent</groupId>
-    <artifactId>springcloud-parent</artifactId>
-    <version>1.8.0-SNAPSHOT</version>
+    <groupId>com.shuai.devops</groupId>
+    <artifactId>devops-parent</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.3.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <modules>
-        <module>springcloud-common</module>
-        <module>springcloud-gateway</module>
-        <module>eureka-server</module>
-        <module>springcloud-api</module>
-        <module>springcloud-menu</module>
-        <module>springcloud-login</module>
-        <module>springcloud-mvc</module>
-        <module>springcloud-role</module>
-        <module>springcloud-log</module>
+        <module>devops-common</module>
+        <module>devops-gateway</module>
+        <module>devops-eureka</module>
+        <module>devops-api</module>
+        <module>devops-menu</module>
+        <module>devops-login</module>
+        <module>devops-mvc</module>
+        <module>devops-role</module>
+        <module>devops-log</module>
+        <module>devops-starter</module>
+        <module>devops-user</module>
+        <module>devops-base</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
-        <springfox.version>2.6.1</springfox.version>
-        <boot.admin.version>1.5.7</boot.admin.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!-- springboot 1.5.X eureka依赖 -->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>-->
-        <!--springboot 2.X eureka 依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!-- swagger cloud start -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-        <!-- swagger cloud end -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.5</version>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
-            <version>${boot.admin.version}</version>
-        </dependency>
-
-    </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.shuai.devops</groupId>
+        <artifactId>devops-starter</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../devops-starter/pom.xml</relativePath>
+    </parent>
+    <artifactId>devops-api</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>user-api</module>
+        <module>menu-api</module>
+        <module>login-api</module>
+        <module>role-api</module>
+        <module>log-api</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shuai.devops</groupId>
+            <artifactId>devops-base</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${project.name}</finalName>
+    </build>
+</project>
