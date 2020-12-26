@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>devops-common</module>
         <module>devops-gateway</module>
         <module>devops-eureka</module>
         <module>devops-api</module>
