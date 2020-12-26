@@ -27,6 +27,9 @@ server:
     #    context-path: /${project.artifactId}
     context-path: /mvc
 
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
 
 
 

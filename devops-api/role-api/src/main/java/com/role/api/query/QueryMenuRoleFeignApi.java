@@ -1,6 +1,6 @@
 package com.role.api.query;
 
-import common.Result;
+import com.devops.base.common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;

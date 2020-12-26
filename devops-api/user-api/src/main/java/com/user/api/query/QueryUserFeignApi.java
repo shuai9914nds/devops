@@ -1,9 +1,9 @@
 package com.user.api.query;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.devops.base.common.Result;
 import com.user.api.dto.UserInfoDto;
 import com.user.api.entity.UserInfo;
-import common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;

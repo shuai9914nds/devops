@@ -143,6 +143,12 @@
         </plugins>
         <resources>
             <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>/**</exclude>
+                </excludes>
+            </resource>
+            <resource>
                 <directory>src/main/resource</directory>
                 <filtering>true</filtering>
                 <excludes>
@@ -156,18 +162,17 @@
         <profile>
             <id>dev</id>
             <activation>
-                <property>
-                    <name>develop</name>
-                </property>
+                <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <env>dev</env>
+            </properties>
         </profile>
         <profile>
             <id>pro</id>
-            <activation>
-                <property>
-                    <name>product</name>
-                </property>
-            </activation>
+            <properties>
+                <env>pro</env>
+            </properties>
         </profile>
     </profiles>
 </project>

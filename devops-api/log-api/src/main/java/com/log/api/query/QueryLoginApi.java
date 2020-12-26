@@ -1,8 +1,8 @@
 package com.log.api.query;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.devops.base.common.Result;
 import com.log.api.entity.SysLog;
-import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;

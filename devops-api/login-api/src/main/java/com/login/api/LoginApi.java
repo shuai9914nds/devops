@@ -1,7 +1,7 @@
 package com.login.api;
 
+import com.devops.base.common.Result;
 import com.login.api.dto.LoginDto;
-import common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;

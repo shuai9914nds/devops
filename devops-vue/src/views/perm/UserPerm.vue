@@ -5,9 +5,9 @@
         <a-input v-model="name" />
       </a-form-item>
 
-      <a-config-provider :auto-insert-space-in-button="false">
-        <a-button type="primary" @click="selectUserRolePage"> 查询</a-button>
-      </a-config-provider>
+      <a-com.devops.base.config-provider :auto-insert-space-in-button="false">
+          <a-button type="primary" @click="selectUserRolePage"> 查询</a-button>
+      </a-com.devops.base.config-provider>
     </a-form>
     <template>
       <div>

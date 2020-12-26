@@ -1,7 +1,7 @@
 package com.menu.api.query;
 
+import com.devops.base.common.Result;
 import com.menu.api.dto.MenuDto;
-import common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
