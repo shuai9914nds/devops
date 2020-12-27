@@ -6,7 +6,7 @@
         <groupId>com.shuai.devops</groupId>
         <artifactId>devops-starter</artifactId>
         <version>1.0.0</version>
-<!--        <relativePath>../devops-starter/pom.xml</relativePath>-->
+        <relativePath>../devops-starter/pom.xml</relativePath>
     </parent>
     <artifactId>devops-eureka</artifactId>
 
