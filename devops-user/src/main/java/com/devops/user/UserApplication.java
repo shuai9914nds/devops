@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableFeignClients({"com.user.*"})
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.devops.base.aspect", "com.devops.base.annotation", "com.devops.user.*"})
+@ComponentScan(basePackages = {"com.devops.base.aspect", "com.devops.base.annotation", "com.devops.user.*", "com.devops.base.enums"})
 @MyApplication
 public class UserApplication {
 

@@ -38,7 +38,6 @@ public class MyLogAspect implements Ordered {
     @Before("logPointCut()")
     public void insertSysLog() {
         System.out.println("走到注解了");
-        log.error("！！！！！！！！！！！！！！！！！！！！！！！！！！！！！");
     }
 
     @AfterReturning("logPointCut()")
@@ -51,11 +50,13 @@ public class MyLogAspect implements Ordered {
             Class<?> targetClass = Class.forName(targetName);
             Method[] methods = targetClass.getMethods();
             String operation = "";
+            int type = 0;
             for (Method method : methods) {
                 if (method.getName().equals(methodName)) {
                     Class<?>[] clazzs = method.getParameterTypes();
                     if (clazzs.length == arguments.length) {
                         operation = Optional.ofNullable(method.getAnnotation(MyLog.class)).map(MyLog::operation).orElse("");// 操作人
+                        type = Optional.ofNullable(method.getAnnotation(MyLog.class)).map(MyLog::type).orElse(0);// 操作人
                         break;
                     }
                 }
@@ -67,16 +68,13 @@ public class MyLogAspect implements Ordered {
             }
             RestTemplate restTemplate = new RestTemplate();
             // *========控制台输出=========*//
-            log.info("[X用户]执行了[" + operation + "],类:" + targetName + ",方法名：" + methodName + ",参数:"
-                    + paramsBuf.toString());
-            log.info("=====================执行后置通知结束==================");
             String url = "http://localhost:8007/log/log";
             SysLog sysLog = new SysLog();
             sysLog.setMethodName(methodName);
             sysLog.setOperateContent(operation);
-            sysLog.setOperateType(101);
+            sysLog.setOperateType(type);
             sysLog.setParam(paramsBuf.toString());
-//            将日志插入数据库
+//          将日志插入数据库
             restTemplate.put(url, sysLog);
         } catch (Throwable e) {
             log.info("around " + joinPoint + " with com.devops.base.exception : " + e.getMessage());

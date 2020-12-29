@@ -22,4 +22,15 @@ public class Constant {
     //request的key
     public static final String PRE_REDIS_REQUEST_KEY = "pre:redis_request_key:";
 
+
+    public static final int LOG_LOGIN = 101;
+    public static final int USER_LOCK = 201;
+    public static final int USER_DISABLE = 202;
+    public static final int USER_NORMAL = 203;
+    public static final int ADD_ROLE = 301;
+    public static final int UPDATE_ROLE = 302;
+    public static final int DELETE_ROLE = 303;
+    public static final int ADD_USER_ROLE = 401;
+    public static final int DELETE_USER_ROLE = 402;
+
 }

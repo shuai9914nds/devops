@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
 import com.devops.base.common.Result;
 import com.devops.base.utils.BeanConverter;
@@ -68,10 +67,10 @@ public class QueryUserClient {
      * @param name    用户名称
      * @return Result<IPage < UserInfo>>
      */
-    @MyLog(operation = "分页查询用户信息")
     @GetMapping(value = "/user/page")
     public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
                                                  @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
+
         Page<UserInfo> page = new Page<>();
         page.setCurrent(current);
         page.setSize(size);
