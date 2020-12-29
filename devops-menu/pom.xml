@@ -41,7 +41,7 @@
         <!--        </dependency>-->
         <dependency>
             <groupId>com.shuai.devops</groupId>
-            <artifactId>devops-common</artifactId>
+            <artifactId>devops-base</artifactId>
             <version>1.0.0</version>
         </dependency>
 

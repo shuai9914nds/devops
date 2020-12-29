@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableFeignClients(basePackages = {"com.menu.*", "com.user.*", "com.login.*"})
-@ComponentScan(basePackages = {"com.devops.base.config"})
+@ComponentScan(basePackages = {"com.devops.base.config", "com.devops.login.*"})
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @MyApplication
 public class LoginApplication {

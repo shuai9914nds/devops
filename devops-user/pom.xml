@@ -8,7 +8,8 @@
         <version>1.0.0</version>
         <relativePath>../devops-starter/pom.xml</relativePath>
     </parent>
-    <artifactId>devops-user</artifactId>
+    <artifactId>user</artifactId>
+    <name>devops-user</name>
     <dependencies>
         <!-- springboot2.0.*对应的eureka依赖 -->
         <dependency>

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +40,6 @@ public class VerifyCodeController {
     @ApiOperation(value = "验证码")
     @GetMapping(value = "/mvc/verify/code")
     public Result<Void> getVerifyCode() {
-        HttpServletRequest request = HttpUtil.getRequest();
         HttpServletResponse response = HttpUtil.getResponse();
         System.out.println(HttpUtil.getRequest().getHeaders("User-Token"));
         IVerifyCodeGen iVerifyCodeGen = new SimpleCharVerifyCodeGenImpl();

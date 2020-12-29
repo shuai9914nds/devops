@@ -1,6 +1,7 @@
 package com.devops.base.aspect;
 
 import com.devops.base.annotation.MyLog;
+import com.devops.base.entity.SysLog;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -9,6 +10,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Method;
 import java.util.Optional;
@@ -23,8 +25,6 @@ import java.util.Optional;
 @Slf4j
 public class MyLogAspect implements Ordered {
 
-//    @Resource
-//    private RestTemplate restTemplate;
 
 
     //定义切点
@@ -65,19 +65,19 @@ public class MyLogAspect implements Ordered {
                 paramsBuf.append(arg);
                 paramsBuf.append("&");
             }
-
+            RestTemplate restTemplate = new RestTemplate();
             // *========控制台输出=========*//
             log.info("[X用户]执行了[" + operation + "],类:" + targetName + ",方法名：" + methodName + ",参数:"
                     + paramsBuf.toString());
             log.info("=====================执行后置通知结束==================");
-            String url = "http://localhost:8003/log/log";
-//            SysLog sysLog = new SysLog();
-//            sysLog.setMethodName(methodName);
-//            sysLog.setOperateContent(operation);
-//            sysLog.setOperateType(101);
-//            sysLog.setParam(paramsBuf.toString());
-            //将日志插入数据库
-//            restTemplate.put(url, sysLog);
+            String url = "http://localhost:8007/log/log";
+            SysLog sysLog = new SysLog();
+            sysLog.setMethodName(methodName);
+            sysLog.setOperateContent(operation);
+            sysLog.setOperateType(101);
+            sysLog.setParam(paramsBuf.toString());
+//            将日志插入数据库
+            restTemplate.put(url, sysLog);
         } catch (Throwable e) {
             log.info("around " + joinPoint + " with com.devops.base.exception : " + e.getMessage());
         }
