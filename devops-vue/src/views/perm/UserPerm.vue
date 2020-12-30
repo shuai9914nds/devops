@@ -5,9 +5,10 @@
         <a-input v-model="name" />
       </a-form-item>
 
-      <a-com.devops.base.config-provider :auto-insert-space-in-button="false">
+      <a-config-provider :auto-insert-space-in-button="false">
           <a-button type="primary" @click="selectUserRolePage"> 查询</a-button>
-      </a-com.devops.base.config-provider>
+      </a-config-provider>
+      
     </a-form>
     <template>
       <div>
@@ -20,8 +21,8 @@
                   <!-- <a-select style="width: 200px" @change="addUserRole"> -->
                   <a-select-option
                     v-for="item in roleList"
-                    :key="item"
-                    :value="item"
+                    :key="item.roleId"
+                    :value="item.roleId"
                   >
                     {{ item.roleName }}
                   </a-select-option>
@@ -38,7 +39,7 @@
           </template>
           <a-table
             :columns="smapllColumns"
-            :row-key="(record) => record.uid"
+            
             :data-source="data1"
             :pagination="false"
             :loading="loading"
@@ -65,7 +66,7 @@
     <template>
       <a-table
         :columns="columns"
-        :row-key="(record) => record.uid"
+        
         :data-source="data"
         :pagination="pagination"
         :loading="loading"

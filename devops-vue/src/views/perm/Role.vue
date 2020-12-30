@@ -10,11 +10,11 @@
                 <a-input v-model="roleRelParam.roleName" />
               </a-form-item>
 
-              <a-com.devops.base.config-provider :auto-insert-space-in-button="false">
-                  <a-button type="primary" @click="getRolePage">
-                      查询
-                  </a-button>
-              </a-com.devops.base.config-provider>
+              <a-config-provider :auto-insert-space-in-button="false">
+                <a-button type="primary" @click="getRolePage">
+                  查询
+                </a-button>
+              </a-config-provider>
             </a-form>
           </a-col>
           <a-col :span="13"> </a-col>
