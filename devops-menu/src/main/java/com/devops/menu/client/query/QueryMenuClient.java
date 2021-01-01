@@ -4,14 +4,17 @@ import com.devops.base.common.Result;
 import com.devops.menu.service.IMenuService;
 import com.menu.api.dto.MenuDto;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -21,32 +24,25 @@ import java.util.stream.Collectors;
  * @description：提供查询菜单接口
  */
 @RestController
-@Api(value = "API - QueryPermController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class QueryPermClient {
+@Api(value = "API - QueryMenuController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class QueryMenuClient {
 
-    @Autowired
+    @Resource
     private IMenuService iMenuService;
 
 
     /**
-     * 查询全部权限（树结构）
+     * 根据菜单ids查询菜单列表
      *
+     * @param menuIds 菜单id列表
      * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/menu/all/tree")
-    public Result<List<MenuDto>> selectPermListAll() {
-        return new Result<>(iMenuService.getMenuListAll());
-    }
-
-    /**
-     * 根据权限id查询权限列表
-     *
-     * @param permsIds 菜单id
-     * @return Result<List < MenuDto>>
-     */
-    @GetMapping(value = "/menu/tree/{permsIds}")
-    public Result<List<MenuDto>> selectPermListByPermIds(@PathVariable(value = "permsIds") List<Integer> permsIds) {
-        List<MenuDto> menuDtos = iMenuService.selectPermListByMenuIds(permsIds);
+    @GetMapping(value = "/menu/tree")
+    public Result<List<MenuDto>> selectMenuListByMenuIds(@RequestParam(value = "menuIds", required = false) String menuIds) {
+        List<Integer> collect = Optional.of(Arrays.asList(menuIds.split(",")))
+                .map(i -> i.stream().map(Integer::valueOf)
+                        .collect(Collectors.toList())).orElse(Collections.emptyList());
+        List<MenuDto> menuDtos = iMenuService.selectMenuListByMenuIds(collect);
         if (CollectionUtils.isEmpty(menuDtos)) {
             return new Result<>(menuDtos);
         }

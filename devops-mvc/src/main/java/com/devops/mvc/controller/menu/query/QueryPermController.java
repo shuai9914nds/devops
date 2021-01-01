@@ -4,7 +4,7 @@ import com.devops.base.common.Result;
 import com.menu.api.dto.MenuDto;
 import com.menu.api.query.QueryPermFeignApi;
 import com.role.api.entity.Role;
-import com.role.api.query.QueryMenuRoleFeignApi;
+import com.role.api.query.QueryPermRoleFeignApi;
 import com.role.api.query.QueryRoleFeignApi;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -28,16 +28,15 @@ import java.util.Map;
  * @description：权限相关的controller
  */
 @RestController
-@Api(value = "API - QueryMenuController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(value = "API - QueryPermController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class QueryPermController {
 
     private static final Logger logger = LoggerFactory.getLogger(QueryPermController.class);
 
-
+    @Resource
+    private QueryPermRoleFeignApi queryPermRoleFeignApi;
     @Resource
     private QueryPermFeignApi queryPermFeignApi;
-    @Resource
-    private QueryMenuRoleFeignApi queryMenuRoleFeignApi;
     @Resource
     private QueryRoleFeignApi queryRoleFeignApi;
 
@@ -60,7 +59,7 @@ public class QueryPermController {
     @GetMapping(value = "/mvc/perm/list/{uid}")
     public Result<List<MenuDto>> selectPermByUid(@PathVariable("uid") Integer uid) {
         //查询用户拥有的权限id列表
-        Result<List<Integer>> menuRoleResult = queryMenuRoleFeignApi.selectPermByUid(uid);
+        Result<List<Integer>> menuRoleResult = queryPermRoleFeignApi.selectPermByUid(uid);
         if (!menuRoleResult.getSuccess()) {
             logger.error("调用接口queryMenuRoleFeignApi.selectPermByUid失败,result={}", menuRoleResult);
             return new Result<>(Collections.emptyList());
@@ -69,7 +68,7 @@ public class QueryPermController {
         if (CollectionUtils.isEmpty(menuIdList)) {
             return new Result<>(Collections.emptyList());
         }
-        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermListByMenuIds(menuIdList);
+        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermListByPermIds(menuIdList);
         if (!menuResult.getSuccess()) {
             logger.error("调用queryPermFeignApi.selectPermListByMenuIds接口失败，result={}", menuResult);
         }
@@ -83,7 +82,7 @@ public class QueryPermController {
      */
     @GetMapping(value = "/mvc/{roleId}/perm/list")
     Result<List<MenuDto>> selectPermListByRoleId(@PathVariable("roleId") Integer roleId) {
-        Result<List<Integer>> roleResult = queryMenuRoleFeignApi.selectPermIdListByRoleId(roleId);
+        Result<List<Integer>> roleResult = queryPermRoleFeignApi.selectPermIdListByRoleId(roleId);
         if (!roleResult.getSuccess()) {
             logger.error("调用接口queryMenuRoleFeignApi.selectPermIdListByRoleId失败,result={}", roleResult);
             return new Result<>(Collections.emptyList());
@@ -92,7 +91,7 @@ public class QueryPermController {
         if (CollectionUtils.isEmpty(menuIdList)) {
             return new Result<>(Collections.emptyList());
         }
-        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermListByMenuIds(menuIdList);
+        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermListByPermIds(menuIdList);
         if (!menuResult.getSuccess()) {
             logger.error("调用queryPermFeignApi.selectPermListByMenuIds接口失败，result={}", menuResult);
         }
@@ -106,7 +105,7 @@ public class QueryPermController {
      */
     @GetMapping(value = "/mvc/perm/map/{roleId}")
     Result<Map<String, Object>> selectPermIdListByRoleId(@PathVariable("roleId") Integer roleId) {
-        Result<List<Integer>> menuRoleResult = queryMenuRoleFeignApi.selectPermIdListByRoleId(roleId);
+        Result<List<Integer>> menuRoleResult = queryPermRoleFeignApi.selectPermIdListByRoleId(roleId);
         if (!menuRoleResult.getSuccess()) {
             logger.error("调用接口queryMenuRoleFeignApi.selectPermIdListByRoleId失败,result={}", menuRoleResult);
             return new Result<>(Collections.emptyMap());

@@ -43,10 +43,18 @@ public interface IMenuService extends IService<Menu> {
     void refreshPermCache();
 
     /**
-     * 根据菜单id查询权限列表
+     * 根据权限ids查询权限列表
      *
-     * @param menuIdList 菜单id
+     * @param permIdList 权限id列表
      * @return Result<List < MenuDto>>
      */
-    List<MenuDto> selectPermListByMenuIds(List<Integer> menuIdList);
+    List<MenuDto> selectPermListByPermIds(List<Integer> permIdList);
+
+    /**
+     * 根据菜单ids查询菜单列表
+     *
+     * @param menuIdList 菜单id列表
+     * @return Result<List < MenuDto>>
+     */
+    List<MenuDto> selectMenuListByMenuIds(List<Integer> menuIdList);
 }

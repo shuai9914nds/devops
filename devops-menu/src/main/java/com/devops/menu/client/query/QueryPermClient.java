@@ -3,7 +3,9 @@ package com.devops.menu.client.query;
 import com.devops.base.common.Result;
 import com.devops.menu.service.IMenuService;
 import com.menu.api.dto.MenuDto;
+import com.role.api.query.QueryRoleFeignApi;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
  * @date: 2020/9/1
  * @description：提供查询菜单接口
  */
+@Slf4j
 @RestController
 @Api(value = "API - QueryPermController", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class QueryPermClient {
@@ -27,30 +30,34 @@ public class QueryPermClient {
     @Autowired
     private IMenuService iMenuService;
 
+    private QueryRoleFeignApi queryRoleFeignApi;
+
 
     /**
      * 查询全部权限（树结构）
      *
      * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/menu/all/tree")
+    @GetMapping(value = "/perm/all/tree")
     public Result<List<MenuDto>> selectPermListAll() {
         return new Result<>(iMenuService.getMenuListAll());
     }
 
     /**
-     * 根据菜单id查询权限列表
+     * 根据权限id查询权限列表
      *
-     * @param menuIdList 菜单id
+     * @param permIds 权限id
      * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/menu/tree/{menuIds}")
-    public Result<List<MenuDto>> selectPermListByMenuIds(@PathVariable(value = "menuIds") List<Integer> menuIdList) {
-        List<MenuDto> menuDtos = iMenuService.selectPermListByMenuIds(menuIdList);
+    @GetMapping(value = "/perm/tree/{permIds}")
+    public Result<List<MenuDto>> selectPermListByPermIds(@PathVariable("permIds") List<Integer> permIds) {
+        List<MenuDto> menuDtos = iMenuService.selectPermListByPermIds(permIds);
         if (CollectionUtils.isEmpty(menuDtos)) {
             return new Result<>(menuDtos);
         }
         return new Result<>(menuDtos.stream().distinct().collect(Collectors.toList()));
     }
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.devops.role.entity;
+package com.role.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -25,16 +25,18 @@ public interface QueryPermFeignApi {
      *
      * @return
      */
-    @ApiOperation(httpMethod = "GET", value = "查询全部菜单列表")
-    @GetMapping(value = "/menu/all/tree")
+    @ApiOperation(httpMethod = "GET", value = "查询全部权限列表")
+    @GetMapping(value = "/perm/all/tree")
     Result<List<MenuDto>> selectPermListAll();
 
     /**
-     * 根据菜单id查询权限列表
+     * 根据权限id查询权限列表
      *
-     * @param menuIdList 菜单id
+     * @param permIds 权限id
      * @return Result<List < MenuDto>>
      */
-    @GetMapping(value = "/menu/tree/{menuIds}")
-    Result<List<MenuDto>> selectPermListByMenuIds(@PathVariable(value = "menuIds") List<Integer> menuIdList);
+    @GetMapping(value = "/perm/tree/{permIds}")
+    Result<List<MenuDto>> selectPermListByPermIds(@PathVariable("permIds") List<Integer> permIds);
+
+
 }

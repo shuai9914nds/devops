@@ -2,12 +2,14 @@ package com.devops.role.client;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.devops.base.annotation.MyLog;
+import com.devops.base.common.Constant;
 import com.devops.base.common.Result;
-import com.devops.role.entity.MenuRoleRel;
-import com.devops.role.entity.Role;
 import com.devops.role.service.IMenuRoleRelService;
 import com.devops.role.service.IRoleService;
 import com.role.api.dto.MenuRoleDto;
+import com.role.api.entity.MenuRoleRel;
+import com.role.api.entity.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,7 @@ public class RoleClient {
      * @param role 角色实体类
      * @return Result<Role>
      */
+    @MyLog(operation = "新增角色", type = Constant.ADD_ROLE)
     @PutMapping(value = "/role")
     public Result<Role> addRole(@RequestBody Role role) {
         iRoleService.save(role);
@@ -49,6 +52,7 @@ public class RoleClient {
      * @param roleId 角色id
      * @return Result<Void>
      */
+    @MyLog(operation = "删除角色", type = Constant.DELETE_ROLE)
     @DeleteMapping(value = "/role")
     @Transactional(rollbackFor = Exception.class)
     public Result<Void> deleteRole(@RequestParam(value = "roleId") Integer roleId) {

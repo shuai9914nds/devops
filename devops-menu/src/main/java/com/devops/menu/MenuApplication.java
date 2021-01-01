@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableFeignClients({"com.menu.api.*", "com.role.api.*"})
-@ComponentScan(basePackages = {"com.devops.base.config"})
+@EnableFeignClients({"com.menu.*", "com.role.api.*"})
+@ComponentScan(basePackages = {"com.devops.base.config", "com.devops.menu.*"})
 @SpringBootApplication
 @MyApplication
 public class MenuApplication {

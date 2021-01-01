@@ -2,10 +2,11 @@ package com.devops.role.client.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.devops.base.common.Result;
-import com.devops.role.entity.MenuRoleRel;
-import com.devops.role.entity.Role;
 import com.devops.role.service.IMenuRoleRelService;
+import com.role.api.entity.MenuRoleRel;
+import com.role.api.entity.Role;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -21,44 +22,18 @@ import java.util.stream.Collectors;
 /**
  * @author: liushuai
  * @date: 2020/10/3
- * @description：菜单角色相关
+ * @description：角色权限相关
  */
+@Slf4j
 @RestController
-@Api(value = "API - QueryMenuRoleClient")
-public class QueryMenuRoleClient {
-    private static final Logger logger = LoggerFactory.getLogger(QueryMenuRoleClient.class);
+@Api(value = "API - QueryPermRoleClient")
+public class QueryPermRoleClient {
+    private static final Logger logger = LoggerFactory.getLogger(QueryPermRoleClient.class);
     @Resource
     private IMenuRoleRelService iMenuRoleRelService;
     @Resource
     private QueryRoleClient queryRoleClient;
 
-
-    /**
-     * 查询用户所拥有的的权限id列表
-     *
-     * @return Result<List < Integer>>
-     */
-    @GetMapping(value = "/perm/list/{uid}")
-    public Result<List<Integer>> selectPermByUid(@PathVariable("uid") Integer uid) {
-        Result<List<Role>> roleResult = queryRoleClient.selectRoleListByUid(uid);
-        if (!roleResult.getSuccess()) {
-            logger.error("调用queryRoleClient.selectRoleListByUid服务失败，result={}", roleResult);
-            return new Result<>(Collections.emptyList());
-        }
-        List<Role> roleList = roleResult.getObj();
-        if (CollectionUtils.isEmpty(roleList)) {
-            return new Result<>(Collections.emptyList());
-        }
-        List<Integer> roleIdList = roleList.stream().map(Role::getRoleId).distinct().collect(Collectors.toList());
-        LambdaQueryWrapper<MenuRoleRel> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.in(MenuRoleRel::getId, roleIdList);
-        List<MenuRoleRel> userRoleRelList = iMenuRoleRelService.list(queryWrapper);
-        if (CollectionUtils.isEmpty(userRoleRelList)) {
-            return new Result<>(Collections.emptyList());
-        }
-        List<Integer> menuIdList = userRoleRelList.stream().map(MenuRoleRel::getMenuId).distinct().collect(Collectors.toList());
-        return new Result<>(menuIdList);
-    }
 
     /**
      * 查询某个角色对应的权限id列表
@@ -76,5 +51,32 @@ public class QueryMenuRoleClient {
         List<Integer> menuIdList = menuRoleRelList.stream().map(MenuRoleRel::getMenuId).distinct().collect(Collectors.toList());
         return new Result<>(menuIdList);
 
+    }
+
+    /**
+     * 查询用户所拥有的的权限id列表
+     *
+     * @return Result<List < Integer>>
+     */
+    @GetMapping(value = "/perm/list/{uid}")
+    public Result<List<Integer>> selectPermByUid(@PathVariable("uid") Integer uid) {
+        Result<List<Role>> roleResult = queryRoleClient.selectRoleListByUid(uid);
+        if (!roleResult.getSuccess()) {
+            log.error("调用queryRoleClient.selectRoleListByUid服务失败，result={}", roleResult);
+            return new Result<>(Collections.emptyList());
+        }
+        List<Role> roleList = roleResult.getObj();
+        if (CollectionUtils.isEmpty(roleList)) {
+            return new Result<>(Collections.emptyList());
+        }
+        List<Integer> roleIdList = roleList.stream().map(Role::getRoleId).distinct().collect(Collectors.toList());
+        LambdaQueryWrapper<MenuRoleRel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(MenuRoleRel::getRoleId, roleIdList);
+        List<MenuRoleRel> userRoleRelList = iMenuRoleRelService.list(queryWrapper);
+        if (CollectionUtils.isEmpty(userRoleRelList)) {
+            return new Result<>(Collections.emptyList());
+        }
+        List<Integer> menuIdList = userRoleRelList.stream().map(MenuRoleRel::getMenuId).distinct().collect(Collectors.toList());
+        return new Result<>(menuIdList);
     }
 }

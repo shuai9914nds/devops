@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.devops.base.common.Constant;
+import com.devops.base.enums.ResourceTypeEnum;
 import com.devops.base.utils.BeanConverter;
 import com.devops.menu.entity.Menu;
 import com.devops.menu.mapper.MenuMapper;
@@ -67,13 +68,28 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     /**
-     * 根据菜单id查询权限列表
+     * 根据权限ids查询权限列表
      *
-     * @param menuIdList 菜单id
+     * @param permIdList 权限id列表
      * @return Result<List < MenuDto>>
      */
-    public List<MenuDto> selectPermListByMenuIds(List<Integer> menuIdList) {
-        List<Menu> menus = this.baseMapper.selectBatchIds(menuIdList);
+    public List<MenuDto> selectPermListByPermIds(List<Integer> permIdList) {
+        List<Menu> menus = this.baseMapper.selectBatchIds(permIdList);
+        return getPermTree(menus);
+    }
+
+    /**
+     * 根据菜单ids查询菜单列表
+     *
+     * @param menuIdList 菜单id列表
+     * @return Result<List < MenuDto>>
+     */
+    @Override
+    public List<MenuDto> selectMenuListByMenuIds(List<Integer> menuIdList) {
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("resource_type", ResourceTypeEnum.MENU.getCode());
+        queryWrapper.in("menu_id", menuIdList);
+        List<Menu> menus = this.baseMapper.selectList(queryWrapper);
         return getPermTree(menus);
     }
 

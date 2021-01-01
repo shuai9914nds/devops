@@ -2,6 +2,8 @@ package com.devops.role.client;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.devops.base.annotation.MyLog;
+import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.role.entity.UserRoleRel;
@@ -34,6 +36,7 @@ public class UserRoleClient {
      * @param uid    用户id
      * @return Result<Void>
      */
+    @MyLog(operation = "删除用户角色", type = Constant.DELETE_USER_ROLE)
     @DeleteMapping("/user/role")
     public Result<Void> deleteUserRole(@RequestParam(value = "roleId", required = false) Integer roleId,
                                        @RequestParam(value = "uid", required = false) Integer uid) {
@@ -60,6 +63,7 @@ public class UserRoleClient {
      * @return Result<Void>
      */
     @PutMapping("/user/role")
+    @MyLog(operation = "新增用户角色", type = Constant.ADD_USER_ROLE)
     public Result<Void> addUserRole(@RequestParam(value = "roleId") Integer roleId,
                                     @RequestParam(value = "uid") Integer uid) {
         UserRoleRel userRoleRel = new UserRoleRel();

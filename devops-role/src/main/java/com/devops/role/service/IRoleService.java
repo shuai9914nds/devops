@@ -2,7 +2,7 @@ package com.devops.role.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.devops.role.entity.Role;
+import com.role.api.entity.Role;
 
 import java.util.List;
 

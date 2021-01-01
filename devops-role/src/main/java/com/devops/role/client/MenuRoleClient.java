@@ -3,10 +3,10 @@ package com.devops.role.client;
 
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
-import com.devops.role.entity.MenuRoleRel;
 import com.devops.role.service.IMenuRoleRelService;
 import com.role.api.RoleFeignApi;
 import com.role.api.dto.MenuRoleDto;
+import com.role.api.entity.MenuRoleRel;
 import com.role.api.entity.Role;
 import com.role.api.query.QueryRoleFeignApi;
 import org.slf4j.Logger;
