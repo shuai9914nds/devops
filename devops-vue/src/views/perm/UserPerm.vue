@@ -269,7 +269,8 @@ export default {
           }
         )
         .then((response) => {
-          this.getRolePage();
+
+          // this.getRolePage();
         })
         .catch((error) => {
           console.log(error);
@@ -312,7 +313,7 @@ export default {
     },
 
     handleChange(data) {
-      this.addRoleId = data.roleId;
+      this.addRoleId = data;
     },
     filteredOptions() {
       return this.roleList.filter((o) => !this.selectedItems.includes(o));
