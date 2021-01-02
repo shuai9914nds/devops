@@ -1,7 +1,7 @@
 package com.devops.log.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.devops.log.entity.SysLog;
+import com.log.api.entity.SysLog;
 
 /**
  * <p>

@@ -1,9 +1,9 @@
 package com.devops.log.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.devops.log.entity.SysLog;
 import com.devops.log.mapper.SysLogMapper;
 import com.devops.log.service.ISysLogService;
+import com.log.api.entity.SysLog;
 import org.springframework.stereotype.Service;
 
 /**

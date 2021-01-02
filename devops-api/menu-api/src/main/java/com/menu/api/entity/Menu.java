@@ -1,4 +1,4 @@
-package com.devops.menu.entity;
+package com.menu.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

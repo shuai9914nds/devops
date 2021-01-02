@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.devops.base.common.Constant;
 import com.devops.base.utils.HttpUtil;
-import com.devops.user.entity.UserInfo;
 import com.devops.user.mapper.UserInfoMapper;
 import com.devops.user.service.IUserInfoService;
+import com.user.api.entity.UserInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 

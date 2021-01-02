@@ -1,8 +1,8 @@
 package com.devops.menu.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.devops.menu.entity.Menu;
 import com.menu.api.dto.MenuDto;
+import com.menu.api.entity.Menu;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package com.devops.role.client.query;
 
 import com.devops.base.common.Result;
 import com.devops.base.utils.JacksonUtil;
-import com.devops.role.entity.UserRoleRel;
 import com.devops.role.service.IUserRoleRelService;
+import com.role.api.entity.UserRoleRel;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@ package com.devops.user.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.devops.user.entity.UserInfo;
+import com.user.api.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

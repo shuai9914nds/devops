@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.devops.base.common.Constant;
-import com.devops.user.entity.UserInfo;
 import com.devops.user.service.IUserInfoService;
+import com.user.api.entity.UserInfo;
 
 import javax.annotation.Resource;
 import java.util.Date;
