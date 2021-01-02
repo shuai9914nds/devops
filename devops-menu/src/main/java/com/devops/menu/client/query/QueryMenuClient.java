@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -38,11 +35,8 @@ public class QueryMenuClient {
      * @return Result<List < MenuDto>>
      */
     @GetMapping(value = "/menu/tree")
-    public Result<List<MenuDto>> selectMenuListByMenuIds(@RequestParam(value = "menuIds", required = false) String menuIds) {
-        List<Integer> collect = Optional.of(Arrays.asList(menuIds.split(",")))
-                .map(i -> i.stream().map(Integer::valueOf)
-                        .collect(Collectors.toList())).orElse(Collections.emptyList());
-        List<MenuDto> menuDtos = iMenuService.selectMenuListByMenuIds(collect);
+    public Result<List<MenuDto>> selectMenuListByMenuIds(@RequestParam(value = "menuIds", required = false) List<Integer> menuIds) {
+        List<MenuDto> menuDtos = iMenuService.selectMenuListByMenuIds(menuIds);
         if (CollectionUtils.isEmpty(menuDtos)) {
             return new Result<>(menuDtos);
         }

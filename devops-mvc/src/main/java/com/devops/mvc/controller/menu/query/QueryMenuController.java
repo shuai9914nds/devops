@@ -1,7 +1,6 @@
 package com.devops.mvc.controller.menu.query;
 
 import com.devops.base.common.Result;
-import com.google.common.base.Joiner;
 import com.menu.api.dto.MenuDto;
 import com.menu.api.query.QueryMenuFeignApi;
 import com.role.api.query.QueryPermRoleFeignApi;
@@ -47,7 +46,8 @@ public class QueryMenuController {
         }
         //用户拥有的权限id
         List<Integer> permIdList = permResult.getObj();
-        Result<List<MenuDto>> menuResult = queryMenuFeignApi.selectMenuListByMenuIds(Joiner.on(",").join(permIdList));
+//        Joiner.on(",").join(permIdList);
+        Result<List<MenuDto>> menuResult = queryMenuFeignApi.selectMenuListByMenuIds(permIdList);
         if (!menuResult.getSuccess()) {
             log.error("queryMenuFeignApi.selectMenuListByMenuIds,errorMessage={}", menuResult.getErrorMessage());
             return new Result<>(Collections.emptyList());

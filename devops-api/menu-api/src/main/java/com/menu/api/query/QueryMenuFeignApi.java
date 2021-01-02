@@ -26,5 +26,5 @@ public interface QueryMenuFeignApi {
      * @return Result<List < MenuDto>>
      */
     @GetMapping(value = "/menu/tree")
-    Result<List<MenuDto>> selectMenuListByMenuIds(@RequestParam(value = "menuIds", required = false) String menuIds);
+    Result<List<MenuDto>> selectMenuListByMenuIds(@RequestParam(value = "menuIds", required = false) List<Integer> menuIds);
 }
