@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.devops.base.common.Constant;
 import com.devops.base.utils.HttpUtil;
-import com.devops.user.mapper.UserInfoMapper;
+import com.devops.user.mapper.UserMapper;
 import com.devops.user.service.IUserInfoService;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,29 +21,29 @@ import org.springframework.stereotype.Service;
  * @since 2020-11-24
  */
 @Service
-public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserInfoService {
+public class UserInfoServiceImpl extends ServiceImpl<UserMapper, User> implements IUserInfoService {
 
     /**
      * 查询一个用户信息
      *
-     * @param userInfo 查询条件
-     * @return UserInfo
+     * @param user 查询条件
+     * @return User
      */
     @Override
-    public UserInfo getOneByCondition(UserInfo userInfo) {
-        return this.baseMapper.selectOne(getLambdaQueryWrapper(userInfo));
+    public User getOneByCondition(User user) {
+        return this.baseMapper.selectOne(getLambdaQueryWrapper(user));
     }
 
     /**
      * 分页查询用户信息
      *
-     * @param page     分页对象
-     * @param userInfo userInfo对象
-     * @return IPage<UserInfo>
+     * @param page 分页对象
+     * @param user userInfo对象
+     * @return IPage<User>
      */
     @Override
-    public Page<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo) {
-        return this.baseMapper.selectPage(page, getLambdaQueryWrapper(userInfo));
+    public Page<User> selectUserPage(Page<User> page, User user) {
+        return this.baseMapper.selectPage(page, getLambdaQueryWrapper(user));
     }
 
     /**
@@ -59,82 +59,82 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     /**
      * 更新用户信息
      *
-     * @param userInfo 用户信息
+     * @param user 用户信息
      */
     @Override
-    public void updateUserInfo(UserInfo userInfo) {
-        UserInfo user = new UserInfo();
-        user.setUid(userInfo.getUid());
-        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = getLambdaUpdateWrapper(user);
-        this.baseMapper.update(userInfo, lambdaUpdateWrapper);
+    public void updateUserInfo(User user) {
+        User user1 = new User();
+        user1.setUid(user.getUid());
+        LambdaUpdateWrapper<User> lambdaUpdateWrapper = getLambdaUpdateWrapper(user);
+        this.baseMapper.update(user1, lambdaUpdateWrapper);
     }
 
     /**
-     * 获取LambdaQueryWrapper<UserInfo>
+     * 获取LambdaQueryWrapper<User>
      *
-     * @param userInfo 用户信息
-     * @return LambdaQueryWrapper<UserInfo>
+     * @param user 用户信息
+     * @return LambdaQueryWrapper<User>
      */
-    private LambdaQueryWrapper<UserInfo> getLambdaQueryWrapper(UserInfo userInfo) {
-        LambdaQueryWrapper<UserInfo> queryMapper = new LambdaQueryWrapper<>();
-        if (null == userInfo) {
+    private LambdaQueryWrapper<User> getLambdaQueryWrapper(User user) {
+        LambdaQueryWrapper<User> queryMapper = new LambdaQueryWrapper<>();
+        if (null == user) {
             return null;
         }
-        if (null != userInfo.getUid()) {
-            queryMapper.eq(UserInfo::getUid, userInfo.getUid());
+        if (null != user.getUid()) {
+            queryMapper.eq(User::getUid, user.getUid());
         }
-        if (StringUtils.isNotBlank(userInfo.getName())) {
-            queryMapper.like(UserInfo::getName, userInfo.getName());
+        if (StringUtils.isNotBlank(user.getName())) {
+            queryMapper.like(User::getName, user.getName());
         }
-        if (StringUtils.isNotBlank(userInfo.getUsername())) {
-            queryMapper.eq(UserInfo::getUsername, userInfo.getUsername());
+        if (StringUtils.isNotBlank(user.getUsername())) {
+            queryMapper.eq(User::getUsername, user.getUsername());
         }
-        if (StringUtils.isNotBlank(userInfo.getIdCardNum())) {
-            queryMapper.eq(UserInfo::getIdCardNum, userInfo.getIdCardNum());
+        if (StringUtils.isNotBlank(user.getIdCardNum())) {
+            queryMapper.eq(User::getIdCardNum, user.getIdCardNum());
         }
-        if (null != userInfo.getState()) {
-            queryMapper.eq(UserInfo::getState, userInfo.getState());
+        if (null != user.getState()) {
+            queryMapper.eq(User::getState, user.getState());
         }
-        if (StringUtils.isNotBlank(userInfo.getCreateBy())) {
-            queryMapper.eq(UserInfo::getCreateBy, userInfo.getCreateBy());
+        if (StringUtils.isNotBlank(user.getCreateBy())) {
+            queryMapper.eq(User::getCreateBy, user.getCreateBy());
         }
-        if (StringUtils.isNotBlank(userInfo.getUpdateBy())) {
-            queryMapper.eq(UserInfo::getUpdateBy, userInfo.getUpdateBy());
+        if (StringUtils.isNotBlank(user.getUpdateBy())) {
+            queryMapper.eq(User::getUpdateBy, user.getUpdateBy());
         }
         return queryMapper;
     }
 
     /**
-     * 获取LambdaUpdateWrapper<UserInfo>
+     * 获取LambdaUpdateWrapper<User>
      *
-     * @param userInfo 用户信息
-     * @return LambdaUpdateWrapper<UserInfo>
+     * @param user 用户信息
+     * @return LambdaUpdateWrapper<User>
      */
-    private LambdaUpdateWrapper<UserInfo> getLambdaUpdateWrapper(UserInfo userInfo) {
-        if (null == userInfo) {
+    private LambdaUpdateWrapper<User> getLambdaUpdateWrapper(User user) {
+        if (null == user) {
             return null;
         }
-        LambdaUpdateWrapper<UserInfo> updateMapper = new LambdaUpdateWrapper<>();
-        if (null != userInfo.getUid()) {
-            updateMapper.eq(UserInfo::getUid, userInfo.getUid());
+        LambdaUpdateWrapper<User> updateMapper = new LambdaUpdateWrapper<>();
+        if (null != user.getUid()) {
+            updateMapper.eq(User::getUid, user.getUid());
         }
-        if (StringUtils.isNotBlank(userInfo.getName())) {
-            updateMapper.eq(UserInfo::getName, userInfo.getName());
+        if (StringUtils.isNotBlank(user.getName())) {
+            updateMapper.eq(User::getName, user.getName());
         }
-        if (StringUtils.isNotBlank(userInfo.getUsername())) {
-            updateMapper.eq(UserInfo::getUsername, userInfo.getUsername());
+        if (StringUtils.isNotBlank(user.getUsername())) {
+            updateMapper.eq(User::getUsername, user.getUsername());
         }
-        if (StringUtils.isNotBlank(userInfo.getIdCardNum())) {
-            updateMapper.eq(UserInfo::getIdCardNum, userInfo.getIdCardNum());
+        if (StringUtils.isNotBlank(user.getIdCardNum())) {
+            updateMapper.eq(User::getIdCardNum, user.getIdCardNum());
         }
-        if (null != userInfo.getState()) {
-            updateMapper.eq(UserInfo::getState, userInfo.getState());
+        if (null != user.getState()) {
+            updateMapper.eq(User::getState, user.getState());
         }
-        if (StringUtils.isNotBlank(userInfo.getCreateBy())) {
-            updateMapper.eq(UserInfo::getCreateBy, userInfo.getCreateBy());
+        if (StringUtils.isNotBlank(user.getCreateBy())) {
+            updateMapper.eq(User::getCreateBy, user.getCreateBy());
         }
-        if (StringUtils.isNotBlank(userInfo.getUpdateBy())) {
-            updateMapper.eq(UserInfo::getUpdateBy, userInfo.getUpdateBy());
+        if (StringUtils.isNotBlank(user.getUpdateBy())) {
+            updateMapper.eq(User::getUpdateBy, user.getUpdateBy());
         }
         return updateMapper;
     }

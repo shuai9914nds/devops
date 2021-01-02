@@ -2,8 +2,8 @@ package com.user.api.query;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devops.base.common.Result;
-import com.user.api.dto.UserInfoDto;
-import com.user.api.entity.UserInfo;
+import com.user.api.dto.UserDto;
+import com.user.api.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -30,7 +30,7 @@ public interface QueryUserFeignApi {
      */
     @ApiOperation(httpMethod = "GET", value = "根据用户名查询用户信息，包含密码")
     @GetMapping(value = "/{username}/user")
-    Result<UserInfo> getUserByUserName(@PathVariable("username") String username);
+    Result<User> getUserByUserName(@PathVariable("username") String username);
 
     /**
      * 查询全部用户信息列表
@@ -39,7 +39,7 @@ public interface QueryUserFeignApi {
      */
     @ApiOperation(httpMethod = "GET", value = "查询全部用户信息列表")
     @GetMapping(value = "/user/list")
-    Result<List<UserInfoDto>> getUserAll();
+    Result<List<UserDto>> getUserAll();
 
     /**
      * 创建token
@@ -57,9 +57,9 @@ public interface QueryUserFeignApi {
      * @param current 当前页
      * @param size    每页显示行数
      * @param name    用户名称
-     * @return Result<IPage < UserInfo>>
+     * @return Result<IPage < User>>
      */
     @GetMapping(value = "/user/page")
-    Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                          @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy);
+    Result<Page<User>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
+                                      @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy);
 }

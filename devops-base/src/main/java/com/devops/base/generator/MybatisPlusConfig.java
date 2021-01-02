@@ -1,4 +1,4 @@
-package com.devops.log.util;
+package com.devops.base.generator;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;

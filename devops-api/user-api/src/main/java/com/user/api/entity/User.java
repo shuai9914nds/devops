@@ -1,4 +1,4 @@
-package com.role.api.entity;
+package com.user.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -21,24 +21,30 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("devops_role")
-@ApiModel(value = "Role对象", description = "")
-public class Role implements Serializable {
+@TableName("devops_user")
+@ApiModel(value = "User对象", description = "")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
-    @TableId(value = "role_id", type = IdType.AUTO)
-    private Integer roleId;
+    @ApiModelProperty(value = "主键id")
+    @TableId(value = "uid", type = IdType.AUTO)
+    private Integer uid;
 
-    @ApiModelProperty(value = "是否可用1可用  0停用")
-    private Boolean isAvailable;
+    @ApiModelProperty(value = "用户名")
+    private String username;
 
-    @ApiModelProperty(value = "角色标识程序中判断使用,如admin")
-    private String roleIdentify;
+    @ApiModelProperty(value = "登录密码")
+    private String password;
 
-    @ApiModelProperty(value = "角色描述,UI界面显示使用")
-    private String roleName;
+    @ApiModelProperty(value = "用户真实姓名")
+    private String name;
+
+    @ApiModelProperty(value = "用户身份证号")
+    private String idCardNum;
+
+    @ApiModelProperty(value = "用户状态：0:正常状态,1：用户被锁定,2:用户被禁用")
+    private Integer state;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -51,6 +57,4 @@ public class Role implements Serializable {
 
     @ApiModelProperty(value = "更新人")
     private String updateBy;
-
-
 }

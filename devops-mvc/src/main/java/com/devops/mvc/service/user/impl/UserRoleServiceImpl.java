@@ -9,7 +9,7 @@ import com.devops.mvc.service.user.IUserRoleService;
 import com.role.api.entity.Role;
 import com.role.api.query.QueryRoleFeignApi;
 import com.role.api.query.QueryUserRoleFeignApi;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 import com.user.api.query.QueryUserFeignApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,23 +44,23 @@ public class UserRoleServiceImpl implements IUserRoleService {
      * 分页查询用户角色列表
      *
      * @param baseQueryDto 查询dto
-     * @param userInfo     用户信息
+     * @param user         用户信息
      * @return 用户角色实体类分页列表
      */
     @Override
-    public Page<UserRoleRelDto> selectUserRolePage(BaseQueryDto baseQueryDto, UserInfo userInfo) {
-        Result<Page<UserInfo>> userResult = queryUserFeignApi.selectUserPage(baseQueryDto.getCurrent(), baseQueryDto.getSize(), userInfo.getName(), baseQueryDto.getOrderBy());
+    public Page<UserRoleRelDto> selectUserRolePage(BaseQueryDto baseQueryDto, User user) {
+        Result<Page<User>> userResult = queryUserFeignApi.selectUserPage(baseQueryDto.getCurrent(), baseQueryDto.getSize(), user.getName(), baseQueryDto.getOrderBy());
         if (!userResult.getSuccess()) {
             logger.info("调用接口QueryUserFeignApi.selectUserPage失败，返回结果为{}", userResult);
             return new Page<>(0, 0);
         }
-        Page<UserInfo> userInfoPage = userResult.getObj();
-        List<UserInfo> users = userInfoPage.getRecords();
+        Page<User> userInfoPage = userResult.getObj();
+        List<User> users = userInfoPage.getRecords();
         if (CollectionUtils.isEmpty(users)) {
             logger.info("查询用户信息为空");
             return new Page<>(0, 0);
         }
-        List<Integer> uids = users.stream().map(UserInfo::getUid).collect(Collectors.toList());
+        List<Integer> uids = users.stream().map(User::getUid).collect(Collectors.toList());
         //根据用户id查询角色id列表
         Result<Map<Integer, List<Integer>>> uidResult = queryUserRoleFeignApi.selectUserRoleIdsByUids(uids);
         if (!uidResult.getSuccess()) {

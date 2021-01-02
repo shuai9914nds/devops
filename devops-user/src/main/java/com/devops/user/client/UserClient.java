@@ -5,7 +5,7 @@ import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.user.service.IUserInfoService;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @description：
  */
 @RestController
-@Api(value = "API - QueryUserClient")
+@Api(value = "API - UserClient")
 @Slf4j
 public class UserClient {
     @Resource
@@ -43,10 +43,10 @@ public class UserClient {
             log.error("token为空");
             return new Result<>(ErrorCode.SYSTEM_ERROR);
         }
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(uid);
-        userInfo.setState(state);
-        iUserInfoService.updateUserInfo(userInfo);
+        User user = new User();
+        user.setUid(uid);
+        user.setState(state);
+        iUserInfoService.updateUserInfo(user);
         return new Result<>();
     }
 }

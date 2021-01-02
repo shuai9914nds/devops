@@ -3,7 +3,7 @@ package com.devops.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 
 /**
  * <p>
@@ -13,24 +13,24 @@ import com.user.api.entity.UserInfo;
  * @author shuai
  * @since 2020-11-24
  */
-public interface IUserInfoService extends IService<UserInfo> {
+public interface IUserInfoService extends IService<User> {
 
     /**
      * 查询一个用户信息
      *
-     * @param userInfo
-     * @return UserInfo
+     * @param user
+     * @return User
      */
-    UserInfo getOneByCondition(UserInfo userInfo);
+    User getOneByCondition(User user);
 
     /**
      * 分页查询用户信息
      *
      * @param page
-     * @param userInfo
-     * @return IPage<UserInfo>
+     * @param user
+     * @return IPage<User>
      */
-    Page<UserInfo> selectUserPage(Page<UserInfo> page, UserInfo userInfo);
+    Page<User> selectUserPage(Page<User> page, User user);
 
     /**
      * 获取token
@@ -43,7 +43,7 @@ public interface IUserInfoService extends IService<UserInfo> {
     /**
      * 更新用户信息
      *
-     * @param userInfo 用户信息
+     * @param user 用户信息
      */
-    void updateUserInfo(UserInfo userInfo);
+    void updateUserInfo(User user);
 }

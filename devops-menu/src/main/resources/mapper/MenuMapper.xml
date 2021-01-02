@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.devops.menu.mapper.MenuMapper">
+<mapper namespace="com.devops.generator.mapper.MenuMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.menu.api.entity.Menu">
         <id column="menu_id" property="menuId"/>
         <result column="menu_name" property="menuName"/>
         <result column="parent_id" property="parentId"/>
-        <result column="permission" property="permission"/>
+        <result column="request_uri" property="requestUri"/>
         <result column="resource_type" property="resourceType"/>
         <result column="request_type" property="requestType"/>
         <result column="is_show" property="isShow"/>

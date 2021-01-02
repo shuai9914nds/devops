@@ -2,6 +2,7 @@ package com.role.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,11 +17,12 @@ import java.util.Date;
  * </p>
  *
  * @author shuai
- * @since 2020-12-02
+ * @since 2021-01-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="MenuRoleRel对象", description="")
+@TableName("devops_menu_role_rel")
+@ApiModel(value = "MenuRoleRel对象", description = "")
 public class MenuRoleRel implements Serializable {
 
     private static final long serialVersionUID = 1L;

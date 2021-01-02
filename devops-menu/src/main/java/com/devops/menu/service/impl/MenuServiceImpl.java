@@ -222,9 +222,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         if (null == menu.getParentId()) {
             wrapper.eq(Menu::getParentId, menu.getParentId());
         }
-        if (StringUtils.isNotBlank(menu.getPermission())) {
-            wrapper.eq(Menu::getPermission, menu.getPermission());
-        }
         if (null != menu.getResourceType()) {
             wrapper.eq(Menu::getResourceType, menu.getResourceType());
         }

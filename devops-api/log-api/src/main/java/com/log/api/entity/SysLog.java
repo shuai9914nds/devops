@@ -2,13 +2,14 @@ package com.log.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,10 +17,11 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author shuai
- * @since 2020-12-16
+ * @since 2021-01-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("devops_sys_log")
 @ApiModel(value = "SysLog对象", description = "")
 public class SysLog implements Serializable {
 
@@ -48,7 +50,7 @@ public class SysLog implements Serializable {
     private String param;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }

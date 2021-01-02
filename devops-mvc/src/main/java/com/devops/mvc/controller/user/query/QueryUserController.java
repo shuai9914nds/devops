@@ -2,7 +2,7 @@ package com.devops.mvc.controller.user.query;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devops.base.common.Result;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 import com.user.api.query.QueryUserFeignApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +30,11 @@ public class QueryUserController {
      * @param current 当前页
      * @param size    每页显示行数
      * @param name    用户名称
-     * @return Result<IPage < UserInfo>>
+     * @return Result<IPage < User>>
      */
     @GetMapping(value = "/mvc/user/page")
-    public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                                 @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
+    public Result<Page<User>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
+                                             @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
         return queryUserFeignApi.selectUserPage(current, size, name, orderBy);
     }
 }

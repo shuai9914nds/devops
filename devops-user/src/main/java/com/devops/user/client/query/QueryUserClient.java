@@ -9,8 +9,8 @@ import com.devops.base.common.Result;
 import com.devops.base.utils.BeanConverter;
 import com.devops.user.service.IUserInfoService;
 import com.devops.user.util.JwtUtil;
-import com.user.api.dto.UserInfoDto;
-import com.user.api.entity.UserInfo;
+import com.user.api.dto.UserDto;
+import com.user.api.entity.User;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -42,10 +42,10 @@ public class QueryUserClient {
      * @return Result<UserInfoDto>
      */
     @GetMapping(value = "/{username}/user")
-    public Result<UserInfo> getUserByUserName(@PathVariable("username") String username) {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUsername(username);
-        return new Result<>(iUserInfoService.getOneByCondition(userInfo));
+    public Result<User> getUserByUserName(@PathVariable("username") String username) {
+        User user = new User();
+        user.setUsername(username);
+        return new Result<>(iUserInfoService.getOneByCondition(user));
     }
 
     /**
@@ -54,9 +54,9 @@ public class QueryUserClient {
      * @return Result<List < UserInfoDto>>
      */
     @GetMapping(value = "/user/list")
-    public Result<List<UserInfoDto>> getUserAll() {
-        List<UserInfo> userInfos = iUserInfoService.getBaseMapper().selectList(null);
-        return new Result<>(BeanConverter.convertList(userInfos, UserInfoDto.class));
+    public Result<List<UserDto>> getUserAll() {
+        List<User> userInfos = iUserInfoService.getBaseMapper().selectList(null);
+        return new Result<>(BeanConverter.convertList(userInfos, UserDto.class));
     }
 
     /**
@@ -65,23 +65,23 @@ public class QueryUserClient {
      * @param current 当前页
      * @param size    每页显示行数
      * @param name    用户名称
-     * @return Result<IPage < UserInfo>>
+     * @return Result<IPage < User>>
      */
     @GetMapping(value = "/user/page")
-    public Result<Page<UserInfo>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
-                                                 @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
+    public Result<Page<User>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
+                                             @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
 
-        Page<UserInfo> page = new Page<>();
+        Page<User> page = new Page<>();
         page.setCurrent(current);
         page.setSize(size);
         OrderItem orderItem = new OrderItem();
         orderItem.setAsc(false);
         orderItem.setColumn(orderBy);
         page.setOrders(Collections.singletonList(orderItem));
-        UserInfo userInfo = new UserInfo();
-        userInfo.setName(name);
-        Page<UserInfo> userInfoIPage = iUserInfoService.selectUserPage(page, userInfo);
-        List<UserInfo> records = userInfoIPage.getRecords();
+        User user = new User();
+        user.setName(name);
+        Page<User> userInfoIPage = iUserInfoService.selectUserPage(page, user);
+        List<User> records = userInfoIPage.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return new Result<>(userInfoIPage);
         }
@@ -100,25 +100,25 @@ public class QueryUserClient {
      */
     @GetMapping(value = "/create/token")
     public Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name) {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(uid);
-        userInfo.setName(name);
-        return new Result<>(JwtUtil.getToken(userInfo));
+        User user = new User();
+        user.setUid(uid);
+        user.setName(name);
+        return new Result<>(JwtUtil.getToken(user));
     }
 
     /**
      * 获取用户信息
      *
      * @param token 用户的token
-     * @return UserInfo
+     * @return User
      */
     @GetMapping(value = "/token/user")
-    public UserInfo getUserByToken(String token) {
+    public User getUserByToken(String token) {
         DecodedJWT decode = JWT.decode(token);
         Integer userId = decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUid(userId);
-        return iUserInfoService.getOneByCondition(userInfo);
+        User user = new User();
+        user.setUid(userId);
+        return iUserInfoService.getOneByCondition(user);
     }
 
     /**

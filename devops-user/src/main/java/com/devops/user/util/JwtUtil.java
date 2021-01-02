@@ -4,10 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.devops.base.common.Constant;
-import com.devops.user.service.IUserInfoService;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 
-import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -23,9 +21,6 @@ public class JwtUtil {
     //秘钥
     public static final String APPSECRET = "xd666";
 
-    @Resource
-    private IUserInfoService iUserInfoService;
-
 
     /**
      * 生成jwt
@@ -33,7 +28,7 @@ public class JwtUtil {
      * @param user UserInfo对象
      * @return token
      */
-    public static String getToken(UserInfo user) {
+    public static String getToken(User user) {
 
         if (user == null || user.getUid() == null || user.getName() == null) {
             return null;
@@ -54,10 +49,10 @@ public class JwtUtil {
      * @param token token
      * @return token是否争取
      */
-    public static boolean checkToken(String token, UserInfo userInfo) {
+    public static boolean checkToken(String token, User User) {
         try {
-            Integer uid = userInfo.getUid();
-            String name = userInfo.getName();
+            Integer uid = User.getUid();
+            String name = User.getName();
             Algorithm algorithm = Algorithm.HMAC256(name);
             JWTVerifier jwtVerifier = JWT.require(algorithm)
                     .withClaim(Constant.DEVOPS_USER_ID, uid)

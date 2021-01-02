@@ -7,7 +7,7 @@ import com.devops.mvc.dto.UserRoleRelDto;
 import com.devops.mvc.service.user.IUserRoleService;
 import com.role.api.entity.Role;
 import com.role.api.query.QueryRoleFeignApi;
-import com.user.api.entity.UserInfo;
+import com.user.api.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +37,7 @@ public class QueryUserRoleController {
      * @param size    每页显示行数
      * @param name    用户名称
      * @param orderBy 顺序
-     * @return Result<IPage < UserInfo>>
+     * @return Result<IPage < User>>
      */
     @GetMapping(value = "/mvc/user/role/page")
     public Result<Page<UserRoleRelDto>> selectUserRolePage(@RequestParam("current") Long current, @RequestParam("size") Long size,
@@ -47,9 +47,9 @@ public class QueryUserRoleController {
         baseQueryDto.setCurrent(current);
         baseQueryDto.setSize(size);
         baseQueryDto.setOrderBy(orderBy);
-        UserInfo userInfo = new UserInfo();
-        userInfo.setName(name);
-        Page<UserRoleRelDto> page = iUserRoleService.selectUserRolePage(baseQueryDto, userInfo);
+        User User = new User();
+        User.setName(name);
+        Page<UserRoleRelDto> page = iUserRoleService.selectUserRolePage(baseQueryDto, User);
         return new Result<>(page);
 
     }

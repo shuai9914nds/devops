@@ -2,6 +2,7 @@ package com.menu.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,10 +17,11 @@ import java.util.Date;
  * </p>
  *
  * @author shuai
- * @since 2020-12-01
+ * @since 2021-01-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("devops_menu")
 @ApiModel(value = "Menu对象", description = "")
 public class Menu implements Serializable {
 
@@ -35,8 +37,8 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "父编号,本权限可能是该父编号权限的子权限")
     private Integer parentId;
 
-    @ApiModelProperty(value = "权限字符串,menu例子：/user/info")
-    private String permission;
+    @ApiModelProperty(value = "请求路径，例子：/user/info")
+    private String requestUri;
 
     @ApiModelProperty(value = "资源类型，101菜单，201按钮，301请求地址")
     private Integer resourceType;

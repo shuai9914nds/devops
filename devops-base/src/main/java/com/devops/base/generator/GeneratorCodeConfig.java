@@ -1,4 +1,4 @@
-package com.devops.log.util;
+package com.devops.base.generator;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -23,8 +23,7 @@ public class GeneratorCodeConfig {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        //Applications/work/project/springcloud/springcloud-user/src/main/java
-        gc.setOutputDir(projectPath + "/springcloud-log/src/main/java");
+        gc.setOutputDir(projectPath + "/devops-base/src/main/java");
         gc.setAuthor("shuai");
         gc.setOpen(false);
         //覆盖已有文件
@@ -38,7 +37,7 @@ public class GeneratorCodeConfig {
         gc.setBaseColumnList(false);// XML columList
 
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/user_info?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true");
+        dsc.setUrl("jdbc:mysql://localhost:3306/devops?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
@@ -51,15 +50,12 @@ public class GeneratorCodeConfig {
                     return DbColumnType.INTEGER;
                 }
                 //将数据库中datetime转换成date
-//                if (fieldType.toLowerCase().contains("datetime")) {
-//                    return DbColumnType.DATE;
-//                }
+                if (fieldType.toLowerCase().contains("datetime")) {
+                    return DbColumnType.DATE;
+                }
                 if (fieldType.toLowerCase().contains("smallint")) {
                     return DbColumnType.INTEGER;
                 }
-//                if(fieldType.toLowerCase().contains(("datetime"))) {
-//                    return DbColumnType.LOCAL_DATE_TIME;
-//                }
                 return (DbColumnType) super.processTypeConvert(globalConfig, fieldType);
             }
         });
@@ -68,11 +64,11 @@ public class GeneratorCodeConfig {
         // 包配置
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.springcloud.log");
+        pc.setParent("com.devops.generator");
         pc.setEntity("entity");
         pc.setMapper("mapper");
-        pc.setService("service");
-        pc.setServiceImpl("service.impl");
+//        pc.setService("service");
+//        pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);
 
 
@@ -85,7 +81,7 @@ public class GeneratorCodeConfig {
         // templateConfig.setService();
         // templateConfig.setController();
         templateConfig.setMapper("/templates/mapper.java");
-//        templateConfig.setXml(null);
+        templateConfig.setXml("/templates/mapper.xml");
         //空字符串不生成controller，否则会生成controller
         templateConfig.setController("");
 
@@ -104,10 +100,15 @@ public class GeneratorCodeConfig {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         List<String> tables = new ArrayList<>();
-        tables.add("sys_log");
+        tables.add("devops_menu");
+        tables.add("devops_role");
+        tables.add("devops_sys_log");
+        tables.add("devops_user");
+        tables.add("devops_user_role_rel");
+        tables.add("devops_menu_role_rel");
         strategy.setInclude(tables.toArray(new String[0]));
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setTablePrefix("devops_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
