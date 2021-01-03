@@ -7,13 +7,11 @@
           <a-col :span="8">
             <a-form layout="inline">
               <a-form-item label="角色名称">
-                <a-input v-model="roleRelParam.roleName" />
+                <a-input v-model="queryPage.roleNameLike"/>
               </a-form-item>
 
               <a-config-provider :auto-insert-space-in-button="false">
-                <a-button type="primary" @click="getRolePage">
-                  查询
-                </a-button>
+                  <a-button type="primary" @click="getRolePage"> 查询</a-button>
               </a-config-provider>
             </a-form>
           </a-col>
@@ -156,21 +154,24 @@ const columns = [
 export default {
   data() {
     return {
-      data: [],
-      pagination: {},
-      loading: false,
-      columns,
-      loading: false,
-      addVisible: false,
-      updateVisible: false,
-      treeData: [],
-      roleRelParam: {
-        menuIds: [],
-        roleName: "",
+        data: [],
+        pagination: {},
+        loading: false,
+        columns,
+        loading: false,
+        addVisible: false,
+        updateVisible: false,
+        treeData: [],
+        queryPage: {
+            roleNameLike: "",
+        },
+        roleRelParam: {
+            menuIds: [],
+            roleName: "",
+            roleId: null,
+        },
         roleId: null,
-      },
-      roleId: null,
-      checkedKeys: [],
+        checkedKeys: [],
     };
   },
   mounted() {
@@ -194,10 +195,10 @@ export default {
       this.$axios
         .get("/role/page", {
           params: {
-            size: 10,
-            current: params.current === undefined ? 1 : params.current,
-            roleName: this.roleRelParam.roleName,
-            ...params,
+              size: 10,
+              current: params.current === undefined ? 1 : params.current,
+              roleName: this.queryPage.roleNameLike,
+              ...params,
           },
           headers: {
             "User-Token": localStorage.getItem("token"),
@@ -290,19 +291,13 @@ export default {
     addHandleOk(e) {
       console.log(e);
       this.loading = true;
-      this.addRole();
-      setTimeout(() => {
+        this.addRole();
         this.addVisible = false;
-        this.loading = false;
-      }, 3000);
     },
     updateHandleOk(e) {
       this.loading = true;
-      this.updateRole();
-      setTimeout(() => {
+        this.updateRole();
         this.updateVisible = false;
-        this.loading = false;
-      }, 3000);
     },
     addHandleCancel(e) {
       this.addVisible = false;

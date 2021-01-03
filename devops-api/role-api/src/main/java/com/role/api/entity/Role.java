@@ -34,9 +34,6 @@ public class Role implements Serializable {
     @ApiModelProperty(value = "是否可用1可用  0停用")
     private Boolean isAvailable;
 
-    @ApiModelProperty(value = "角色标识程序中判断使用,如admin")
-    private String roleIdentify;
-
     @ApiModelProperty(value = "角色描述,UI界面显示使用")
     private String roleName;
 

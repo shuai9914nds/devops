@@ -75,9 +75,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         if (null != role.getIsAvailable()) {
             queryMapper.eq(Role::getIsAvailable, role.getIsAvailable());
         }
-        if (StringUtils.isNotBlank(role.getRoleIdentify())) {
-            queryMapper.eq(Role::getRoleIdentify, role.getRoleIdentify());
-        }
         if (StringUtils.isNotBlank(role.getRoleName())) {
             queryMapper.like(Role::getRoleName, role.getRoleName());
         }

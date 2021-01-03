@@ -1,4 +1,4 @@
-package com.devops.mvc.controller.user;
+package com.devops.mvc.controller.role;
 
 import com.devops.base.common.Result;
 import com.devops.mvc.dto.AddUserRoleRelDto;
@@ -37,20 +37,16 @@ public class UserRoleController {
     }
 
     /**
-     * 删除一个角色
+     * 删除用户一个角色
      *
      * @param roleId 角色id
      * @return Result<Void>
      */
     @Transactional(rollbackFor = Exception.class)
-    @DeleteMapping(value = "/mvc/role")
-    Result<Void> deleteRole(@RequestParam(value = "roleId", required = false) Integer roleId,
-                            @RequestParam(value = "uid", required = false) Integer uid) {
+    @DeleteMapping(value = "/mvc/user/role")
+    Result<Void> deleteUserRole(@RequestParam(value = "roleId", required = false) Integer roleId,
+                                @RequestParam(value = "uid", required = false) Integer uid) {
         //删除用户角色关联关系
-        Result<Void> userRoleResult = userRoleFeignApi.deleteUserRole(roleId, uid);
-        if (null == roleId) {
-            return userRoleResult;
-        }
-        return roleFeignApi.deleteRole(roleId);
+        return userRoleFeignApi.deleteUserRole(roleId, uid);
     }
 }

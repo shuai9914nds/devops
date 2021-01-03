@@ -4,7 +4,7 @@ import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
-import com.devops.user.service.IUserInfoService;
+import com.devops.user.service.IUserService;
 import com.user.api.entity.User;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserClient {
     @Resource
-    private IUserInfoService iUserInfoService;
+    private IUserService iUserService;
 
 
     /**
@@ -38,7 +38,7 @@ public class UserClient {
     @MyLog(operation = "修改用户状态", type = Constant.USER_LOCK)
     @PostMapping(value = "/user/state")
     public Result<Void> updateUserState(@RequestParam("uid") Integer uid, @RequestParam("state") Integer state) {
-        String token = iUserInfoService.getToken();
+        String token = iUserService.getToken();
         if (StringUtils.isBlank(token)) {
             log.error("token为空");
             return new Result<>(ErrorCode.SYSTEM_ERROR);
@@ -46,7 +46,7 @@ public class UserClient {
         User user = new User();
         user.setUid(uid);
         user.setState(state);
-        iUserInfoService.updateUserInfo(user);
+        iUserService.updateUserInfo(user);
         return new Result<>();
     }
 }

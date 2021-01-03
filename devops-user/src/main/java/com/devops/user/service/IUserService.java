@@ -13,7 +13,7 @@ import com.user.api.entity.User;
  * @author shuai
  * @since 2020-11-24
  */
-public interface IUserInfoService extends IService<User> {
+public interface IUserService extends IService<User> {
 
     /**
      * 查询一个用户信息

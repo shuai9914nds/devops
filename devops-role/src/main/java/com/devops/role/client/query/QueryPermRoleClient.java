@@ -7,8 +7,6 @@ import com.role.api.entity.MenuRoleRel;
 import com.role.api.entity.Role;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +26,6 @@ import java.util.stream.Collectors;
 @RestController
 @Api(value = "API - QueryPermRoleClient")
 public class QueryPermRoleClient {
-    private static final Logger logger = LoggerFactory.getLogger(QueryPermRoleClient.class);
     @Resource
     private IMenuRoleRelService iMenuRoleRelService;
     @Resource

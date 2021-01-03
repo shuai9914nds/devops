@@ -5,15 +5,17 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devops.base.common.Constant;
+import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.base.utils.BeanConverter;
-import com.devops.user.service.IUserInfoService;
+import com.devops.user.service.IUserService;
 import com.devops.user.util.JwtUtil;
 import com.user.api.dto.UserDto;
 import com.user.api.entity.User;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +35,7 @@ import java.util.List;
 @Api(value = "API - QueryUserClient")
 public class QueryUserClient {
     @Resource
-    private IUserInfoService iUserInfoService;
+    private IUserService iUserService;
 
     /**
      * 根据用户名查询用户信息 (包含密码，只允许内部调用)
@@ -45,7 +47,7 @@ public class QueryUserClient {
     public Result<User> getUserByUserName(@PathVariable("username") String username) {
         User user = new User();
         user.setUsername(username);
-        return new Result<>(iUserInfoService.getOneByCondition(user));
+        return new Result<>(iUserService.getOneByCondition(user));
     }
 
     /**
@@ -55,7 +57,7 @@ public class QueryUserClient {
      */
     @GetMapping(value = "/user/list")
     public Result<List<UserDto>> getUserAll() {
-        List<User> userInfos = iUserInfoService.getBaseMapper().selectList(null);
+        List<User> userInfos = iUserService.getBaseMapper().selectList(null);
         return new Result<>(BeanConverter.convertList(userInfos, UserDto.class));
     }
 
@@ -80,7 +82,7 @@ public class QueryUserClient {
         page.setOrders(Collections.singletonList(orderItem));
         User user = new User();
         user.setName(name);
-        Page<User> userInfoIPage = iUserInfoService.selectUserPage(page, user);
+        Page<User> userInfoIPage = iUserService.selectUserPage(page, user);
         List<User> records = userInfoIPage.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return new Result<>(userInfoIPage);
@@ -89,6 +91,27 @@ public class QueryUserClient {
             i.setPassword("");
         });
         return new Result<>(userInfoIPage);
+    }
+
+
+    /**
+     * 查询一个用户信息
+     *
+     * @param uid      用户id
+     * @param userName 用户名
+     * @return Result<User>
+     */
+    @GetMapping(value = "/user/one")
+    public Result<User> selectUserOne(@RequestParam(value = "uid") Integer uid, @RequestParam(value = "userName", required = false) String userName) {
+        if (null == uid && StringUtils.isEmpty(userName)) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
+        User queryUser = new User();
+        queryUser.setUid(uid);
+        queryUser.setUsername(userName);
+        User userDB = iUserService.getOneByCondition(queryUser);
+        userDB.setPassword("");
+        return new Result<>(userDB);
     }
 
     /**
@@ -118,7 +141,7 @@ public class QueryUserClient {
         Integer userId = decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
         User user = new User();
         user.setUid(userId);
-        return iUserInfoService.getOneByCondition(user);
+        return iUserService.getOneByCondition(user);
     }
 
     /**
@@ -128,6 +151,6 @@ public class QueryUserClient {
      */
     public String getToken() {
 
-        return iUserInfoService.getToken();
+        return iUserService.getToken();
     }
 }

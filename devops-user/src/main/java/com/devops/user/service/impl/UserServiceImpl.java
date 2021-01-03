@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.devops.base.common.Constant;
 import com.devops.base.utils.HttpUtil;
 import com.devops.user.mapper.UserMapper;
-import com.devops.user.service.IUserInfoService;
+import com.devops.user.service.IUserService;
 import com.user.api.entity.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * @since 2020-11-24
  */
 @Service
-public class UserInfoServiceImpl extends ServiceImpl<UserMapper, User> implements IUserInfoService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     /**
      * 查询一个用户信息

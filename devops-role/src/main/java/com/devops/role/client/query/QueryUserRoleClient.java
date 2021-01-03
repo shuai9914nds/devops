@@ -5,8 +5,7 @@ import com.devops.base.utils.JacksonUtil;
 import com.devops.role.service.IUserRoleRelService;
 import com.role.api.entity.UserRoleRel;
 import io.swagger.annotations.Api;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,10 +23,10 @@ import java.util.stream.Collectors;
  * @date: 2020/10/3
  * @description：
  */
+@Slf4j
 @RestController
-@Api(value = "API - QueryUserClient")
+@Api(value = "API - QueryUserRoleClient")
 public class QueryUserRoleClient {
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserRoleClient.class);
     @Resource
     private IUserRoleRelService iUserRoleRelService;
 
@@ -43,7 +42,7 @@ public class QueryUserRoleClient {
         List<UserRoleRel> userRoleRels = iUserRoleRelService.selectUserRoleListByUids(uids);
         Map<Integer, List<UserRoleRel>> uidMap = userRoleRels.stream().collect(Collectors.groupingBy(UserRoleRel::getUid));
         if (CollectionUtils.isEmpty(uidMap)) {
-            logger.info("查询用户关联关系为空，uids={}", JacksonUtil.toJSon(uids));
+            log.info("查询用户关联关系为空，uids={}", JacksonUtil.toJSon(uids));
             return new Result<>(Collections.emptyMap());
         }
         Map<Integer, List<Integer>> map = new HashMap<>();

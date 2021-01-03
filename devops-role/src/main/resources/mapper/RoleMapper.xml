@@ -6,7 +6,6 @@
     <resultMap id="BaseResultMap" type="com.role.api.entity.Role">
         <id column="role_id" property="roleId"/>
         <result column="is_available" property="isAvailable"/>
-        <result column="role_identify" property="roleIdentify"/>
         <result column="role_name" property="roleName"/>
         <result column="create_time" property="createTime"/>
         <result column="create_by" property="createBy"/>

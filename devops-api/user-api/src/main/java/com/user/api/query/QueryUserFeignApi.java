@@ -62,4 +62,15 @@ public interface QueryUserFeignApi {
     @GetMapping(value = "/user/page")
     Result<Page<User>> selectUserPage(@RequestParam("current") Long current, @RequestParam("size") Long size,
                                       @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy);
+
+    /**
+     * 查询一个用户信息
+     *
+     * @param uid      用户id
+     * @param userName 用户名
+     * @return Result<User>
+     */
+    @GetMapping(value = "/user/one")
+    Result<User> selectUserOne(@RequestParam(value = "uid") Integer uid, @RequestParam(value = "userName", required = false) String userName);
+
 }

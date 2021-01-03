@@ -6,9 +6,8 @@
       </a-form-item>
 
       <a-config-provider :auto-insert-space-in-button="false">
-          <a-button type="primary" @click="selectUserRolePage"> 查询</a-button>
+        <a-button type="primary" @click="selectUserRolePage"> 查询</a-button>
       </a-config-provider>
-      
     </a-form>
     <template>
       <div>
@@ -20,9 +19,9 @@
                 <a-select style="width: 200px" @change="handleChange">
                   <!-- <a-select style="width: 200px" @change="addUserRole"> -->
                   <a-select-option
-                    v-for="item in roleList"
-                    :key="item.roleId"
-                    :value="item.roleId"
+                          v-for="item in selectRoleList"
+                          :key="item.roleId"
+                          :value="item.roleId"
                   >
                     {{ item.roleName }}
                   </a-select-option>
@@ -39,7 +38,6 @@
           </template>
           <a-table
             :columns="smapllColumns"
-            
             :data-source="data1"
             :pagination="false"
             :loading="loading"
@@ -66,7 +64,6 @@
     <template>
       <a-table
         :columns="columns"
-        
         :data-source="data"
         :pagination="pagination"
         :loading="loading"
@@ -147,6 +144,7 @@ export default {
       roleList: [],
       addRoleId: "",
       addUid: "",
+      selectRoleList: [],
     };
   },
   mounted() {
@@ -226,29 +224,13 @@ export default {
         });
     },
     showModal(data) {
+      this.selectNoRoleByUser(data.uid);
+      this.selectRoleByUser(data.uid);
       this.visible = true;
-      if (null != data) {
-        const list = data.roleList;
-        if (null != list && list.length > 0) {
-          for (var i = 0; i < list.length; i++) {
-            if (!this.data1[i]) {
-              this.data1[i] = {};
-            }
-            this.data1[i].role = list[i];
-            this.data1[i].name = data.name;
-            this.data1[i].uid = data.uid;
-          }
-        }
-      }
       this.addUid = data.uid;
-      console.log(this.data1);
     },
     addHandle(e) {
       this.loading = true;
-      setTimeout(() => {
-        this.visible = false;
-        this.loading = false;
-      }, 3000);
     },
     handleCancel(e) {
       this.visible = false;
@@ -269,8 +251,8 @@ export default {
           }
         )
         .then((response) => {
-
-          // this.getRolePage();
+          this.selectRoleByUser(this.addUid);
+          this.selectUserRolePage();
         })
         .catch((error) => {
           console.log(error);
@@ -278,19 +260,20 @@ export default {
     },
     deleteUserRole(paramUid, paramRole) {
       this.$axios
-        .delete("/role", {
-          params: {
-            uid: paramUid,
-            roleId: paramRole.roleId,
-          },
+              .delete("/user/role", {
+                params: {
+                  uid: paramUid,
+                  roleId: paramRole.roleId,
+                },
 
-          headers: {
-            // "content-type": "application/json",
-            "User-Token": localStorage.getItem("token"),
-          },
-        })
+                headers: {
+                  // "content-type": "application/json",
+                  "User-Token": localStorage.getItem("token"),
+                },
+              })
         .then((response) => {
           this.selectUserRolePage();
+          this.selectRoleByUser(this.addUid);
         })
         .catch((error) => {
           console.log(error);
@@ -304,14 +287,53 @@ export default {
             "User-Token": localStorage.getItem("token"),
           },
         })
-        .then((response) => {
-          this.roleList = response.data.obj;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+              .then((response) => {
+                this.roleList = response.data.obj;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
     },
-
+    selectRoleByUser(uid) {
+      this.$axios
+              .get("/user/role/list/" + uid, {
+                params: {},
+                headers: {
+                  "User-Token": localStorage.getItem("token"),
+                },
+              })
+              .then((response) => {
+                const user = response.data.obj;
+                const list = response.data.obj.roleList;
+                this.data1 = [];
+                for (var i = 0; i < list.length; i++) {
+                  if (!this.data1[i]) {
+                    this.data1[i] = {};
+                  }
+                  this.data1[i].role = list[i];
+                  this.data1[i].name = user.name;
+                  this.data1[i].uid = user.uid;
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+    },
+    selectNoRoleByUser(uid) {
+      this.$axios
+              .get("/user/no/role/list/" + uid, {
+                params: {},
+                headers: {
+                  "User-Token": localStorage.getItem("token"),
+                },
+              })
+              .then((response) => {
+                this.selectRoleList = response.data.obj.roleList;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+    },
     handleChange(data) {
       this.addRoleId = data;
     },

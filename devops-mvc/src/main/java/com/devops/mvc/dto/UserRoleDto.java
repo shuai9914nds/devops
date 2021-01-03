@@ -15,7 +15,7 @@ import java.util.List;
  * @description：用户角色dto
  */
 @Data
-public class UserRoleRelDto implements Serializable {
+public class UserRoleDto implements Serializable {
     private static final long serialVersionUID = 767221352292000181L;
 
     @ApiModelProperty(value = "主键id")
