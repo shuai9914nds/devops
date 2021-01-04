@@ -3,8 +3,7 @@ package com.devops.mvc.controller.user;
 import com.devops.base.common.Result;
 import com.user.api.UserFeignApi;
 import com.user.api.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +15,9 @@ import javax.annotation.Resource;
  * @date: 2020/11/25
  * @description：对接前端页面的controller
  */
+@Slf4j
 @RestController
 public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Resource
     private UserFeignApi userFeignApi;

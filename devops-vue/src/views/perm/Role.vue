@@ -322,17 +322,17 @@ export default {
     addRole() {
       this.$axios
         .put(
-          "/menu/role",
-          {
-            roleName: this.roleRelParam.roleName,
-            menuIds: this.roleRelParam.menuIds,
-          },
-          {
-            headers: {
-              // "content-type": "application/json",
-              "User-Token": localStorage.getItem("token"),
-            },
-          }
+                "/role",
+                {
+                  roleName: this.roleRelParam.roleName,
+                  menuIds: this.roleRelParam.menuIds,
+                },
+                {
+                  headers: {
+                    // "content-type": "application/json",
+                    "User-Token": localStorage.getItem("token"),
+                  },
+                }
         )
         .then((response) => {
           this.getRolePage();
@@ -344,17 +344,17 @@ export default {
     updateRole() {
       this.$axios
         .post(
-          "/menu/role",
-          {
-            roleName: this.roleRelParam.roleName,
-            menuIds: this.checkedKeys,
-            roleId: this.roleRelParam.roleId,
-          },
-          {
-            headers: {
-              // "content-type": "application/json",
-              "User-Token": localStorage.getItem("token"),
-            },
+                "/role",
+                {
+                  roleName: this.roleRelParam.roleName,
+                  menuIds: this.checkedKeys,
+                  roleId: this.roleRelParam.roleId,
+                },
+                {
+                  headers: {
+                    // "content-type": "application/json",
+                    "User-Token": localStorage.getItem("token"),
+                  },
           }
         )
         .then((response) => {

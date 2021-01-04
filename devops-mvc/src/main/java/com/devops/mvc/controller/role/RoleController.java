@@ -1,13 +1,16 @@
 package com.devops.mvc.controller.role;
 
+import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
+import com.role.api.PermRoleFeignApi;
 import com.role.api.RoleFeignApi;
 import com.role.api.UserRoleFeignApi;
+import com.role.api.dto.MenuRoleDto;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,8 +28,11 @@ public class RoleController {
     @Resource
     private RoleFeignApi roleFeignApi;
 
+    @Resource
+    private PermRoleFeignApi permRoleFeignApi;
+
     /**
-     * 删除一个角色
+     * 删除角色
      *
      * @param roleId 角色id
      * @return Result<Void>
@@ -41,5 +47,33 @@ public class RoleController {
             return userRoleResult;
         }
         return roleFeignApi.deleteRole(roleId);
+    }
+
+    /**
+     * 新增角色
+     *
+     * @param menuRoleDto 菜单角色dto
+     * @return Result<Void>
+     */
+    @PutMapping("/mvc/role")
+    public Result<Void> addMenuRole(@RequestBody MenuRoleDto menuRoleDto) {
+        if (null == menuRoleDto || StringUtils.isBlank(menuRoleDto.getRoleName()) || CollectionUtils.isEmpty(menuRoleDto.getMenuIds())) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
+        return permRoleFeignApi.addMenuRole(menuRoleDto);
+    }
+
+    /**
+     * 修改角色
+     *
+     * @param menuRoleDto 菜单角色dto
+     * @return Result<Void>
+     */
+    @PostMapping("/mvc/role")
+    public Result<Void> updateMenuRole(@RequestBody MenuRoleDto menuRoleDto) {
+        if (null == menuRoleDto || null == menuRoleDto.getRoleId() || StringUtils.isBlank(menuRoleDto.getRoleName())) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
+        return permRoleFeignApi.updateMenuRole(menuRoleDto);
     }
 }

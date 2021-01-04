@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devops.base.common.Result;
 import com.user.api.entity.User;
 import com.user.api.query.QueryUserFeignApi;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +17,6 @@ import javax.annotation.Resource;
  */
 @RestController
 public class QueryUserController {
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserController.class);
 
     @Resource
     private QueryUserFeignApi queryUserFeignApi;
