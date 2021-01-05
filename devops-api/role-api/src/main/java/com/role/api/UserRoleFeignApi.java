@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @description：
  */
 @Api(value = "API - UserRoleFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "role-server", path = "/role", contextId = "userRole")
+@FeignClient(name = "role", path = "/role", contextId = "userRole")
 public interface UserRoleFeignApi {
 
 

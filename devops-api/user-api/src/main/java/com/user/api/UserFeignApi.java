@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @description：
  */
 @Api(value = "API - UserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "user-server", path = "user", contextId = "user")
+@FeignClient(name = "user", path = "user", contextId = "user")
 public interface UserFeignApi {
 
 

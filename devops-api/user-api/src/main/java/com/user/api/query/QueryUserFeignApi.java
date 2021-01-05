@@ -20,7 +20,7 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryUserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "user-server", path = "user", contextId = "queryUser")
+@FeignClient(name = "user", path = "user", contextId = "queryUser")
 public interface QueryUserFeignApi {
 
     /**

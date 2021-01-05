@@ -1,18 +1,14 @@
 spring:
+  profiles:
+    include: @app.profile@
   application:
-    name: menu-server
-    #数据库连接配置
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/devops
-    username: root
-    password: root
-  main:
-    allow-bean-definition-overriding: true
+    name: @artifactId@
+#  main:
+#    allow-bean-definition-overriding: true
 server:
   port: 8005
   servlet:
-    context-path: /menu
+    context-path: /@artifactId@
 
 eureka:
   client:

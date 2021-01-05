@@ -1,10 +1,12 @@
 spring:
+  profiles:
+    include: @app.profile@
   application:
-    name: login-server
+    name: @project.artifactId@
 server:
   port: 8003
   servlet:
-    context-path: /login
+    context-path: /@project.artifactId@
 eureka:
   client:
     service-url:

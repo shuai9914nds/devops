@@ -8,7 +8,8 @@
         <version>1.0.0</version>
         <relativePath>../devops-starter/pom.xml</relativePath>
     </parent>
-    <artifactId>devops-role</artifactId>
+    <artifactId>role</artifactId>
+    <name>devops-role</name>
     <packaging>${devops.package}</packaging>
     <dependencies>
         <!-- springboot2.0.*对应的eureka依赖 -->
@@ -82,6 +83,14 @@
                 </executions>
             </plugin>
         </plugins>
+        <!--build节点增加内容-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--开启过滤，用指定的参数替换directory下的文件中的参数-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

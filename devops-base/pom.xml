@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>devops-base</artifactId>
-    <packaging>jar</packaging>
+    <packaging>${devops.package}</packaging>
 
     <dependencies>
         <dependency>

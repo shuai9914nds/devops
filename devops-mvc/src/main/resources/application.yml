@@ -1,20 +1,11 @@
 spring:
   application:
-    name: mvc-server
-    #数据库连接配置
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/devops
-    username: root
-    password: root
-#  main:
-#    allow-bean-definition-overriding: true
+    name: @project.artifactId@
 
 server:
   port: 8002
   servlet:
-    #    context-path: /${project.artifactId}
-    context-path: /mvc
+    context-path: /@project.artifactId@
 
 eureka:
   client:
@@ -26,8 +17,6 @@ mybatis-plus:
   configuration:
     #打印sql日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-
 
 ribbon:
   ReadTimeout: 60000

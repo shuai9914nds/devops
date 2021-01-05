@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @description：
  */
 @Api(value = "API - QueryLogFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "log-server", path = "log", contextId = "queryLog")
+@FeignClient(name = "log", path = "log", contextId = "queryLog")
 public interface QueryLoginApi {
 
     /**

@@ -9,7 +9,8 @@
         <relativePath>../devops-starter/pom.xml</relativePath>
     </parent>
 
-    <artifactId>devops-menu</artifactId>
+    <artifactId>menu</artifactId>
+    <name>devops-menu</name>
     <packaging>${devops.package}</packaging>
 
 
@@ -87,6 +88,14 @@
                 </executions>
             </plugin>
         </plugins>
+        <!--build节点增加内容-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--开启过滤，用指定的参数替换directory下的文件中的参数-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

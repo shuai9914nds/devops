@@ -15,7 +15,7 @@ import java.util.List;
  * @description：
  */
 @Api(value = "API - QueryPermRoleFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "role-server", path = "role", contextId = "queryPermRole")
+@FeignClient(name = "role", path = "role", contextId = "queryPermRole")
 public interface QueryPermRoleFeignApi {
 
     /**

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "role-server", path = "role", contextId = "permRole")
+@FeignClient(name = "role", path = "role", contextId = "permRole")
 public interface PermRoleFeignApi {
 
     /**

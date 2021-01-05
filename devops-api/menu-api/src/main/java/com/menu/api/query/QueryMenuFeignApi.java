@@ -16,7 +16,7 @@ import java.util.List;
  * @description：提供菜单相关的接口
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "menu-server", path = "/menu", contextId = "queryMenu")
+@FeignClient(name = "menu", path = "/menu", contextId = "queryMenu")
 public interface QueryMenuFeignApi {
 
     /**

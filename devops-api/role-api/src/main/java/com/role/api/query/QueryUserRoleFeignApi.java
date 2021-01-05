@@ -17,7 +17,7 @@ import java.util.Map;
  * @description：
  */
 @Api(value = "API - QueryUserInfoFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "role-server", path = "role", contextId = "queryUserRole")
+@FeignClient(name = "role", path = "role", contextId = "queryUserRole")
 public interface QueryUserRoleFeignApi {
 
     /**

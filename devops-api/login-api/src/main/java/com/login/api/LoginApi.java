@@ -16,7 +16,7 @@ import java.util.Map;
  * @description：
  */
 @Api(value = "API - QueryMenuFeignApi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@FeignClient(name = "login-server", path = "login", contextId = "login")
+@FeignClient(name = "login", path = "login", contextId = "login")
 public interface LoginApi {
 
     /**

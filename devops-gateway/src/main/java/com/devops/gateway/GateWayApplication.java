@@ -21,8 +21,8 @@ public class GateWayApplication {
     public RouteLocator mvcRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 //basic proxy
-                .route("mvc-server", r -> r.path("/mvc/**")
-                        .uri("lb://mvc-server")
+                .route("mvc", r -> r.path("/mvc/**")
+                        .uri("lb://mvc")
                 ).build();
     }
 
