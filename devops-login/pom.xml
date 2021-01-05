@@ -9,6 +9,7 @@
         <relativePath>../devops-starter/pom.xml</relativePath>
     </parent>
     <artifactId>devops-login</artifactId>
+    <packaging>${devops.package}</packaging>
     <dependencies>
 
         <!-- springboot2.0.*对应的eureka依赖 -->

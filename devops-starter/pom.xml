@@ -173,13 +173,43 @@
             </activation>
             <properties>
                 <env>dev</env>
+                <devops.package>jar</devops.package>
             </properties>
+            <!--            <dependencies>-->
+            <!--                <dependency>-->
+            <!--                    <groupId>javax.servlet</groupId>-->
+            <!--                    <artifactId>javax.servlet-api</artifactId>-->
+            <!--                    <version>3.1.0</version>-->
+            <!--                    <scope>provided</scope>-->
+            <!--                </dependency>-->
+            <!--            </dependencies>-->
         </profile>
         <profile>
             <id>pro</id>
             <properties>
                 <env>pro</env>
+                <devops.package>war</devops.package>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+            <!--不需要WEB相关文件夹-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.6</version>
+                        <configuration>
+                            <failOnMissingWebXml>false</failOnMissingWebXml>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

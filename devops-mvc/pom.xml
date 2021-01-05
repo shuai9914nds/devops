@@ -7,9 +7,11 @@
         <artifactId>devops-starter</artifactId>
         <version>1.0.0</version>
         <relativePath>../devops-starter/pom.xml</relativePath>
+
     </parent>
     <artifactId>mvc</artifactId>
     <name>devops-mvc</name>
+    <packaging>${devops.package}</packaging>
 
     <dependencies>
         <!-- springboot2.0.*对应的eureka依赖 -->
