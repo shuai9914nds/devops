@@ -59,14 +59,23 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <!-- springboot main方法入口 -->
+                    <mainClass>com.devops.user.UserApplication</mainClass>
+                    <layout>ZIP</layout>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

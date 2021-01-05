@@ -23,6 +23,7 @@
     </modules>
     <properties>
         <java.version>1.8</java.version>
+        <dist.path>/Applications/work/springcloud/devops/dist</dist.path>
     </properties>
 
     <build>
@@ -38,6 +39,47 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-resources-plugin</artifactId>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>copy-configurations</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>copy-resources</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <encoding>UTF-8</encoding>-->
+            <!--                            <outputDirectory>${dist.path}</outputDirectory>-->
+            <!--                            <resources>-->
+            <!--                                <resource>-->
+            <!--                                    <directory>bin</directory>-->
+            <!--                                    <filtering>true</filtering>-->
+            <!--                                </resource>-->
+            <!--                                <resource>-->
+            <!--                                    <directory>${project.build.directory}</directory>-->
+            <!--                                    <includes>-->
+            <!--                                        <include>*.${project.packaging}</include>-->
+            <!--                                    </includes>-->
+            <!--                                </resource>-->
+            <!--                            </resources>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-clean-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <excludeDefaultDirectories>false</excludeDefaultDirectories>-->
+            <!--                    <filesets>-->
+            <!--                        <fileset>-->
+            <!--                            <directory>${dist.path}</directory>-->
+            <!--                        </fileset>-->
+            <!--                    </filesets>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
         <pluginManagement>
             <plugins>
@@ -49,5 +91,6 @@
             </plugins>
         </pluginManagement>
     </build>
+
 
 </project>
