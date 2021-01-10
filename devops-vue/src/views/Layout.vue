@@ -45,7 +45,12 @@
                 <a-menu-item key="12"> Option 12 </a-menu-item>
               </a-sub-menu>
             </a-sub-menu> -->
+            <a-menu-item key="/Monitor">
+              <a-icon type="usergroup-add"/>
+              <span>监控管理</span>
+            </a-menu-item>
           </a-menu>
+
         </div>
       </a-layout-sider>
       <a-layout>

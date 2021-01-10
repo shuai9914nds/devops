@@ -38,7 +38,7 @@ public class GeneratorCodeConfig {
         gc.setBaseColumnList(false);// XML columList
 
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/devops?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true");
+        dsc.setUrl("jdbc:mysql://172.16.24.3:3306/devops?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");

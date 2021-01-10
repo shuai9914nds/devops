@@ -2,6 +2,6 @@ spring:
   #数据库连接配置
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.100.148:3306/devops
+    url: jdbc:mysql://172.16.24.3:3306/devops
     username: root
-    password: root
+    password: '123qazWSX,/;:'
