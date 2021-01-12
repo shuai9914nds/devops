@@ -6,6 +6,8 @@ import Home from '../views/bm/Home.vue'
 import User from '../views/user/User'
 import Role from '../views/perm/Role'
 import UserPerm from '../views/perm/UserPerm'
+import Monitor from '../views/monitor/Monitor'
+
 
 Vue.use(VueRouter)
 
@@ -40,6 +42,11 @@ const routes = [
         path: '/UserPerm',
         name: 'UserPerm',
         component: UserPerm
+      },
+      {
+        path: '/Monitor',
+        name: 'Monitor',
+        component: Monitor
       }
     ]
   },
