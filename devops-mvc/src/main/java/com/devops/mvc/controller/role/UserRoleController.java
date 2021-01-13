@@ -1,9 +1,9 @@
 package com.devops.mvc.controller.role;
 
+import com.devops.api.RoleFeignApi;
+import com.devops.api.UserRoleFeignApi;
 import com.devops.base.common.Result;
 import com.devops.mvc.dto.AddUserRoleRelDto;
-import com.role.api.RoleFeignApi;
-import com.role.api.UserRoleFeignApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;

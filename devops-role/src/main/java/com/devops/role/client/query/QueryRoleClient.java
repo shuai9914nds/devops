@@ -3,10 +3,10 @@ package com.devops.role.client.query;
 
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.devops.api.entity.Role;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.role.service.IRoleService;
-import com.role.api.entity.Role;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

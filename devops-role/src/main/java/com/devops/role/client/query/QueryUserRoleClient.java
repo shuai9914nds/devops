@@ -1,9 +1,9 @@
 package com.devops.role.client.query;
 
+import com.devops.api.entity.UserRoleRel;
 import com.devops.base.common.Result;
 import com.devops.base.utils.JacksonUtil;
 import com.devops.role.service.IUserRoleRelService;
-import com.role.api.entity.UserRoleRel;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;

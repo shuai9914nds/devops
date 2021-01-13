@@ -1,8 +1,8 @@
 package com.devops.menu.client.query;
 
+import com.devops.api.dto.MenuDto;
 import com.devops.base.common.Result;
 import com.devops.menu.service.IMenuService;
-import com.menu.api.dto.MenuDto;
 import io.swagger.annotations.Api;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;

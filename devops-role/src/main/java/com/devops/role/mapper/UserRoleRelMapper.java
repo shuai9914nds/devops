@@ -1,7 +1,7 @@
 package com.devops.role.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.role.api.entity.UserRoleRel;
+import com.devops.api.entity.UserRoleRel;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

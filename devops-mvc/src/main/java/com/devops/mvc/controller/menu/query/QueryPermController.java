@@ -1,11 +1,11 @@
 package com.devops.mvc.controller.menu.query;
 
+import com.devops.api.dto.MenuDto;
+import com.devops.api.entity.Role;
+import com.devops.api.query.QueryPermFeignApi;
+import com.devops.api.query.QueryPermRoleFeignApi;
+import com.devops.api.query.QueryRoleFeignApi;
 import com.devops.base.common.Result;
-import com.menu.api.dto.MenuDto;
-import com.menu.api.query.QueryPermFeignApi;
-import com.role.api.entity.Role;
-import com.role.api.query.QueryPermRoleFeignApi;
-import com.role.api.query.QueryRoleFeignApi;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package com.devops.log.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.log.api.entity.SysLog;
+import com.devops.api.entity.SysLog;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

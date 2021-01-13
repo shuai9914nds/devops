@@ -3,7 +3,7 @@
 <mapper namespace="com.devops.generator.mapper.RoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.role.api.entity.Role">
+    <resultMap id="BaseResultMap" type="com.devops.api.entity.Role">
         <id column="role_id" property="roleId"/>
         <result column="is_available" property="isAvailable"/>
         <result column="role_name" property="roleName"/>

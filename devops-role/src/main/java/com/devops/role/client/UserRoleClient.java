@@ -2,12 +2,12 @@ package com.devops.role.client;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.devops.api.entity.UserRoleRel;
 import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.role.service.IUserRoleRelService;
-import com.role.api.entity.UserRoleRel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;

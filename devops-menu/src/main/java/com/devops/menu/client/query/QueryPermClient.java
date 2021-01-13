@@ -1,9 +1,9 @@
 package com.devops.menu.client.query;
 
+import com.devops.api.dto.MenuDto;
+import com.devops.api.query.QueryRoleFeignApi;
 import com.devops.base.common.Result;
 import com.devops.menu.service.IMenuService;
-import com.menu.api.dto.MenuDto;
-import com.role.api.query.QueryRoleFeignApi;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

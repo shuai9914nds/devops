@@ -1,11 +1,11 @@
 package com.devops.user.client;
 
+import com.devops.api.entity.User;
 import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.user.service.IUserService;
-import com.user.api.entity.User;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

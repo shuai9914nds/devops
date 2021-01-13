@@ -1,10 +1,10 @@
 package com.devops.role.client.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.devops.api.entity.MenuRoleRel;
+import com.devops.api.entity.Role;
 import com.devops.base.common.Result;
 import com.devops.role.service.IMenuRoleRelService;
-import com.role.api.entity.MenuRoleRel;
-import com.role.api.entity.Role;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;

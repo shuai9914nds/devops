@@ -1,8 +1,8 @@
 package com.devops.mvc.controller.user;
 
+import com.devops.api.UserFeignApi;
+import com.devops.api.entity.User;
 import com.devops.base.common.Result;
-import com.user.api.UserFeignApi;
-import com.user.api.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

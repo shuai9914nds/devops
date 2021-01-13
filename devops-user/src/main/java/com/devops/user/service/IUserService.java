@@ -3,7 +3,7 @@ package com.devops.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.user.api.entity.User;
+import com.devops.api.entity.User;
 
 /**
  * <p>

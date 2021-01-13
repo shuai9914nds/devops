@@ -1,14 +1,14 @@
 package com.devops.mvc.controller.role.query;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.devops.api.entity.Role;
+import com.devops.api.entity.User;
+import com.devops.api.query.QueryRoleFeignApi;
+import com.devops.api.query.QueryUserFeignApi;
+import com.devops.api.query.QueryUserRoleFeignApi;
 import com.devops.base.common.Result;
 import com.devops.base.utils.BeanConverter;
 import com.devops.mvc.dto.UserRoleDto;
-import com.role.api.entity.Role;
-import com.role.api.query.QueryRoleFeignApi;
-import com.role.api.query.QueryUserRoleFeignApi;
-import com.user.api.entity.User;
-import com.user.api.query.QueryUserFeignApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;

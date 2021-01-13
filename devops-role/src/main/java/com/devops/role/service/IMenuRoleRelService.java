@@ -1,7 +1,7 @@
 package com.devops.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.role.api.entity.MenuRoleRel;
+import com.devops.api.entity.MenuRoleRel;
 
 /**
  * <p>

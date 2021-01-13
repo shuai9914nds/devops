@@ -3,8 +3,8 @@ package com.devops.user.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.devops.api.entity.User;
 import com.devops.base.common.Constant;
-import com.user.api.entity.User;
 
 import java.util.Date;
 

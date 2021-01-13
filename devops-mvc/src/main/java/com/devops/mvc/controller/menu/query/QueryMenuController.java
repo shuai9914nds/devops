@@ -1,9 +1,9 @@
 package com.devops.mvc.controller.menu.query;
 
+import com.devops.api.dto.MenuDto;
+import com.devops.api.query.QueryMenuFeignApi;
+import com.devops.api.query.QueryPermRoleFeignApi;
 import com.devops.base.common.Result;
-import com.menu.api.dto.MenuDto;
-import com.menu.api.query.QueryMenuFeignApi;
-import com.role.api.query.QueryPermRoleFeignApi;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

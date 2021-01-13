@@ -1,11 +1,11 @@
 package com.devops.login.client;
 
+import com.devops.api.dto.LoginDto;
+import com.devops.api.entity.User;
+import com.devops.api.query.QueryUserFeignApi;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
-import com.login.api.dto.LoginDto;
-import com.user.api.entity.User;
-import com.user.api.query.QueryUserFeignApi;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;

@@ -1,8 +1,8 @@
 package com.devops.mvc.controller.role.query;
 
+import com.devops.api.entity.Role;
+import com.devops.api.query.QueryRoleFeignApi;
 import com.devops.base.common.Result;
-import com.role.api.entity.Role;
-import com.role.api.query.QueryRoleFeignApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;

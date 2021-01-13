@@ -3,7 +3,7 @@
 <mapper namespace="com.devops.generator.mapper.MenuRoleRelMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.role.api.entity.MenuRoleRel">
+    <resultMap id="BaseResultMap" type="com.devops.api.entity.MenuRoleRel">
         <id column="id" property="id"/>
         <result column="menu_id" property="menuId"/>
         <result column="role_id" property="roleId"/>

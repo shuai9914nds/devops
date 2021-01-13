@@ -1,7 +1,7 @@
 package com.devops.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.role.api.entity.UserRoleRel;
+import com.devops.api.entity.UserRoleRel;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;

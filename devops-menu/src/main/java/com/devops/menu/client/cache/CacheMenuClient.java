@@ -1,8 +1,8 @@
 package com.devops.menu.client.cache;
 
+import com.devops.api.entity.Menu;
 import com.devops.base.common.Result;
 import com.devops.menu.service.IMenuService;
-import com.menu.api.entity.Menu;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

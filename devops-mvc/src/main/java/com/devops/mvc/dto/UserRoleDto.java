@@ -2,7 +2,7 @@ package com.devops.mvc.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.role.api.entity.Role;
+import com.devops.api.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

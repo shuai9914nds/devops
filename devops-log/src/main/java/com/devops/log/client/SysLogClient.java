@@ -1,8 +1,8 @@
 package com.devops.log.client;
 
+import com.devops.api.entity.SysLog;
 import com.devops.base.common.Result;
 import com.devops.log.service.ISysLogService;
-import com.log.api.entity.SysLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PutMapping;

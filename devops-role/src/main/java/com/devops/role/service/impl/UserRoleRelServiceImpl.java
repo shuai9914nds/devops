@@ -2,9 +2,9 @@ package com.devops.role.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.devops.api.entity.UserRoleRel;
 import com.devops.role.mapper.UserRoleRelMapper;
 import com.devops.role.service.IUserRoleRelService;
-import com.role.api.entity.UserRoleRel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

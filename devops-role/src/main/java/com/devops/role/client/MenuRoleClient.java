@@ -1,14 +1,14 @@
 package com.devops.role.client;
 
 
+import com.devops.api.RoleFeignApi;
+import com.devops.api.dto.MenuRoleDto;
+import com.devops.api.entity.MenuRoleRel;
+import com.devops.api.entity.Role;
+import com.devops.api.query.QueryRoleFeignApi;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.role.service.IMenuRoleRelService;
-import com.role.api.RoleFeignApi;
-import com.role.api.dto.MenuRoleDto;
-import com.role.api.entity.MenuRoleRel;
-import com.role.api.entity.Role;
-import com.role.api.query.QueryRoleFeignApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;

@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.devops.api.entity.User;
 import com.devops.base.common.Constant;
 import com.devops.base.utils.HttpUtil;
 import com.devops.user.mapper.UserMapper;
 import com.devops.user.service.IUserService;
-import com.user.api.entity.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
