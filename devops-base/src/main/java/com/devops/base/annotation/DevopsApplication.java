@@ -1,6 +1,7 @@
 package com.devops.base.annotation;
 
 import com.devops.base.config.DevopsConfig;
+import com.devops.base.exception.MyExceptionAdvice;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
@@ -15,6 +16,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(DevopsConfig.class)
+@Import({DevopsConfig.class, MyExceptionAdvice.class})
 public @interface DevopsApplication {
 }
