@@ -3,6 +3,7 @@ package com.devops.login.client;
 import com.devops.api.dto.LoginDto;
 import com.devops.api.entity.User;
 import com.devops.api.query.QueryUserFeignApi;
+import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
@@ -42,6 +43,7 @@ public class LoginController {
      * @param loginDto
      * @returnzz
      */
+    @MyLog(operation = "用户登录", type = Constant.LOG_LOGIN)
     @PostMapping(value = "/login")
     public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {

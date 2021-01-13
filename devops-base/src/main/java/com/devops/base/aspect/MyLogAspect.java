@@ -2,6 +2,9 @@ package com.devops.base.aspect;
 
 import com.devops.base.annotation.MyLog;
 import com.devops.base.entity.SysLog;
+import com.devops.base.enums.LogEnum;
+import com.devops.base.utils.BeanConverter;
+import com.devops.base.utils.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -24,6 +28,7 @@ import java.util.Optional;
 @Component
 @Slf4j
 public class MyLogAspect implements Ordered {
+
 
 
 
@@ -42,6 +47,7 @@ public class MyLogAspect implements Ordered {
 
     @AfterReturning("logPointCut()")
     public String insertSyslog(JoinPoint joinPoint) {
+        String header = HttpUtil.getRequest().getHeader("User-Token");
         log.info("=====================开始执行后置通知==================");
         try {
             String targetName = joinPoint.getTarget().getClass().getName();
@@ -62,10 +68,7 @@ public class MyLogAspect implements Ordered {
                 }
             }
             StringBuilder paramsBuf = new StringBuilder();
-            for (Object arg : arguments) {
-                paramsBuf.append(arg);
-                paramsBuf.append("&");
-            }
+
             RestTemplate restTemplate = new RestTemplate();
             // *========控制台输出=========*//
             String url = "http://localhost:8007/log/log";
@@ -73,7 +76,17 @@ public class MyLogAspect implements Ordered {
             sysLog.setMethodName(methodName);
             sysLog.setOperateContent(operation);
             sysLog.setOperateType(type);
-            sysLog.setParam(paramsBuf.toString());
+            for (Object arg : arguments) {
+                paramsBuf.append(arg);
+                paramsBuf.append("&");
+            }
+            String params
+                    = paramsBuf.toString();
+            if (LogEnum.LOGIN.getCode() == type) {
+                Map<String, Object> map = BeanConverter.Obj2Map(arguments[0]);
+                sysLog.setUsername(map.get("username").toString());
+            }
+            sysLog.setParam(params);
 //          将日志插入数据库
             restTemplate.put(url, sysLog);
         } catch (Throwable e) {
