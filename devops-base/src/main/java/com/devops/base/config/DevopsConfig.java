@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Import;
  */
 @Slf4j
 @Configuration
-@Import({FeignConfig.class})
+@Import({FeignConfig.class, RedissonConfig.class})
 public class DevopsConfig {
 }

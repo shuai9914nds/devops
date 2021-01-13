@@ -1,4 +1,4 @@
-package com.devops.base.aspect;
+package com.devops.base.annotation;
 
 import com.devops.base.config.DevopsConfig;
 import org.springframework.context.annotation.Import;
