@@ -1,6 +1,7 @@
 package com.devops.gateway;
 
 import com.devops.gateway.filter.AuthFilter;
+import com.devops.gateway.filter.TokenFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -24,10 +25,11 @@ public class GateWayApplication {
                 ).build();
     }
 
-//    @Bean
-//    public TokenFilter tokenFilter() {
-//        return new TokenFilter();
-//    }
+    @Bean
+    public TokenFilter tokenFilter() {
+        return new TokenFilter();
+    }
+
     @Bean
     public AuthFilter authFilter() {
         return new AuthFilter();

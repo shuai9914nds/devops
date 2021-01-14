@@ -35,7 +35,7 @@ public class UserClient {
      * @param state 修改成state状态
      * @return Result<Void>
      */
-    @MyLog(operation = "修改用户状态", type = Constant.USER_LOCK)
+    @MyLog(operation = "修改用户状态", type = Constant.UPADTE_USER_STATE)
     @PostMapping(value = "/user/state")
     public Result<Void> updateUserState(@RequestParam("uid") Integer uid, @RequestParam("state") Integer state) {
         String token = iUserService.getToken();

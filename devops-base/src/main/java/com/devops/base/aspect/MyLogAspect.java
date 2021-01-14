@@ -1,11 +1,14 @@
 package com.devops.base.aspect;
 
 import com.devops.base.annotation.MyLog;
+import com.devops.base.common.Constant;
 import com.devops.base.entity.SysLog;
 import com.devops.base.enums.LogEnum;
+import com.devops.base.enums.UserStateEnum;
 import com.devops.base.utils.BeanConverter;
 import com.devops.base.utils.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,8 +33,6 @@ import java.util.Optional;
 public class MyLogAspect implements Ordered {
 
 
-
-
     //定义切点
     //在注解的位置切入代码
     @Pointcut("@annotation(com.devops.base.annotation.MyLog)")
@@ -47,7 +48,8 @@ public class MyLogAspect implements Ordered {
 
     @AfterReturning("logPointCut()")
     public String insertSyslog(JoinPoint joinPoint) {
-        String header = HttpUtil.getRequest().getHeader("User-Token");
+        String token = HttpUtil.getRequest().getHeader("User-Token");
+//        token = "123";
         log.info("=====================开始执行后置通知==================");
         try {
             String targetName = joinPoint.getTarget().getClass().getName();
@@ -74,17 +76,43 @@ public class MyLogAspect implements Ordered {
             String url = "http://localhost:8007/log/log";
             SysLog sysLog = new SysLog();
             sysLog.setMethodName(methodName);
-            sysLog.setOperateContent(operation);
-            sysLog.setOperateType(type);
             for (Object arg : arguments) {
                 paramsBuf.append(arg);
                 paramsBuf.append("&");
             }
-            String params
-                    = paramsBuf.toString();
-            if (LogEnum.LOGIN.getCode() == type) {
-                Map<String, Object> map = BeanConverter.Obj2Map(arguments[0]);
-                sysLog.setUsername(map.get("username").toString());
+            String params = paramsBuf.toString();
+            if (StringUtils.isBlank(token)) {
+                if (LogEnum.LOGIN.getCode() == type) {
+                    Map<String, Object> map = BeanConverter.Obj2Map(arguments[0]);
+                    sysLog.setUsername(map.get("username").toString());
+                    sysLog.setOperateType(type);
+                    sysLog.setOperateContent(operation);
+
+                }
+            } else {
+//                String userName = JWTUtil.getUserName(token);
+//                Integer uid = JWTUtil.getUid(token);
+//                sysLog.setUid(uid);
+//                sysLog.setUsername(userName);
+                if (Constant.UPADTE_USER_STATE == type) {
+                    //修改用户状态
+                    if (arguments[1].equals(UserStateEnum.DISABLE.getCode())) {
+                        sysLog.setOperateType(LogEnum.USER_LOCK.getCode());
+                        sysLog.setOperateContent("锁定用户");
+                    }
+                    if (arguments[1].equals(UserStateEnum.LOCKED.getCode())) {
+                        sysLog.setOperateType(LogEnum.USER_DISABLE.getCode());
+                        sysLog.setOperateContent("禁用用户");
+                    }
+                    if (arguments[1].equals(UserStateEnum.NORMAL.getCode())) {
+                        sysLog.setOperateType(LogEnum.USER_NORMAL.getCode());
+                        sysLog.setOperateContent("用户状态恢复正常");
+                    }
+                } else {
+                    sysLog.setOperateType(type);
+                    sysLog.setOperateContent(operation);
+
+                }
             }
             sysLog.setParam(params);
 //          将日志插入数据库

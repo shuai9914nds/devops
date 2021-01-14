@@ -1,4 +1,4 @@
-package com.devops.user.enumc;
+package com.devops.base.enums;
 
 /**
  * @author: liushuai

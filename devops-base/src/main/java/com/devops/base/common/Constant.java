@@ -8,7 +8,7 @@ package com.devops.base.common;
 public class Constant {
 
     public static final String DEVOPS_USER_ID = "User-Id";
-    public static final String DEVOPS_USER_NAME = "User-Name";
+    public static final String DEVOPS_USERNAME = "UserName";
 
     public static final String USER_TOKEN = "User-Token";
 
@@ -24,9 +24,7 @@ public class Constant {
 
 
     public static final int LOG_LOGIN = 101;
-    public static final int USER_LOCK = 201;
-    public static final int USER_DISABLE = 202;
-    public static final int USER_NORMAL = 203;
+    public static final int UPADTE_USER_STATE = 201;
     public static final int ADD_ROLE = 301;
     public static final int UPDATE_ROLE = 302;
     public static final int DELETE_ROLE = 303;

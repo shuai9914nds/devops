@@ -36,7 +36,7 @@ public class JwtUtil {
         Algorithm algorithm = Algorithm.HMAC256(user.getName());
         return JWT.create()
                 .withClaim(Constant.DEVOPS_USER_ID, user.getUid())
-                .withClaim(Constant.DEVOPS_USER_NAME, user.getName())
+                .withClaim(Constant.DEVOPS_USERNAME, user.getName())
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE))
                 .sign(algorithm);
@@ -56,7 +56,7 @@ public class JwtUtil {
             Algorithm algorithm = Algorithm.HMAC256(name);
             JWTVerifier jwtVerifier = JWT.require(algorithm)
                     .withClaim(Constant.DEVOPS_USER_ID, uid)
-                    .withClaim(Constant.DEVOPS_USER_NAME, name)
+                    .withClaim(Constant.DEVOPS_USERNAME, name)
                     .acceptIssuedAt(0)
                     .build();
             jwtVerifier.verify(token);
