@@ -15,11 +15,20 @@ public class JWTUtil {
 
     public static String getUserName(String token) {
         DecodedJWT decode = JWT.decode(token);
-        return decode.getClaim(Constant.DEVOPS_USERNAME).toString();
+        return decode.getClaim(Constant.DEVOPS_USERNAME).asString();
     }
 
     public static Integer getUid(String token) {
         DecodedJWT decode = JWT.decode(token);
         return decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
+    }
+
+    public static String getName(String token) {
+        DecodedJWT decode = JWT.decode(token);
+        return decode.getClaim(Constant.DEVOPS_NAME).asString();
+    }
+
+    public static String getToken() {
+        return HttpUtil.getRequest().getHeader(Constant.USER_TOKEN);
     }
 }

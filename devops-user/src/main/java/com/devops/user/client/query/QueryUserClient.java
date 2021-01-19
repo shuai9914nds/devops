@@ -14,6 +14,7 @@ import com.devops.user.service.IUserService;
 import com.devops.user.util.JwtUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,15 +118,14 @@ public class QueryUserClient {
     /**
      * 创建token
      *
-     * @param uid  用户id
-     * @param name 用户名称
+     * @param user 用户实体类
      * @return Result<String>
      */
     @GetMapping(value = "/create/token")
-    public Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name) {
-        User user = new User();
-        user.setUid(uid);
-        user.setName(name);
+    public Result<String> createToken(@SpringQueryMap User user) {
+        user.setUid(user.getUid());
+        user.setName(user.getName());
+        user.setUsername(user.getUsername());
         return new Result<>(JwtUtil.getToken(user));
     }
 

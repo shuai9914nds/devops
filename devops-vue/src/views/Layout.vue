@@ -55,11 +55,25 @@
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
-          <a-icon
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="() => (collapsed = !collapsed)"
-          />
+
+            <div class="header">
+
+
+                <a-row>
+                    <a-col :span="3">
+                        <a-icon
+                                class="trigger"
+                                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                                @click="() => (collapsed = !collapsed)"
+                        />
+                    </a-col>
+                    <a-col class="item" :span="3" :offset="18">
+                        刘帅
+                    </a-col>
+
+                </a-row>
+            </div>
+
         </a-layout-header>
         <a-layout-content
           :style="{
@@ -103,15 +117,29 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+    padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    a {
+        font-weight: bold;
+        color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
+        &.router-link-exact-active {
+            color: #42b983;
+        }
     }
-  }
+
+}
+
+.header {
+    width: 100%;
+
+    .item {
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .item:hover {
+        background-color: #cccccc;
+    }
 }
 </style>

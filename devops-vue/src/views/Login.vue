@@ -81,17 +81,19 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      identifyImg: "",
-    };
-  },
-  beforeCreate() {
-    this.form = this.$form.createForm(this, { name: "normal_login" });
-  },
-  created() {
-    this.getCode();
+  import Http from '@/utils/http'
+
+  export default {
+    data() {
+      return {
+        identifyImg: "",
+      };
+    },
+    beforeCreate() {
+      this.form = this.$form.createForm(this, {name: "normal_login"});
+    },
+    created() {
+      this.getCode();
   },
   methods: {
     handleSubmit(e) {
@@ -104,23 +106,22 @@ export default {
       });
     },
     login(values) {
-      this.$axios
-        .post("/login", {
+      Http({
+        url: '/login',
+        method: 'post',
+        data: {
           username: values.username,
           password: values.password,
           identifyCode: values.identifyCode,
-        })
-        .then((response) => {
+        },
+        success: res => {
           localStorage.clear();
-          localStorage.setItem("token", response.data.obj.token);
+          localStorage.setItem("token", res.token);
           this.$router.push({
             name: "Home",
           });
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        }
+      })
     },
     getCode() {
       this.$axios

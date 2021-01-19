@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.devops.api.entity.User;
 import com.devops.base.common.Constant;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -30,13 +32,15 @@ public class JwtUtil {
      */
     public static String getToken(User user) {
 
-        if (user == null || user.getUid() == null || user.getName() == null) {
+        if (ObjectUtils.isEmpty(user) || ObjectUtils.isEmpty(user.getUid()) ||
+                StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getUsername())) {
             return null;
         }
         Algorithm algorithm = Algorithm.HMAC256(user.getName());
         return JWT.create()
                 .withClaim(Constant.DEVOPS_USER_ID, user.getUid())
-                .withClaim(Constant.DEVOPS_USERNAME, user.getName())
+                .withClaim(Constant.DEVOPS_USERNAME, user.getUsername())
+                .withClaim(Constant.DEVOPS_NAME, user.getName())
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE))
                 .sign(algorithm);

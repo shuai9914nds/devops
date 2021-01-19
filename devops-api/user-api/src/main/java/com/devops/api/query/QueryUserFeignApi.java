@@ -7,6 +7,7 @@ import com.devops.base.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,12 +45,11 @@ public interface QueryUserFeignApi {
     /**
      * 创建token
      *
-     * @param uid  用户id
-     * @param name 用户名称
+     * @param user 用户实体类
      * @return Result<String>
      */
     @GetMapping(value = "/create/token")
-    Result<String> createToken(@RequestParam("uid") Integer uid, @RequestParam("name") String name);
+    Result<String> createToken(@SpringQueryMap User user);
 
     /**
      * 分页查询用户信息

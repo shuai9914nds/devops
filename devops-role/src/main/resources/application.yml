@@ -3,7 +3,6 @@ spring:
     include: @app.profile@
   application:
     name: @artifactId@
-
 server:
   port: 8006
   servlet:

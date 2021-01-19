@@ -4,8 +4,7 @@ import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.base.utils.JacksonUtil;
 import com.google.common.net.HttpHeaders;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -23,8 +22,8 @@ import static com.google.common.net.MediaType.JSON_UTF_8;
  * @date: 2020/10/18
  * @description：
  */
+@Slf4j
 public class AuthFilter implements Ordered, GlobalFilter {
-    Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

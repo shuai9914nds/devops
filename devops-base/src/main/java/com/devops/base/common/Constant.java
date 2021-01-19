@@ -9,6 +9,7 @@ public class Constant {
 
     public static final String DEVOPS_USER_ID = "User-Id";
     public static final String DEVOPS_USERNAME = "UserName";
+    public static final String DEVOPS_NAME = "name";
 
     public static final String USER_TOKEN = "User-Token";
 

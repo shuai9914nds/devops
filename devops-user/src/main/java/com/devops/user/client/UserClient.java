@@ -1,8 +1,6 @@
 package com.devops.user.client;
 
 import com.devops.api.entity.User;
-import com.devops.base.annotation.MyLog;
-import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
 import com.devops.user.service.IUserService;
@@ -35,7 +33,6 @@ public class UserClient {
      * @param state 修改成state状态
      * @return Result<Void>
      */
-    @MyLog(operation = "修改用户状态", type = Constant.UPADTE_USER_STATE)
     @PostMapping(value = "/user/state")
     public Result<Void> updateUserState(@RequestParam("uid") Integer uid, @RequestParam("state") Integer state) {
         String token = iUserService.getToken();

@@ -2,6 +2,8 @@ package com.devops.mvc.controller.user;
 
 import com.devops.api.UserFeignApi;
 import com.devops.api.entity.User;
+import com.devops.base.annotation.MyLog;
+import com.devops.base.common.Constant;
 import com.devops.base.common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,7 @@ public class UserController {
      * @param User 用户对象
      * @return Result<Void>
      */
+    @MyLog(operation = "修改用户状态", type = Constant.UPADTE_USER_STATE)
     @PostMapping(value = "/mvc/user/state")
     public Result<Void> updateUserState(@RequestBody User User) {
         return userFeignApi.updateUserState(User.getUid(), User.getState());

@@ -1,12 +1,10 @@
 package com.devops.gateway.filter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -21,10 +19,10 @@ public class TokenFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst("token");
-        if (StringUtils.isBlank(token)) {
-            logger.error("token不能为空");
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-        }
+//        if (StringUtils.isBlank(token)) {
+//            logger.error("token不能为空");
+//            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//        }
         return chain.filter(exchange);
     }
 

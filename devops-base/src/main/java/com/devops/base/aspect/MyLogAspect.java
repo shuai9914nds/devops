@@ -2,11 +2,12 @@ package com.devops.base.aspect;
 
 import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
+import com.devops.base.common.Result;
 import com.devops.base.entity.SysLog;
 import com.devops.base.enums.LogEnum;
 import com.devops.base.enums.UserStateEnum;
 import com.devops.base.utils.BeanConverter;
-import com.devops.base.utils.HttpUtil;
+import com.devops.base.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -46,10 +47,13 @@ public class MyLogAspect implements Ordered {
         System.out.println("走到注解了");
     }
 
-    @AfterReturning("logPointCut()")
-    public String insertSyslog(JoinPoint joinPoint) {
-        String token = HttpUtil.getRequest().getHeader("User-Token");
-//        token = "123";
+    @AfterReturning(returning = "object", pointcut = "logPointCut()")
+    public void insertSyslog(JoinPoint joinPoint, Object object) {
+        Result result = (Result) object;
+        if (!result.getSuccess()) {
+            return;
+        }
+        String token = JWTUtil.getToken();
         log.info("=====================开始执行后置通知==================");
         try {
             String targetName = joinPoint.getTarget().getClass().getName();
@@ -87,24 +91,24 @@ public class MyLogAspect implements Ordered {
                     sysLog.setUsername(map.get("username").toString());
                     sysLog.setOperateType(type);
                     sysLog.setOperateContent(operation);
-
                 }
             } else {
-//                String userName = JWTUtil.getUserName(token);
-//                Integer uid = JWTUtil.getUid(token);
-//                sysLog.setUid(uid);
-//                sysLog.setUsername(userName);
+                String userName = JWTUtil.getUserName(token);
+                Integer uid = JWTUtil.getUid(token);
+                sysLog.setUid(uid);
+                sysLog.setUsername(userName);
                 if (Constant.UPADTE_USER_STATE == type) {
+                    Map<String, Object> map = BeanConverter.Obj2Map(arguments[0]);
                     //修改用户状态
-                    if (arguments[1].equals(UserStateEnum.DISABLE.getCode())) {
+                    if (map.get("state").equals(UserStateEnum.DISABLE.getCode())) {
                         sysLog.setOperateType(LogEnum.USER_LOCK.getCode());
                         sysLog.setOperateContent("锁定用户");
                     }
-                    if (arguments[1].equals(UserStateEnum.LOCKED.getCode())) {
+                    if (map.get("state").equals(UserStateEnum.LOCKED.getCode())) {
                         sysLog.setOperateType(LogEnum.USER_DISABLE.getCode());
                         sysLog.setOperateContent("禁用用户");
                     }
-                    if (arguments[1].equals(UserStateEnum.NORMAL.getCode())) {
+                    if (map.get("state").equals(UserStateEnum.NORMAL.getCode())) {
                         sysLog.setOperateType(LogEnum.USER_NORMAL.getCode());
                         sysLog.setOperateContent("用户状态恢复正常");
                     }
@@ -120,7 +124,6 @@ public class MyLogAspect implements Ordered {
         } catch (Throwable e) {
             log.info("around " + joinPoint + " with com.devops.base.exception : " + e.getMessage());
         }
-        return "";
     }
 
 

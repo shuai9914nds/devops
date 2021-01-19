@@ -2,11 +2,16 @@ package com.devops.mvc.controller.login;
 
 import com.devops.api.LoginApi;
 import com.devops.api.dto.LoginDto;
+import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.devops.base.utils.JWTUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +24,15 @@ import java.util.Map;
  * @date: 2020/11/25
  * @description：对接前端页面的controller
  */
+@Slf4j
 @RestController
 public class LoginController {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Resource
     private LoginApi loginApi;
+    @Resource
+    private RedissonClient redissonClient;
 
     /**
      * 登录controller
@@ -36,10 +43,29 @@ public class LoginController {
     @PostMapping(value = "/mvc/login")
     public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
-            logger.warn("loginDto不能为空，登录失败");
+            log.warn("loginDto不能为空，登录失败");
             return new Result<>(ErrorCode.PARAM_ERROR);
         }
         return loginApi.login(loginDto);
+    }
+
+
+    /**
+     * 删除token
+     *
+     * @return Void
+     */
+    @GetMapping(value = "/mvc/login/out")
+    public Result<Void> loginOut() {
+        String token = JWTUtil.getToken();
+        if (StringUtils.isEmpty(token)) {
+            log.warn("用户登出，token为空！");
+            return new Result<>();
+        }
+        Integer uid = JWTUtil.getUid(JWTUtil.getToken());
+        RBucket<Object> tokenBucket = redissonClient.getBucket(Constant.PRE_REDIS_USER_TOKEN + uid);
+        tokenBucket.delete();
+        return new Result<>();
     }
 
 }

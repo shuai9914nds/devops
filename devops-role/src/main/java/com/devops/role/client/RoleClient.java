@@ -5,13 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.devops.api.dto.MenuRoleDto;
 import com.devops.api.entity.MenuRoleRel;
 import com.devops.api.entity.Role;
-import com.devops.base.annotation.MyLog;
-import com.devops.base.common.Constant;
 import com.devops.base.common.Result;
 import com.devops.role.service.IMenuRoleRelService;
 import com.devops.role.service.IRoleService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +22,6 @@ import java.util.List;
  */
 @RestController
 public class RoleClient {
-    private static final Logger logger = LoggerFactory.getLogger(RoleClient.class);
 
     @Resource
     private IRoleService iRoleService;
@@ -39,7 +34,6 @@ public class RoleClient {
      * @param role 角色实体类
      * @return Result<Role>
      */
-    @MyLog(operation = "新增角色", type = Constant.ADD_ROLE)
     @PutMapping(value = "/role")
     public Result<Role> addRole(@RequestBody Role role) {
         iRoleService.save(role);
@@ -52,9 +46,8 @@ public class RoleClient {
      * @param roleId 角色id
      * @return Result<Void>
      */
-    @MyLog(operation = "删除角色", type = Constant.DELETE_ROLE)
-    @DeleteMapping(value = "/role")
     @Transactional(rollbackFor = Exception.class)
+    @DeleteMapping(value = "/role")
     public Result<Void> deleteRole(@RequestParam(value = "roleId") Integer roleId) {
         iRoleService.removeById(roleId);
         LambdaQueryWrapper<MenuRoleRel> queryWrapper = new LambdaQueryWrapper<>();
