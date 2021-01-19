@@ -1,6 +1,7 @@
 package com.devops.api.query;
 
 import com.devops.api.dto.MenuDto;
+import com.devops.api.entity.Menu;
 import com.devops.base.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,13 +31,22 @@ public interface QueryPermFeignApi {
     Result<List<MenuDto>> selectPermListAll();
 
     /**
-     * 根据权限id查询权限列表
+     * 根据权限id查询权限列表(树结构)
      *
      * @param permIds 权限id
      * @return Result<List < MenuDto>>
      */
     @GetMapping(value = "/perm/tree/{permIds}")
-    Result<List<MenuDto>> selectPermListByPermIds(@PathVariable("permIds") List<Integer> permIds);
+    Result<List<MenuDto>> selectPermTreeByPermIds(@PathVariable("permIds") List<Integer> permIds);
+
+    /**
+     * 查询某个用户的权限列表
+     *
+     * @param uid 用户id
+     * @return Result<List < Menu>>
+     */
+    @GetMapping(value = "/perm/list/{uid}")
+    Result<List<Menu>> selectPermListByUid(@PathVariable("uid") Integer uid);
 
 
 }

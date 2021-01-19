@@ -25,6 +25,7 @@ public enum ErrorCode {
     PARAM_OUT_RANGE_ERROR(100002, "参数的值超出范围"),
 
     TOKEN_IS_NULL(200001, "token不能为空"),
+    PERM_DENIED(200002, "权限不足"),
 
 
     /**
@@ -38,13 +39,16 @@ public enum ErrorCode {
      */
     ROLE_NAME_REPEAT(400001, "角色名称重复"),
 
+    /**
+     * menu服务
+     */
+    CACHE_PERM_IS_NULL(500001, "缓存中权限数据为空"),
 
     /**
      * 具体业务错误码
      **/
-
-
     SYSTEM_ERROR(999999, "接口异常");
+
     private Integer code;
     private String message;
 

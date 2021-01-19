@@ -153,7 +153,6 @@
         },
         mounted() {
             this.selectUserPage();
-            console.log('---', Http)
         },
         methods: {
             handleTableChange(pagination, filters, sorter) {
@@ -185,8 +184,6 @@
                         this.data = response.records;
                         pagination.total = page.total;
                         pagination.pageSize = page.size;
-                        console.log(pagination);
-                        this.loading = false;
                         this.pagination = pagination;
                     }
                 })

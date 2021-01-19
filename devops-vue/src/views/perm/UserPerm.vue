@@ -249,6 +249,9 @@
                     url: "/user/role/list/" + uid,
                     method: 'get',
                     success: response => {
+                        if (response == null) {
+                            return;
+                        }
                         const user = response;
                         const list = response.roleList;
                         this.data1 = [];

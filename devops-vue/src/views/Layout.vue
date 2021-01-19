@@ -76,36 +76,47 @@
 
         </a-layout-header>
         <a-layout-content
-          :style="{
+                :style="{
             margin: '24px 16px',
             padding: '24px',
             background: '#fff',
             minHeight: '280px',
           }"
         >
-          <router-view />
+            <a-spin :spinning="isLoading" tip="加载中...">
+                <router-view/>
+            </a-spin>
         </a-layout-content>
       </a-layout>
     </a-layout>
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      collapsed: false,
-    };
-  },
-  created() {
-  },
-  methods: {
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed;
-    },
-    handleClick({ key }) {
-      this.$router.push({ path: key });
-    },
-  },
+    import {mapGetters, mapMutations} from 'vuex'
+
+    export default {
+        data() {
+            return {
+                collapsed: false,
+            };
+        },
+        computed: {
+            ...mapGetters(['isLoading']),
+        },
+        mounted() {
+            this.SET_LOADING(true)
+        },
+
+        methods: {
+            ...mapMutations(['SET_LOADING']),
+            toggleCollapsed() {
+                this.collapsed = !this.collapsed;
+            },
+            handleClick({key}) {
+                this.SET_LOADING(false)
+                this.$router.push({path: key});
+            },
+        },
 };
 </script>
 <style lang="scss">

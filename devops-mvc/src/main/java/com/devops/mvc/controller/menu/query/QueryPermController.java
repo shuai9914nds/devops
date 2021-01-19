@@ -68,7 +68,7 @@ public class QueryPermController {
         if (CollectionUtils.isEmpty(menuIdList)) {
             return new Result<>(Collections.emptyList());
         }
-        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermListByPermIds(menuIdList);
+        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermTreeByPermIds(menuIdList);
         if (!menuResult.getSuccess()) {
             logger.error("调用queryPermFeignApi.selectPermListByMenuIds接口失败，result={}", menuResult);
         }
@@ -91,7 +91,7 @@ public class QueryPermController {
         if (CollectionUtils.isEmpty(menuIdList)) {
             return new Result<>(Collections.emptyList());
         }
-        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermListByPermIds(menuIdList);
+        Result<List<MenuDto>> menuResult = queryPermFeignApi.selectPermTreeByPermIds(menuIdList);
         if (!menuResult.getSuccess()) {
             logger.error("调用queryPermFeignApi.selectPermListByMenuIds接口失败，result={}", menuResult);
         }

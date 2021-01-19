@@ -48,7 +48,7 @@ public interface IMenuService extends IService<Menu> {
      * @param permIdList 权限id列表
      * @return Result<List < MenuDto>>
      */
-    List<MenuDto> selectPermListByPermIds(List<Integer> permIdList);
+    List<MenuDto> selectPermTreeByPermIds(List<Integer> permIdList);
 
     /**
      * 根据菜单ids查询菜单列表
@@ -57,4 +57,12 @@ public interface IMenuService extends IService<Menu> {
      * @return Result<List < MenuDto>>
      */
     List<MenuDto> selectMenuListByMenuIds(List<Integer> menuIdList);
+
+    /**
+     * 根据权限ids查询权限列表
+     *
+     * @param permIdList 权限id列表
+     * @return Result<List < Menu>>
+     */
+    List<Menu> selectPermListByPermIds(List<Integer> permIdList);
 }

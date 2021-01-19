@@ -1,5 +1,6 @@
 package com.devops.gateway;
 
+import com.devops.base.annotation.DevopsApplication;
 import com.devops.gateway.filter.AuthFilter;
 import com.devops.gateway.filter.TokenFilter;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
+@DevopsApplication
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class GateWayApplication {
 

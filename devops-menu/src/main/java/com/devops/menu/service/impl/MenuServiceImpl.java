@@ -38,9 +38,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Resource
     private RedissonClient redissonClient;
 
-    @Resource
-    private MenuMapper menuMapper;
-
     /**
      * 查询所有菜单列表(树形结构)
      *
@@ -73,9 +70,19 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      * @param permIdList 权限id列表
      * @return Result<List < MenuDto>>
      */
-    public List<MenuDto> selectPermListByPermIds(List<Integer> permIdList) {
+    public List<MenuDto> selectPermTreeByPermIds(List<Integer> permIdList) {
         List<Menu> menus = this.baseMapper.selectBatchIds(permIdList);
         return getPermTree(menus);
+    }
+
+    /**
+     * 根据权限ids查询权限列表
+     *
+     * @param permIdList 权限id列表
+     * @return Result<List < Menu>>
+     */
+    public List<Menu> selectPermListByPermIds(List<Integer> permIdList) {
+        return this.baseMapper.selectBatchIds(permIdList);
     }
 
     /**

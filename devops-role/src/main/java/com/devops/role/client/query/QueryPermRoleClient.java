@@ -55,7 +55,7 @@ public class QueryPermRoleClient {
      *
      * @return Result<List < Integer>>
      */
-    @GetMapping(value = "/perm/list/{uid}")
+    @GetMapping(value = "/perm/id/list/{uid}")
     public Result<List<Integer>> selectPermByUid(@PathVariable("uid") Integer uid) {
         Result<List<Role>> roleResult = queryRoleClient.selectRoleListByUid(uid);
         if (!roleResult.getSuccess()) {

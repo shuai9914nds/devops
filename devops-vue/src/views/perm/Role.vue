@@ -70,7 +70,7 @@
 			</div>
 		</template>
 		<a-table :columns="columns" :row-key="(record) => record.uid" :data-source="data" :pagination="pagination"
-				 :loading="loading"
+
 				 @change="handleTableChange">
 			<template slot="isAvailable" slot-scope="text, record">
 				<span v-if="record.isAvailable == true">是</span>
@@ -294,6 +294,7 @@
 				Http({
 					url: "/role",
 					method: 'post',
+					loading: true,
 					data: {
 						roleName: this.roleRelParam.roleName,
 						menuIds: this.checkedKeys,

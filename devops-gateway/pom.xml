@@ -65,6 +65,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.shuai.devops</groupId>
+            <artifactId>menu-api</artifactId>
+        </dependency>
 
     </dependencies>
 

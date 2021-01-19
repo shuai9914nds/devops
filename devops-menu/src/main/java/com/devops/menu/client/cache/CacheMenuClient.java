@@ -24,17 +24,18 @@ public class CacheMenuClient {
      * 刷新菜单缓存
      */
     @GetMapping("/refresh/cache/menu")
-    public void refreshMenuCache() {
+    public Result<Void> refreshMenuCache() {
         iMenuService.refreshPermCache();
+        return new Result<>();
     }
 
     /**
      * 查询缓存中的菜单数据（非树形结构）
      *
-     * @return
+     * @return Result<List < Menu>>
      */
     @GetMapping("/cache/menu/list")
-    public Result<List<Menu>> getMenusByCache() {
+    public Result<List<Menu>> selectMenusByCache() {
         return new Result<>(iMenuService.getPermsByCache());
     }
 }

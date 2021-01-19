@@ -23,7 +23,7 @@ public interface QueryPermRoleFeignApi {
      *
      * @return Result<List < Integer>>
      */
-    @GetMapping(value = "/perm/list/{uid}")
+    @GetMapping(value = "/perm/id/list/{uid}")
     Result<List<Integer>> selectPermByUid(@PathVariable("uid") Integer uid);
 
 

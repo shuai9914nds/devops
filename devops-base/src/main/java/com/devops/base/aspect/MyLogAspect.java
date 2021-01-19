@@ -115,7 +115,6 @@ public class MyLogAspect implements Ordered {
                 } else {
                     sysLog.setOperateType(type);
                     sysLog.setOperateContent(operation);
-
                 }
             }
             sysLog.setParam(params);
