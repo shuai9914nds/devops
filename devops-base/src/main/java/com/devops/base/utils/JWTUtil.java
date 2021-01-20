@@ -28,6 +28,11 @@ public class JWTUtil {
         return decode.getClaim(Constant.DEVOPS_NAME).asString();
     }
 
+    public static String getIdCard(String token) {
+        DecodedJWT decode = JWT.decode(token);
+        return decode.getClaim(Constant.ID_CARD).asString();
+    }
+
     public static String getToken() {
         return HttpUtil.getRequest().getHeader(Constant.USER_TOKEN);
     }

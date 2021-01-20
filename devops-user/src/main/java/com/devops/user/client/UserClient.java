@@ -40,9 +40,11 @@ public class UserClient {
             log.error("token为空");
             return new Result<>(ErrorCode.SYSTEM_ERROR);
         }
-        User user = new User();
-        user.setUid(uid);
-        user.setState(state);
+
+        User user = User.builder()
+                .uid(uid)
+                .state(state)
+                .build();
         iUserService.updateUserInfo(user);
         return new Result<>();
     }

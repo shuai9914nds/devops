@@ -67,8 +67,23 @@
                                 @click="() => (collapsed = !collapsed)"
                         />
                     </a-col>
-                    <a-col class="item" :span="3" :offset="18">
-                        刘帅
+                    <a-col :span="3" :offset="18">
+                        <div class="item">
+                            <a-dropdown>
+                                <div class="button" @click="e => e.preventDefault()">
+                                    刘帅
+                                </div>
+                                <a-menu slot="overlay">
+                                    <a-menu-item>
+                                        <a href="javascript:;" @click="logout">
+                                            <a-icon style="margin-right: 12px; min-width: 12px;" type="logout"/>
+                                            <span>退出登录</span>
+                                        </a>
+                                    </a-menu-item>
+                                </a-menu>
+                            </a-dropdown>
+                        </div>
+
                     </a-col>
 
                 </a-row>
@@ -116,6 +131,9 @@
                 this.SET_LOADING(false)
                 this.$router.push({path: key});
             },
+            logout() {
+                console.log('-----logout')
+            }
         },
 };
 </script>
@@ -145,12 +163,20 @@
     width: 100%;
 
     .item {
+        width: 100%;
+        height: 64px;
+        box-sizing: border-box;
         text-align: center;
         cursor: pointer;
+
+        .button {
+            width: 100%;
+            height: 64px;
+        }
     }
 
     .item:hover {
-        background-color: #cccccc;
+        background-color: #fafafa;
     }
 }
 </style>

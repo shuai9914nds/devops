@@ -3,7 +3,10 @@ package com.devops.mvc.controller.user.query;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devops.api.entity.User;
 import com.devops.api.query.QueryUserFeignApi;
+import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
+import com.devops.base.utils.JWTUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,4 +37,29 @@ public class QueryUserController {
                                              @RequestParam(value = "name", required = false) String name, @RequestParam(value = "orderBy", required = false) String orderBy) {
         return queryUserFeignApi.selectUserPage(current, size, name, orderBy);
     }
+
+    /**
+     * 查询当前用户信息
+     *
+     * @return
+     */
+    @GetMapping(value = "/mvc/user/one")
+    public Result<User> analyToken() {
+        String token = JWTUtil.getToken();
+        if (StringUtils.isBlank(token)) {
+            return new Result<>(ErrorCode.TOKEN_IS_NULL);
+        }
+        Integer uid = JWTUtil.getUid(token);
+        String userName = JWTUtil.getUserName(token);
+        String name = JWTUtil.getName(token);
+        String idCard = JWTUtil.getIdCard(token);
+        User user = User.builder()
+                .uid(uid)
+                .name(name)
+                .username(userName)
+                .idCardNum(idCard)
+                .build();
+        return new Result<>(user);
+    }
+
 }

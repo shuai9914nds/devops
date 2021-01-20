@@ -63,8 +63,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public void updateUserInfo(User user) {
-        User where = new User();
-        where.setUid(user.getUid());
+        User where = User.builder()
+                .uid(user.getUid())
+                .build();
         LambdaUpdateWrapper<User> lambdaUpdateWrapper = getLambdaUpdateWrapper(where);
         this.baseMapper.update(user, lambdaUpdateWrapper);
     }

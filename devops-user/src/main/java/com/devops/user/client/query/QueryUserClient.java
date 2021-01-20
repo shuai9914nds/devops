@@ -46,8 +46,7 @@ public class QueryUserClient {
      */
     @GetMapping(value = "/{username}/user")
     public Result<User> getUserByUserName(@PathVariable("username") String username) {
-        User user = new User();
-        user.setUsername(username);
+        User user = User.builder().username(username).build();
         return new Result<>(iUserService.getOneByCondition(user));
     }
 
@@ -81,15 +80,14 @@ public class QueryUserClient {
         orderItem.setAsc(false);
         orderItem.setColumn(orderBy);
         page.setOrders(Collections.singletonList(orderItem));
-        User user = new User();
-        user.setName(name);
+        User user = User.builder().name(name).build();
         Page<User> userInfoIPage = iUserService.selectUserPage(page, user);
         List<User> records = userInfoIPage.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return new Result<>(userInfoIPage);
         }
         records.forEach(i -> {
-            i.setPassword("");
+            i.toBuilder().password("").build();
         });
         return new Result<>(userInfoIPage);
     }
@@ -107,11 +105,12 @@ public class QueryUserClient {
         if (null == uid && StringUtils.isEmpty(userName)) {
             return new Result<>(ErrorCode.PARAM_ERROR);
         }
-        User queryUser = new User();
-        queryUser.setUid(uid);
-        queryUser.setUsername(userName);
+        User queryUser = User.builder()
+                .uid(uid)
+                .username(userName)
+                .build();
         User userDB = iUserService.getOneByCondition(queryUser);
-        userDB.setPassword("");
+        userDB.toBuilder().password("").build();
         return new Result<>(userDB);
     }
 
@@ -123,9 +122,13 @@ public class QueryUserClient {
      */
     @GetMapping(value = "/create/token")
     public Result<String> createToken(@SpringQueryMap User user) {
-        user.setUid(user.getUid());
-        user.setName(user.getName());
-        user.setUsername(user.getUsername());
+
+        user.toBuilder()
+                .uid(user.getUid())
+                .name(user.getName())
+                .username(user.getUsername())
+                .idCardNum(user.getIdCardNum())
+                .build();
         return new Result<>(JwtUtil.getToken(user));
     }
 
@@ -139,8 +142,7 @@ public class QueryUserClient {
     public User getUserByToken(String token) {
         DecodedJWT decode = JWT.decode(token);
         Integer userId = decode.getClaim(Constant.DEVOPS_USER_ID).asInt();
-        User user = new User();
-        user.setUid(userId);
+        User user = User.builder().uid(userId).build();
         return iUserService.getOneByCondition(user);
     }
 

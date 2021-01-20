@@ -33,7 +33,8 @@ public class JwtUtil {
     public static String getToken(User user) {
 
         if (ObjectUtils.isEmpty(user) || ObjectUtils.isEmpty(user.getUid()) ||
-                StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getUsername())) {
+                StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getUsername())
+                || StringUtils.isEmpty(user.getIdCardNum())) {
             return null;
         }
         Algorithm algorithm = Algorithm.HMAC256(user.getName());
@@ -41,6 +42,7 @@ public class JwtUtil {
                 .withClaim(Constant.DEVOPS_USER_ID, user.getUid())
                 .withClaim(Constant.DEVOPS_USERNAME, user.getUsername())
                 .withClaim(Constant.DEVOPS_NAME, user.getName())
+                .withClaim(Constant.ID_CARD, user.getIdCardNum())
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE))
                 .sign(algorithm);
