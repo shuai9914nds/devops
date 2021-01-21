@@ -44,6 +44,13 @@ public class AuthFilter implements Ordered, GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        ServerHttpRequest request = exchange.getRequest();
+        //指定的url放行
+        String path = request.getURI().getPath();
+        if ("/mvc/mvc/login".equals(path) || "/mvc/mvc/verify/code".equals(path)) {
+            return chain.filter(exchange);
+        }
+
         Result<List<Menu>> cachePermResult = cachePermFeignApi.selectMenusByCache();
         if (!cachePermResult.getSuccess()) {
             log.error("调用cachePermFeignApi.selectMenusByCache()接口失败，错误信息为:{}", cachePermResult.getErrorMessage());
@@ -55,7 +62,6 @@ public class AuthFilter implements Ordered, GlobalFilter {
             log.error("缓存中权限数据为空");
             return getVoidMono(exchange.getResponse(), ErrorCode.CACHE_PERM_IS_NULL);
         }
-        ServerHttpRequest request = exchange.getRequest();
         String requestType = request.getMethodValue();
         String requestUri = request.getURI().getPath();
         List<String> cacheRequestUriList = cachePermList.stream()

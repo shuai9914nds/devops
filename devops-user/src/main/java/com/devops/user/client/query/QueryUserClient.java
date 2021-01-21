@@ -16,6 +16,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -122,6 +123,9 @@ public class QueryUserClient {
      */
     @GetMapping(value = "/create/token")
     public Result<String> createToken(@SpringQueryMap User user) {
+        if (ObjectUtils.isEmpty(user)) {
+            return new Result<>(ErrorCode.PARAM_ERROR);
+        }
 
         user.toBuilder()
                 .uid(user.getUid())

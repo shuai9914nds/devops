@@ -11,8 +11,9 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2020/10/9
  * @description：验证码controller
  */
-@RestController
+@Controller
 public class VerifyCodeController {
 
     private static final Logger logger = LoggerFactory.getLogger(VerifyCodeController.class);
@@ -38,7 +39,7 @@ public class VerifyCodeController {
      * @return Result<Void>
      */
     @ApiOperation(value = "验证码")
-    @GetMapping(value = "/mvc/verify/code")
+    @GetMapping(value = "/mvc/verify/code", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result<Void> getVerifyCode() {
         HttpServletResponse response = HttpUtil.getResponse();
         System.out.println(HttpUtil.getRequest().getHeaders("User-Token"));

@@ -71,7 +71,7 @@
                         <div class="item">
                             <a-dropdown>
                                 <div class="button" @click="e => e.preventDefault()">
-                                    刘帅
+                                    {{userInfo.name}}
                                 </div>
                                 <a-menu slot="overlay">
                                     <a-menu-item>
@@ -106,20 +106,24 @@
     </a-layout>
   </div>
 </template>
+
 <script>
     import {mapGetters, mapMutations} from 'vuex'
+    import Http from '@/utils/http'
 
     export default {
         data() {
             return {
                 collapsed: false,
+                userInfo: {}
             };
         },
         computed: {
             ...mapGetters(['isLoading']),
         },
         mounted() {
-            this.SET_LOADING(true)
+            // this.SET_LOADING(true)
+            this.getUserInfo();
         },
 
         methods: {
@@ -132,7 +136,24 @@
                 this.$router.push({path: key});
             },
             logout() {
-                console.log('-----logout')
+                Http({
+                    url: "/login/out",
+                    method: 'get',
+                    success: response => {
+                        localStorage.clear()
+                        this.$router.push({path: '/'})
+                    }
+                })
+            },
+            getUserInfo() {
+                Http({
+                    url: "/user/one",
+                    method: 'get',
+                    success: response => {
+                        console.log(response)
+                        this.userInfo = response
+                    }
+                })
             }
         },
 };

@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.devops.base.common.Constant;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author: liushuai
@@ -34,6 +35,12 @@ public class JWTUtil {
     }
 
     public static String getToken() {
-        return HttpUtil.getRequest().getHeader(Constant.USER_TOKEN);
+        String token = "";
+        try {
+            token = HttpUtil.getRequest().getHeader(Constant.USER_TOKEN);
+        } catch (Exception e) {
+            log.error("token为空!");
+        }
+        return (StringUtils.isBlank(token) || token.equals("null")) ? "" : token;
     }
 }

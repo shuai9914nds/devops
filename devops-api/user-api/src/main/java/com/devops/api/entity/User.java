@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,7 +21,9 @@ import java.util.Date;
  * @since 2021-01-02
  */
 @Builder(toBuilder = true)
-@Getter
+//@AllArgsConstructor(access = AccessLevel.PACKAGE)
+//@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("devops_user")
 @ApiModel(value = "User对象", description = "")

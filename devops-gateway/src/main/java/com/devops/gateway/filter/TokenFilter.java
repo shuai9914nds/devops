@@ -34,7 +34,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         //指定的url放行
         String path = request.getURI().getPath();
-        if ("/mvc/mvc/login".equals(path) || "/login/verifyCode".equals(path)) {
+        if ("/mvc/mvc/login".equals(path) || "/mvc/mvc/verify/code".equals(path)) {
             return chain.filter(exchange);
         }
         String token = exchange.getRequest().getHeaders().getFirst(Constant.USER_TOKEN);

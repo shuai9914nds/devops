@@ -45,6 +45,7 @@ public class QueryUserController {
      */
     @GetMapping(value = "/mvc/user/one")
     public Result<User> analyToken() {
+//        String token = request.getHeader(Constant.USER_TOKEN);
         String token = JWTUtil.getToken();
         if (StringUtils.isBlank(token)) {
             return new Result<>(ErrorCode.TOKEN_IS_NULL);
