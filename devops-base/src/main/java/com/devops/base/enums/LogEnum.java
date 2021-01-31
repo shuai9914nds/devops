@@ -8,6 +8,7 @@ package com.devops.base.enums;
 public enum LogEnum {
 
     LOGIN(101, "登录"),
+    LOGIN_OUT(102, "登出"),
     USER_LOCK(201, "锁定用户"),
     USER_DISABLE(202, "禁用用户"),
     USER_NORMAL(203, "恢复正常"),

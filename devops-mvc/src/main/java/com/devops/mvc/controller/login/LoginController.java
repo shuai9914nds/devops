@@ -2,6 +2,7 @@ package com.devops.mvc.controller.login;
 
 import com.devops.api.LoginApi;
 import com.devops.api.dto.LoginDto;
+import com.devops.base.annotation.MyLog;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
@@ -40,6 +41,7 @@ public class LoginController {
      * @param loginDto
      * @returnzz
      */
+    @MyLog(operation = "用户登录", type = Constant.LOG_LOGIN)
     @PostMapping(value = "/mvc/login")
     public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
@@ -55,11 +57,12 @@ public class LoginController {
      *
      * @return Void
      */
+    @MyLog(operation = "用户登出", type = Constant.LOG_LOGIN_OUT)
     @GetMapping(value = "/mvc/login/out")
     public Result<Void> loginOut() {
         String token = JWTUtil.getToken();
         if (StringUtils.isEmpty(token)) {
-            log.warn("用户登出，token为空！");
+            log.error("用户登出，token为空！");
             return new Result<>();
         }
         Integer uid = JWTUtil.getUid(JWTUtil.getToken());

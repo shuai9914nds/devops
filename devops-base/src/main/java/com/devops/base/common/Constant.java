@@ -27,6 +27,7 @@ public class Constant {
 
 
     public static final int LOG_LOGIN = 101;
+    public static final int LOG_LOGIN_OUT = 102;
     public static final int UPADTE_USER_STATE = 201;
     public static final int ADD_ROLE = 301;
     public static final int UPDATE_ROLE = 302;
