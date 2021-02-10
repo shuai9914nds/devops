@@ -6,10 +6,9 @@ import com.devops.api.query.QueryUserFeignApi;
 import com.devops.base.common.Constant;
 import com.devops.base.common.ErrorCode;
 import com.devops.base.common.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +26,9 @@ import java.util.concurrent.TimeUnit;
  * @description：
  */
 @RestController
-public class LoginFeignClient {
+@Slf4j
+public class LoginController {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginFeignClient.class);
 
     @Resource
     private QueryUserFeignApi queryUserFeignApi;
@@ -45,7 +44,7 @@ public class LoginFeignClient {
     @PostMapping(value = "/login")
     public Result<Map<String, Object>> login(@RequestBody LoginDto loginDto) {
         if (ObjectUtils.isEmpty(loginDto)) {
-            logger.warn("loginDto不能为空，登录失败");
+            log.warn("loginDto不能为空，登录失败");
             return new Result<>(ErrorCode.PARAM_ERROR);
         }
         String username = loginDto.getUsername();
@@ -66,12 +65,12 @@ public class LoginFeignClient {
         //校验用户名否正确
         Result<User> result = queryUserFeignApi.getUserByUserName(username);
         if (!result.getSuccess()) {
-            logger.error("查询接口 queryUserFeignApi.getUserByUserNameyi失败,result={}", result);
+            log.error("查询接口 queryUserFeignApi.getUserByUserNameyi失败,result={}", result);
             return new Result<>(ErrorCode.SYSTEM_ERROR);
         }
         User user = result.getObj();
         if (null == user) {
-            logger.warn("用户{}不存在", loginDto.getUsername());
+            log.warn("用户{}不存在", loginDto.getUsername());
             return new Result<>(ErrorCode.UNAME_OR_PASSWORD_ERROR);
         }
         //校验密码是否正确

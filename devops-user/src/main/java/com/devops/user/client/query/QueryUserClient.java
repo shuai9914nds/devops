@@ -127,12 +127,12 @@ public class QueryUserClient {
             return new Result<>(ErrorCode.PARAM_ERROR);
         }
 
-        user.toBuilder()
-                .uid(user.getUid())
-                .name(user.getName())
-                .username(user.getUsername())
-                .idCardNum(user.getIdCardNum())
-                .build();
+//        user.toBuilder()
+//                .uid(user.getUid())
+//                .name(user.getName())
+//                .username(user.getUsername())
+//                .idCardNum(user.getIdCardNum())
+//                .build();
         return new Result<>(JwtUtil.getToken(user));
     }
 

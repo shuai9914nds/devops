@@ -11,9 +11,10 @@ function setError(error = '系统异常') {
 }
 
 export default function (params) {
-
+    const baseUrl = '/api'
     const config = {
-        url: params.url,
+        url: baseUrl + params.url,
+        base_url: '/abc',
         timeout: 1000 * 30,
         method: params.method || 'post' || 'put' || 'delete',
         headers: {
