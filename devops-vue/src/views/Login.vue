@@ -124,31 +124,49 @@
       })
     },
     getCode() {
-      this.$axios
-        .get("/verify/code", {
-          responseType: "arraybuffer",
-          headers: {
-            "User-Token": "123213",
-          },
-        })
-        .then((response) => {
-          return (
-            "data:image/jpeg;base64," +
-            btoa(
-              new Uint8Array(response.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                ""
-              )
-            )
-          );
-        })
-        .then((data) => {
-          this.identifyImg = data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      Http({
+        url: '/verify/code',
+        method: 'get',
+        success: res => {
+          // return (
+          //   "data:image/jpeg;base64," +
+          //   btoa(
+          //     new Uint8Array(res.data).reduce(
+          //       (data, byte) => data + String.fromCharCode(byte),
+          //       ""
+          //     )
+          //   )
+          // );
+          this.identifyImg = "data:image/png;base64," + res;
+        }
+      })
     },
+    // getCode() {
+    //   this.$axios
+    //     .get("/verify/code", {
+    //       responseType: "arraybuffer",
+    //       headers: {
+    //         "User-Token": "123213",
+    //       },
+    //     })
+    //     .then((response) => {
+    //       return (
+    //         "data:image/jpeg;base64," +
+    //         btoa(
+    //           new Uint8Array(response.data).reduce(
+    //             (data, byte) => data + String.fromCharCode(byte),
+    //             ""
+    //           )
+    //         )
+    //       );
+    //     })
+    //     .then((data) => {
+    //       this.identifyImg = data;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
   },
 };
 </script>

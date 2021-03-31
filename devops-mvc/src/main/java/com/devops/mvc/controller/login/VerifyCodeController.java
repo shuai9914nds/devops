@@ -7,13 +7,12 @@ import com.devops.base.utils.HttpUtil;
 import com.devops.base.utils.SimpleCharVerifyCodeGenImpl;
 import com.devops.base.utils.inter.IVerifyCodeGen;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -25,10 +24,10 @@ import java.util.concurrent.TimeUnit;
  * @date: 2020/10/9
  * @description：验证码controller
  */
-@Controller
+@Slf4j
+@RestController
 public class VerifyCodeController {
 
-    private static final Logger logger = LoggerFactory.getLogger(VerifyCodeController.class);
     @Resource
     private RedissonClient redissonClient;
 
@@ -39,8 +38,8 @@ public class VerifyCodeController {
      * @return Result<Void>
      */
     @ApiOperation(value = "验证码")
-    @GetMapping(value = "/mvc/verify/code", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result<Void> getVerifyCode() {
+    @GetMapping(value = "/mvc/verify/code")
+    public Result<String> getVerifyCode() {
         HttpServletResponse response = HttpUtil.getResponse();
         System.out.println(HttpUtil.getRequest().getHeaders("User-Token"));
         IVerifyCodeGen iVerifyCodeGen = new SimpleCharVerifyCodeGenImpl();
@@ -48,7 +47,7 @@ public class VerifyCodeController {
             //设置长宽
             VerifyCode verifyCode = iVerifyCodeGen.generate(80, 28);
             String code = verifyCode.getCode();
-            logger.info(code);
+            log.info(code);
             //将VerifyCode绑定session
 //            request.getSession().setAttribute("VerifyCode", code);
             //设置响应头
@@ -63,10 +62,11 @@ public class VerifyCodeController {
             RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + code.toLowerCase());
             //验证码在redis中时间为5分钟
             bucket.set(code, 5, TimeUnit.MINUTES);
-            response.getOutputStream().write(verifyCode.getImgBytes());
-            response.getOutputStream().flush();
+            BASE64Encoder encoder = new BASE64Encoder();
+            ;
+            return new Result<>(encoder.encode(verifyCode.getImgBytes()));
         } catch (IOException e) {
-            logger.info("", e);
+            log.info("", e);
         }
         return new Result<>();
     }
