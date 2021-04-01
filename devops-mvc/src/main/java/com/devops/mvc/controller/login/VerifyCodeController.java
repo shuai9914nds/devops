@@ -63,7 +63,6 @@ public class VerifyCodeController {
             //验证码在redis中时间为5分钟
             bucket.set(code, 5, TimeUnit.MINUTES);
             BASE64Encoder encoder = new BASE64Encoder();
-            ;
             return new Result<>(encoder.encode(verifyCode.getImgBytes()));
         } catch (IOException e) {
             log.info("", e);
