@@ -10,7 +10,7 @@
 
     <modules>
         <module>devops-gateway</module>
-        <module>devops-eureka</module>
+<!--        <module>devops-eureka</module>-->
         <module>devops-api</module>
         <module>devops-menu</module>
         <module>devops-login</module>

@@ -12,11 +12,15 @@
     <name>devops-login</name>
     <packaging>${devops.package}</packaging>
     <dependencies>
-
         <!-- springboot2.0.*对应的eureka依赖 -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
+        <!--        </dependency>-->
+        <!--Nacos服务发现-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <!--数据库驱动-->
         <dependency>

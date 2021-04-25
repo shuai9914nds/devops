@@ -3,6 +3,10 @@ spring:
     include: @app.profile@
   application:
     name: @project.artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.16.24.4:8848 #注册中心地址,多个地址用逗号隔开
 #  main:
 #    allow-bean-definition-overriding: true
 
@@ -11,11 +15,11 @@ server:
   servlet:
     context-path: /@project.artifactId@
 
-eureka:
-  client:
-    service-url:
-      #设置服务注册中心地址
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  client:
+#    service-url:
+#      #设置服务注册中心地址
+#      defaultZone: http://localhost:8761/eureka
 
 
 
