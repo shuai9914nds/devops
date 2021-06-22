@@ -51,7 +51,7 @@ public class GeneratorCodeConfig {
                 }
                 //将数据库中datetime转换成date
                 if (fieldType.toLowerCase().contains("datetime")) {
-                    return DbColumnType.DATE;
+                    return DbColumnType.LOCAL_DATE_TIME;
                 }
                 if (fieldType.toLowerCase().contains("smallint")) {
                     return DbColumnType.INTEGER;
