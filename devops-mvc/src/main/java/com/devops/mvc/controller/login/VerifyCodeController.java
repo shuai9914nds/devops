@@ -57,7 +57,7 @@ public class VerifyCodeController {
             //在代理服务器端防止缓冲
             response.setDateHeader("Expires", 0);
             //设置响应内容类型
-            response.setContentType("image/jpeg");
+//            response.setContentType("image/jpeg");
             //将验证码存入redis
             RBucket<Object> bucket = redissonClient.getBucket(Constant.PRE_REDIS_VERIFY_CODE_KEY + code.toLowerCase());
             //验证码在redis中时间为5分钟

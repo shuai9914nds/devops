@@ -16,7 +16,7 @@ export default function (params) {
         url: baseUrl + params.url,
         base_url: '/abc',
         timeout: 1000 * 30,
-        method: params.method || 'post' || 'put' || 'delete',
+        method: params.method || 'post',
         headers: {
             'User-Token': localStorage.getItem("token")
         },
