@@ -11,33 +11,33 @@
                   :inline-collapsed="collapsed"
                   @click="handleClick"
           >
-            <a-menu-item v-if="permissionMenus.includes('Home')" key="/Home">
+            <a-menu-item v-if="permissionMenuMap.has('首页')" :key="'/'+permissionMenuMap.get('首页')">
               <a-icon type="home"/>
               <span>首页</span>
             </a-menu-item>
 
-            <a-menu-item v-if="permissionMenus.includes('User')" key="/User">
+            <a-menu-item v-if="permissionMenuMap.has('用户管理')" :key="'/'+permissionMenuMap.get('用户管理')">
               <a-icon type="usergroup-add"/>
               <span>用户管理</span>
             </a-menu-item>
 
-            <a-sub-menu v-if="permissionMenus.includes('Role') || permissionMenus.includes('UserPerm')">
+            <a-sub-menu v-if="permissionMenuMap.has('角色管理')|| permissionMenuMap.has('分配权限')">
               <span slot="title">
                 <a-icon type="solution"/>
                 <span>权限管理</span>
               </span>
 
-              <a-menu-item v-if="permissionMenus.includes('Role')" key="/Role">
+              <a-menu-item v-if="permissionMenuMap.has('角色管理')" :key="'/'+permissionMenuMap.get('角色管理')">
                 <a-icon type="user"/>
                 <span>角色管理</span>
               </a-menu-item>
-              <a-menu-item v-if="permissionMenus.includes('UserPerm')" key="/UserPerm">
+              <a-menu-item v-if="permissionMenuMap.has('分配权限')" :key="'/'+permissionMenuMap.get('分配权限')">
                 <a-icon type="user-add"/>
                 <span>分配权限</span>
               </a-menu-item>
             </a-sub-menu>
 
-            <a-menu-item v-if="permissionMenus.includes('Monitor')" key="/Monitor">
+            <a-menu-item v-if="permissionMenuMap.has( '监控管理')" :key="'/'+permissionMenuMap.get('监控管理')">
               <a-icon type="usergroup-add"/>
               <span>监控管理</span>
             </a-menu-item>
@@ -104,7 +104,7 @@
       return {
         collapsed: false,
         userInfo: {},
-        permissionMenus: []
+        permissionMenuMap: new Map()
       };
     },
     computed: {
@@ -153,7 +153,22 @@
           url: "/menu/list/" + uid,
           method: "get",
           success: (response) => {
-            this.permissionMenus = response.map(({component}) => component)
+            // this.permissionMenus = response.map(({component}) => component)
+            console.log(response);
+          
+            for (var i = 0; i < response.length; i++) {
+              const obj = response[i];
+              const children = response[i].children;
+              
+              if (null ==  children) {
+                this.permissionMenuMap.set(obj.menuName,obj.component);
+                continue;
+              }
+              for (var j = 0; j <children.length;j ++) {
+              this.permissionMenuMap.set(children[j].menuName,children[j].component);
+              }
+            }
+            console.log(this.permissionMenuMap)
           }
         })
       }
